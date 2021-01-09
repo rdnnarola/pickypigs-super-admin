@@ -29,9 +29,10 @@ export const getLogin=(data,history)=>{
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"GET_LOGIN_SUCCESS",payload:response.data});
           // await dispatch(setAlert('LogIn Success', 'success'));
-          history.push('/dashboard');
           const token = localStorage.getItem("access_token");
           if (token) axios.defaults.headers.common = { "x-access-token": token };
+          history.push('/manage_restaurant');
+
       }
       catch(error){
         dispatch({type:"GET_LOGIN_FAILURE",payload:error});

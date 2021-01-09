@@ -44,7 +44,7 @@ const TheHeaderDropdown = () => {
         >
           <strong>Account</strong>
         </CDropdownItem>
-        <CDropdownItem>
+        {/* <CDropdownItem>
           <CIcon name="cil-bell" className="mfe-2" />
           Updates
           <CBadge color="info" className="mfs-auto">42</CBadge>
@@ -88,7 +88,7 @@ const TheHeaderDropdown = () => {
           <CIcon name="cil-file" className="mfe-2" />
           Projects
           <CBadge color="primary" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
+        </CDropdownItem> */}
         <CDropdownItem divider />
         <CDropdownItem onClick={handleLogout}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
