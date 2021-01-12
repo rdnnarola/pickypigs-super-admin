@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import {CBadge,CCard,CCardBody,CCardHeader,CCol,CDataTable,CButton,CRow,CDropdownMenu,CDropdownItem,CDropdown,CDropdownToggle} from '@coreui/react'
-import { getAllUsersData } from '../../../redux/actions/manageUsersAction';
+import { downloadUserData, getAllUsersData } from '../../../redux/actions/manageUsersAction';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable, { defaultThemes }from 'react-data-table-component';
 import CIcon from '@coreui/icons-react'
@@ -9,6 +9,15 @@ import moment from "moment";
 // import DeleteRestaurantModalComp from './DeleteRestaurantModalComp';
 // import AddRestaurantModalComp from './AddRestaurantModalComp';
 import UpdateUserPasswordModalComp from './UpdateUserPasswordModalComp';
+import export_data from '../../users/UsersData'
+import Axios from '../../../redux/actions/axios';
+import download from 'downloadjs'
+
+
+
+
+
+
 
 const ManageUsersPage = () => {
     const dispatch=useDispatch();  
@@ -62,6 +71,80 @@ const ManageUsersPage = () => {
     ];
 
 
+
+
+
+    // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
+function convertArrayOfObjectsToCSV(array) {
+  let result;
+
+  const columnDelimiter = ',';
+  const lineDelimiter = '\n';
+  const keys = ["_id", "email", "updatedAt", "emailVerified"];
+
+  result = '';
+  result += keys.join(columnDelimiter);
+  result += lineDelimiter;
+
+  array.forEach(item => {
+    let ctr = 0;
+    keys.forEach(key => {
+      if (ctr > 0) result += columnDelimiter;
+
+      result += item[key];
+      
+      ctr++;
+    });
+    result += lineDelimiter;
+  });
+  console.log(result)
+
+  return result;
+}
+
+// Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
+function downloadCSV(array) {
+  const link = document.createElement('a');
+  let csv = convertArrayOfObjectsToCSV(array);
+  if (csv == null) return;
+
+  const filename = 'export.csv';
+
+  if (!csv.match(/^data:text\/csv/i)) {
+    csv = `data:text/csv;charset=utf-8,${csv}`;
+  }
+
+  link.setAttribute('href', encodeURI(csv));
+  link.setAttribute('download', filename);
+  link.click();
+}
+const Export = ({ onExport }) => (
+  <CButton  onClick={e => onExport(e.target.value)} color="primary" className="ml-3">
+      <CIcon name="cil-cloud-download" alt="Settings" className="mr-1"/>
+      Export CSV
+  </CButton>
+);
+
+
+// submitProduct
+// const  zzzzzzzzzz = () => {
+//   let dataURL = `/super_admin/manage_user/export_user`;
+//   Axios
+//         .post(dataURL)
+//         .then(response => {
+//           // console.log(response)
+//           const url = window.URL.createObjectURL(new Blob([response.data.message]));
+//           const link = document.createElement('a');
+//           link.href = url;
+//           link.setAttribute('download', 'file.csv'); //or any other extension
+//           document.body.appendChild(link);
+//           link.click();
+//         })
+//         .catch(error => console.log(error));
+// };
+
+
+
   return (
     <>
     <CRow>
@@ -79,6 +162,8 @@ const ManageUsersPage = () => {
                 <CButton color="primary" disabled onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null);setSelectedMail(null)}}>
                   + Add User
                 </CButton>
+                { users_Data&&  <Export onExport={() => downloadCSV(users_Data.userList)} /> }
+                {/* <button onClick={zzzzzzzzzz}>sssss</button> */}
               </CCol>
               <div>
                 {/* <AddRestaurantModalComp show={addRestaurantModalShow} onClose={() => setAddRestaurantModalShow(false)} /> */}

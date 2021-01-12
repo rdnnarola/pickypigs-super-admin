@@ -11,10 +11,8 @@ const initialState = {
       switch (type) {
         
         case "GET_ALLUSERS_REQUEST":
-        case "ADD_RESTAURANT_REQUEST":
-        case "GET_SELECTEDCATEGORY_REQUEST":
         case "UPDATE_USER_REQUEST":
-        case "DELETE_RESTAURANT_REQUEST":
+        case "DOWNLOAD_ALLUSERS_REQUEST":
             return {
                 ...state,
                 isLoading :true,
@@ -26,17 +24,8 @@ const initialState = {
                 users_Data:payload,
     
             };
-        case "ADD_RESTAURANT_SUCCESS":
-            return{
-                ...state,
-                isLoading:false,
-            };
-        case "GET_SELECTEDCATEGORY_SUCCESS":            
-            return{
-                ...state,
-                isLoading:false,
-                selectedRestaurant: payload.data
-            }  
+      
+      
       
         case "UPDATE_USER_SUCCESS":            
             return{
@@ -44,17 +33,15 @@ const initialState = {
                 isLoading:false
             }   
 
-        case "DELETE_RESTAURANT_SUCCESS":            
+        case "DOWNLOAD_ALLUSERS_SUCCESS":            
             return{
                 ...state,
                 isLoading:false
             } 
              
         case "GET_ALLUSERS_FAILURE":
-        case "ADD_RESTAURANT_FAILURE":
-        case "GET_SELECTEDCATEGORY_FAILURE":  
         case "UPDATE_USER_FAILURE":  
-        case "DELETE_RESTAURANT_FAILURE": 
+        case "DOWNLOAD_ALLUSERS_FAILURE": 
             return {
                 ...state,
                 isLoading:false,
