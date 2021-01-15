@@ -1,5 +1,4 @@
 import Axios from './axios';
-import FileSaver from 'file-saver';
 
 export const getAllUsersData=(data)=>{
     return async(dispatch)=>{
@@ -47,49 +46,6 @@ export const getAllUsersData=(data)=>{
 
 
 
-  export function someFunction(values) {
-
-    return (dispatch) => {
   
-  
-      const method = 'POST';
-  
-      const url = '/super_admin/manage_user/export_user';
-  
-  
-      Axios
-  
-        .request({
-  
-          url,
-  
-          method,
-  
-          responseType: 'blob', //important
-  
-        })
-  
-        .then(({ data }) => {
-  
-          const downloadUrl = window.URL.createObjectURL(new Blob([data]));
-  
-          const link = document.createElement('a');
-  
-          link.href = downloadUrl;
-  
-          link.setAttribute('download', 'file.zip'); //any other extension
-  
-          document.body.appendChild(link);
-  
-          link.click();
-  
-          link.remove();
-  
-        });
-  
-    };
-  
-  }
-
 
 
