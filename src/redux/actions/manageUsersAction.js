@@ -1,4 +1,6 @@
 import Axios from './axios';
+import {setAlert} from './alertAction';
+
 
 export const getAllUsersData=(data)=>{
     return async(dispatch)=>{
@@ -16,8 +18,11 @@ export const getAllUsersData=(data)=>{
         }
         catch(error){
           dispatch({type:"GET_ALLUSERS_FAILURE",payload:error});
-          // dispatch(setAlert('Unable To Fetch Data', 'error'));
-
+          if (error.response) {
+            dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+          } else {
+            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          }
         }
     }
   };
@@ -36,10 +41,17 @@ export const getAllUsersData=(data)=>{
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_USER_SUCCESS",payload:response.data});
             await dispatch(getAllUsersData());
+            await dispatch(setAlert('UserPassword Updated Successfully .', 'success'));
+
 
         }
         catch(error){
           dispatch({type:"UPDATE_USER_FAILURE",payload:error});
+          if (error.response) {
+            dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+          } else {
+            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          }
         }
     }
   }; 

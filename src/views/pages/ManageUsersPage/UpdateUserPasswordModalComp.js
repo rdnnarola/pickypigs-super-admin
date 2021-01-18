@@ -22,7 +22,7 @@ const UpdateUserPasswordModalComp = (props) => {
         .label('Password')
         .required('Required')
         .min(8, 'Seems a bit short(atleast 8 characters)...')
-        .max(16, 'We prefer insecure system, try a shorter password.'),
+        .max(24, 'We prefer insecure system, try a shorter password.'),
 
         confirmpassword:Yup.string()
         .required()

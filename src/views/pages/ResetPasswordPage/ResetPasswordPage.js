@@ -24,7 +24,7 @@ const ResetPasswordPage = () => {
         .label('Password')
         .required('Required')
         .min(8, 'Seems a bit short(atleast 8 characters)...')
-        .max(16, 'We prefer insecure system, try a shorter password.')
+        .max(24, 'We prefer insecure system, try a shorter password.')
         .matches(phoneRegExp, 'Password should Have 1 Uppercase,1 Lowercase,1 digit,1 special characte'),
     
     confirmPassword: Yup

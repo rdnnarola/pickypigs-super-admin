@@ -21,7 +21,7 @@ const Login = () => {
         .label('Password')
         .required('Required')
         .min(4, 'Seems a bit short...')
-        .max(15, 'We prefer insecure system, try a shorter password.')
+        .max(24, 'We prefer insecure system, try a shorter password.')
   }); 
 
   const validationSchemaForForgotPassword = Yup.object().shape({

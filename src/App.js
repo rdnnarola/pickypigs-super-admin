@@ -4,6 +4,7 @@ import './scss/style.scss';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import TheContent from './containers/TheContent';
+import AlertSystemPage from './views/pages/AlertSystemPage/AlertSystemPage'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -24,6 +25,9 @@ function App() {
 
     return (
           <React.Suspense fallback={loading}>
+             <div>
+                <AlertSystemPage/>
+              </div>
             <Switch>
               <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
               <Route exact path="/reset_password/:token" render={(props) => <ResetPasswordPage {...props} />} />

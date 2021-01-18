@@ -1,5 +1,5 @@
 import Axios from './axios';
-// import {setAlert} from './alertAction';
+import {setAlert} from './alertAction';
 
 export const getAllRestaurantData=(data)=>{
     return async(dispatch)=>{
@@ -17,8 +17,11 @@ export const getAllRestaurantData=(data)=>{
         }
         catch(error){
           dispatch({type:"GET_ALLRESTAURANT_FAILURE",payload:error});
-          // dispatch(setAlert('Unable To Fetch Data', 'error'));
-
+          if (error.response) {
+            dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+          } else {
+            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          }
         }
     }
   };
@@ -36,13 +39,17 @@ export const getAllRestaurantData=(data)=>{
             let dataURL=`/super_admin/manage_restaurant/create`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_RESTAURANT_SUCCESS",payload:response.data});
-            // await dispatch(setAlert('Registration is Success', 'success'));
+            await dispatch(setAlert('Restaurant Added Successfully .', 'success'));
             await dispatch(getAllRestaurantData());
 
         }
         catch(error){
           dispatch({type:"ADD_RESTAURANT_FAILURE",payload:error});
-          // await dispatch(setAlert('Something Went Wrong', 'danger'));
+          if (error.response) {
+            dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+          } else {
+            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          }
         }
     }
   };
@@ -76,10 +83,15 @@ export const getAllRestaurantData=(data)=>{
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_RESTAURANT_SUCCESS",payload:response.data});
             await dispatch(getAllRestaurantData());
-
+            await dispatch(setAlert('Restaurant Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_RESTAURANT_FAILURE",payload:error});
+          if (error.response) {
+            dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+          } else {
+            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          }
         }
     }
   };
@@ -90,11 +102,16 @@ export const getAllRestaurantData=(data)=>{
             dispatch({type:"DELETE_RESTAURANT_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_restaurant/${selectedId}`)
             dispatch({type:"DELETE_RESTAURANT_SUCCESS",payload:response.data});
-            // await dispatch(setAlert('Data Deleted Successfuly', 'success'));
+            await dispatch(setAlert('Restaurant Deleted Successfully .', 'warning'));
             await dispatch(getAllRestaurantData());
         }
         catch(error){
             dispatch({type:"DELETE_RESTAURANT_FAILURE",payload:error});
+            if (error.response) {
+              dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+            } else {
+              dispatch(setAlert('Something wwnt wrong!', 'danger'));
+            }
         }
     }
   }

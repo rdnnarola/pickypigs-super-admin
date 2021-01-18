@@ -1,6 +1,6 @@
 import Axios from './axios';
 import axios from "axios";
-// import {setAlert} from './alertAction';
+import {setAlert} from './alertAction';
 
 
 export const setSideBar = (value) => {
@@ -28,7 +28,7 @@ export const getLogin=(data,history)=>{
           let dataURL=`/auth/login`
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"GET_LOGIN_SUCCESS",payload:response.data});
-          // await dispatch(setAlert('LogIn Success', 'success'));
+          await dispatch(setAlert('LogIn Success', 'success'));
           const token = localStorage.getItem("access_token");
           if (token) axios.defaults.headers.common = { "x-access-token": token };
           history.push('/manage_restaurant');
@@ -36,7 +36,11 @@ export const getLogin=(data,history)=>{
       }
       catch(error){
         dispatch({type:"GET_LOGIN_FAILURE",payload:error});
-        // await dispatch(setAlert('Wrong Credential', 'error'));
+        if (error.response) {
+          dispatch(setAlert('Wrong Credential !', 'danger'));
+        } else {
+          dispatch(setAlert('Something wwnt wrong!', 'danger'));
+        }
       }
   }
 };
@@ -45,12 +49,16 @@ export const logoutUser=(history)=>{
   return async(dispatch)=>{
       try{
           await dispatch({type:"LOGOUT_USER_REQUEST"});
-          // await dispatch(setAlert('LogOut Success', 'success'));
+          await dispatch(setAlert('LogOut Success', 'success'));
           history.push('/login') ;
       }
       catch(error){
           console.error(error);
-          // await dispatch(setAlert('Something Wrong', 'error'));
+          if (error.response) {
+            dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+          } else {
+            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          }
 
       }
   }
@@ -69,11 +77,15 @@ export const forgotPassword=(data)=>{
           let dataURL=`/auth/forgot_password`
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"FORGOT_PASSWORD_SUCCESS",payload:response.data});
-          // await dispatch(setAlert(`${response.data.message}`, 'success'));
+          await dispatch(setAlert(`${response.data.message}`, 'success'));
       }
       catch(error){
         dispatch({type:"FORGOT_PASSWORD_FAILURE",payload:error});
-        // await dispatch(setAlert('Something Went Wrong', 'error'));
+        if (error.response) {
+          dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+        } else {
+          dispatch(setAlert('Something wwnt wrong!', 'danger'));
+        }
       }
   }
 };
@@ -91,12 +103,16 @@ export const resetPassword=(data,history)=>{
           let dataURL=`/auth/reset_password`
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"RESET_PASSWORD_SUCCESS",payload:response.data});
-          // await dispatch(setAlert(`${response.data.message}`, 'success'));
+          await dispatch(setAlert(`${response.data.message}`, 'success'));
           history.push('/login');
       }
       catch(error){
         dispatch({type:"RESET_PASSWORD_FAILURE",payload:error});
-        // await dispatch(setAlert(`${error.response.data.message}`, 'error'));
+        if (error.response) {
+          dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+        } else {
+          dispatch(setAlert('Something wwnt wrong!', 'danger'));
+        }
       }
   }
 };

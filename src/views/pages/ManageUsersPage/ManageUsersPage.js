@@ -49,10 +49,10 @@ const ManageUsersPage = () => {
   
       { selector: 'user_preferenceDetail.name',name: 'Name', sortable: true, },
       { selector: 'email', name: 'Email', sortable: true},
-      { selector: 'user_preferenceDetail.myPreferences.allergenInformation', name: 'Allergen Info', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.allergenInformation.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
-      { selector: 'user_preferenceDetail.myPreferences.dietaryPreferences', name: 'Dietary Preferences', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.dietaryPreferences.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
-      { selector: 'user_preferenceDetail.myPreferences.lifestyleChoice', name: 'Lifestyle Choice', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.lifestyleChoice.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
-      { selector: 'user_preferenceDetail.myPreferences.restaurantFeatures', name: 'restaurant Features', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.restaurantFeatures.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      // { selector: 'user_preferenceDetail.myPreferences.allergenInformation', name: 'Allergen Info', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.allergenInformation.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      // { selector: 'user_preferenceDetail.myPreferences.dietaryPreferences', name: 'Dietary Preferences', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.dietaryPreferences.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      // { selector: 'user_preferenceDetail.myPreferences.lifestyleChoice', name: 'Lifestyle Choice', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.lifestyleChoice.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      // { selector: 'user_preferenceDetail.myPreferences.restaurantFeatures', name: 'restaurant Features', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.restaurantFeatures.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
       { selector: 'user_preferenceDetail.phone',name: 'Mobile', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.phone}</span> },
       { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
       { name: 'Action', button: true,
@@ -61,7 +61,7 @@ const ManageUsersPage = () => {
           <CDropdownToggle color="primary"> Action </CDropdownToggle>
           <CDropdownMenu>
             <CDropdownItem onClick={() => {setUpdateUserPasswordModalShow(true);setSelectedId(row._id);setSelectedMail(row.email)}}>Update Password</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem>
+            {/* <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem> */}
           </CDropdownMenu>
         </CDropdown>
       },

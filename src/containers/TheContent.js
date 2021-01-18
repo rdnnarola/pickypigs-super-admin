@@ -9,6 +9,7 @@ import { CContainer, CFade } from '@coreui/react'
 // routes config
 import routes from '../routes'
 import TheLayout from './TheLayout'
+import AlertSystemPage from '../views/pages/AlertSystemPage/AlertSystemPage'
   
 const loading = (
   <div className="pt-3 text-center">
@@ -51,10 +52,14 @@ const TheContent = () => {
   return (
     <React.Fragment>
       <TheLayout>
+      <div>
+                       <AlertSystemPage/>
+                   </div>
           <main className="c-main">
             <CContainer fluid>
               <Suspense fallback={loading}>
                 <Switch>
+              
                   {routes.map((route, idx) => {
                     return route.component && (
                       <Route
