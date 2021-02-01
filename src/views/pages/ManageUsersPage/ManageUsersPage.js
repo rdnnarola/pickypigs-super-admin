@@ -12,7 +12,34 @@ import UpdateUserPasswordModalComp from './UpdateUserPasswordModalComp';
 import Axios from '../../../redux/actions/axios';
 
 
-
+const customStyles = {
+  headRow: {
+    style: {
+      minHeight: '65px',
+    },
+  },
+  cells: {
+    style: {
+      '&:not(:last-of-type)': {
+        minHeight: '90px',
+      },
+    },
+  },
+}
+const customStyles2 = {
+  headRow: {
+    style: {
+      minHeight: '65px',
+    },
+  },
+  cells: {
+    style: {
+      '&:not(:last-of-type)': {
+        minHeight: '65px',
+      },
+    },
+  },
+}
 
 
 
@@ -142,6 +169,7 @@ const  handleDownloadScv = () => {
                                 striped
                                 responsive
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
+                                customStyles={users_Data && users_Data.userList.length===1?customStyles:customStyles2}
                               />
                             </CCard>
                             

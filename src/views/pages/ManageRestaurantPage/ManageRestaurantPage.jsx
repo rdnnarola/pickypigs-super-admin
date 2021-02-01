@@ -9,6 +9,37 @@ import moment from "moment";
 import DeleteRestaurantModalComp from './DeleteRestaurantModalComp';
 import AddRestaurantModalComp from './AddRestaurantModalComp';
 import UpdatePasswordModalComp from './UpdatePasswordModalComp';
+import './ManageRestaurantPage.scss'
+
+const customStyles = {
+  headRow: {
+    style: {
+      minHeight: '65px',
+    },
+  },
+  cells: {
+    style: {
+      '&:not(:last-of-type)': {
+        minHeight: '90px',
+      },
+    },
+  },
+}
+const customStyles2 = {
+  headRow: {
+    style: {
+      minHeight: '65px',
+    },
+  },
+  cells: {
+    style: {
+      '&:not(:last-of-type)': {
+        minHeight: '65px',
+      },
+    },
+  },
+}
+
 const ManageRestaurantPage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
@@ -101,7 +132,10 @@ const ManageRestaurantPage = () => {
                                 pagination
                                 noHeader
                                 striped
+                                className="managerestaurant-table"
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
+                                customStyles={restaurant_Data.restaurantList && restaurant_Data.restaurantList.length===1?customStyles:customStyles2}
+
                               />
                             </CCard>
                             

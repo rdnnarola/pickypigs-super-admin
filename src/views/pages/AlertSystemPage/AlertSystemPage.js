@@ -32,7 +32,6 @@ const AlertSystemPage=()=>{
                                         </div> */}
                                        
                                     </React.Fragment>
-                                    
                                 )
                             })
                         }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {useHistory,useParams} from 'react-router-dom'
-import {CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CLabel, CFormGroup,CInvalidFeedback, CInputGroup, CInputGroupPrepend, CInputGroupText, CRow } from '@coreui/react'
+import {CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CLabel,CInputGroupAppend, CFormGroup,CInvalidFeedback, CInputGroup, CInputGroupPrepend, CInputGroupText, CRow } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -18,20 +18,22 @@ const ResetPasswordPage = () => {
 
 
     const phoneRegExp = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passwordRegExp = RegExp(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,24}$/);
+
     const validationSchemaFormat = Yup.object().shape({
     newPassword: Yup
-        .string()
-        .label('Password')
-        .required('Required')
-        .min(8, 'Seems a bit short(atleast 8 characters)...')
-        .max(24, 'We prefer insecure system, try a shorter password.')
-        .matches(phoneRegExp, 'Password should Have 1 Uppercase,1 Lowercase,1 digit,1 special characte'),
+    .string()
+    .label('Password')
+    .required('Password Required')
+    .min(8, 'Seems a bit short(Min 8 characters)...')
+    .max(24, 'Please try a shorter password(Max 24 characters).')
+    .matches(passwordRegExp, 'Password Must Have Letter and Number'),
     
     confirmPassword: Yup
         .string()
         .required()
         .label('Confirm password')
-        .test('passwords-match', 'Passwords must match ya fool', function(value) {
+        .test('passwords-match', 'Passwords must match ', function(value) {
         return this.parent.newPassword === value;
         }),
          
@@ -91,10 +93,19 @@ const ResetPasswordPage = () => {
                           <CInputGroup >
                             <CInputGroupPrepend>
                               <CInputGroupText>
-                                <CIcon onClick={() => handleShowPassword()} name="cil-lock-locked" />
+                                <CIcon name="cil-lock-locked" />
                               </CInputGroupText>
                             </CInputGroupPrepend>
                             <Field type={type} name="newPassword" placeholder="New Password" className={`form-control ${touched.newPassword && errors.newPassword?"is-invalid": touched.newPassword && !errors.newPassword?"is-valid":null}`}/>
+                            <CInputGroupAppend>
+                                <CInputGroupText type="button" color="light" onClick={() => handleShowPassword()}>
+                                    {type=== "password"?
+                                        <img src={'../images/visibility_1.png'}  width="15px" className="img-fluid" alt="showpassword" />
+                                    :
+                                        <img src={'../images/visibility_2.png'} width="15px" className="img-fluid" alt="showpassword" />
+                                    }
+                                </CInputGroupText>
+                            </CInputGroupAppend>
                             <CInvalidFeedback className="help-block">{errors.newPassword}</CInvalidFeedback>
                           </CInputGroup>
                         {/* <div className="error pink-txt f-11">{(touched.newPassword && errors.newPassword && errors.newPassword)}</div> */}
@@ -105,10 +116,19 @@ const ResetPasswordPage = () => {
                           <CInputGroup >
                             <CInputGroupPrepend>
                               <CInputGroupText>
-                                <CIcon onClick={() => handleShowConfirmPassword()} name="cil-lock-locked" />
+                                <CIcon name="cil-lock-locked" />
                               </CInputGroupText>
                             </CInputGroupPrepend>
                             <Field type={confirmType} name="confirmPassword" placeholder="Confirm Password" className={`form-control ${touched.confirmPassword && errors.confirmPassword?"is-invalid": touched.confirmPassword && !errors.confirmPassword?"is-valid":null}`}/>
+                            <CInputGroupAppend>
+                                <CInputGroupText type="button" color="light" onClick={() => handleShowConfirmPassword()}>
+                                    {confirmType=== "password"?
+                                        <img src={'../images/visibility_1.png'}  width="15px" className="img-fluid" alt="showpassword" />
+                                    :
+                                        <img src={'../images/visibility_2.png'} width="15px" className="img-fluid" alt="showpassword" />
+                                    }
+                                </CInputGroupText>
+                            </CInputGroupAppend>
                             <CInvalidFeedback className="help-block">{errors.confirmPassword}</CInvalidFeedback>
                           </CInputGroup>
                         {/* <div className="error pink-txt f-11">{(touched.confirmPassword && errors.confirmPassword && errors.confirmPassword)}</div> */}

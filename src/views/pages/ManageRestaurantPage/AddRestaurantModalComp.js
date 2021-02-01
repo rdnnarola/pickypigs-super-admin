@@ -1,19 +1,22 @@
 import React,{useState,useEffect} from "react";
-import {CButton,CModal,CModalFooter,CModalHeader,CModalTitle,CModalBody } from '@coreui/react'// import {deleteSelectedMenuData} from "../../redux/actions/menuAction"
+import {CButton,CModal,CFormGroup,CLabel,CRow,CCol,CInvalidFeedback,CCardFooter,
+    CModalHeader,CModalTitle,CModalBody ,CInputGroupAppend,CInputGroup,CInputGroupText} from '@coreui/react'
+// import {deleteSelectedMenuData} from "../../redux/actions/menuAction"
 import {useDispatch,useSelector} from "react-redux";
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment'
 import { addRestaurantData } from "../../../redux/actions/manageRestaurantAction";
-import { CFormGroup,CLabel,CRow,CCol,CForm,CInvalidFeedback,CCardFooter} from '@coreui/react'
 
 
 const packages = ["basic","standard","premiun"];
 const roles=["restaurant_admin"]
+const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
 
 const AddRestaurantModalComp = (props) => {
     const dispatch=useDispatch();
- 
+    const [confirmType, setConfirmType] = useState("password")
 
     const initialValues = {
         name:'',
@@ -28,28 +31,37 @@ const AddRestaurantModalComp = (props) => {
     }
 
     const validationSchema  = Yup.object().shape({
-        name:Yup.string().required('Title is required'),
-        contactName:Yup.string().required('Title is required'),
-        company:Yup.string().required('Title is required'),
-        phoneNumber:Yup.number().required().positive().integer(),
-        email:Yup.string().email().required('Title is required'),
-        password:Yup.string().required('Title is required'),
-        package:Yup.string().required('Title is required'),
-        role:Yup.string().required('Title is required'),
+        name:Yup.string().required('Restaurant Name is required'),
+        contactName:Yup.string().required('Contact Name is required'),
+        company:Yup.string().required('Company Name is required'),
+        phoneNumber:Yup.string().required('Phone Number is a required field').min(10, "Min 10 Digits").max(10, "Max 10 Digits").matches(phoneRegex, "Invalid Phone Number"),
+        email:Yup.string().email("Email must be a valid email").required('Email is required'),
+        password: Yup
+        .string()
+        .label('Password')
+        .required('Password Required')
+        .min(8, 'Seems a bit short(Min 8 characters)...')
+        .max(24, 'Please try a shorter password(Max 24 characters).')
+        .matches(passwordRegExp, 'Password should Have 1 Uppercase,1 Lowercase,1 digit,1 special characte'),  
+        package:Yup.string().required('Please Select a package'),
+        role:Yup.string().required('Please Select a Role'),
         isAgreeToTerms:Yup.boolean().oneOf([true], "You must accept the terms and conditions").required()
     });
 
 
-   
-
-   
+    const handleConfirmPassword=()=>{
+        if (confirmType === "password") {
+            setConfirmType("text")
+        } else {
+            setConfirmType("password")
+        }
+    }
 
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
         dispatch(addRestaurantData(fields));
         props.onClose();
         resetForm();
-
     }
 
    
@@ -101,8 +113,19 @@ const AddRestaurantModalComp = (props) => {
                                             <CCol>
                                                 <CFormGroup >
                                                     <CLabel >Password</CLabel>
-                                                    <Field type="password" name="password" placeholder="Enter here" className={`form-control ${touched.password && errors.password?"is-invalid": touched.password && !errors.password?"is-valid":null}`} />
-                                                    <CInvalidFeedback className="help-block">{errors.password}</CInvalidFeedback>
+                                                    <CInputGroup>
+                                                        <Field type={confirmType} name="password" placeholder="Enter here" className={`form-control ${touched.password && errors.password?"is-invalid": touched.password && !errors.password?"is-valid":null}`} />
+                                                        <CInputGroupAppend>
+                                                            <CInputGroupText type="button" color="light" onClick={handleConfirmPassword}>
+                                                                {confirmType=== "password"?
+                                                                    <img src={'images/visibility_1.png'}  width="15px" className="img-fluid" alt="showpassword" />
+                                                                :
+                                                                    <img src={'images/visibility_2.png'} width="15px" className="img-fluid" alt="showpassword" />
+                                                                }
+                                                            </CInputGroupText>
+                                                        </CInputGroupAppend>
+                                                        <CInvalidFeedback className="help-block">{errors.password}</CInvalidFeedback>
+                                                    </CInputGroup>
                                                 </CFormGroup>
                                             </CCol>
                                         </CRow>

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {useHistory} from 'react-router-dom'
-import {CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CForm, CInput, CInputGroup, CInputGroupPrepend, CInputGroupText, CRow } from '@coreui/react'
+import {CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CForm, CInput,CInvalidFeedback, CInputGroup, CInputGroupPrepend,CInputGroupAppend, CInputGroupText, CRow } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch,useSelector} from "react-redux";
 import { forgotPassword, getLogin } from "../../../redux/actions/generalActions";
 
+const passwordRegExp = RegExp(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,24}$/);
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -15,17 +16,18 @@ const Login = () => {
   const [isLoginPage, setLoginPage] = useState(true)
 
   const validationSchemaForLogin = Yup.object().shape({
-    email: Yup.string().email().required('Required'),
+    email: Yup.string().email("Email must be a valid email").required('Email is required'),
     password: Yup
-        .string()
-        .label('Password')
-        .required('Required')
-        .min(4, 'Seems a bit short...')
-        .max(24, 'We prefer insecure system, try a shorter password.')
+      .string()
+      .label('Password')
+      .required('Password Required')
+      .min(8, 'Seems a bit short(Min 8 characters)...')
+      .max(24, 'Please try a shorter password(Max 24 characters).')
+      .matches(passwordRegExp, 'Password Must Have Letter and Number'),
   }); 
 
   const validationSchemaForForgotPassword = Yup.object().shape({
-    email: Yup.string().email().required('Required'),        
+    email: Yup.string().email("Email must be a valid email").required('Email is required'),    
   });
 
   const handleLoginForm = (input) => {
@@ -82,19 +84,28 @@ const Login = () => {
                               <CIcon name="cil-user" />
                             </CInputGroupText>
                           </CInputGroupPrepend>
-                          <Field name="email" placeholder="Email" className="form-control" />
+                          <Field name="email" placeholder="Email" className={`form-control ${touched.email && errors.email?"is-invalid": touched.email && !errors.email?"is-valid":null}`}/>
+                          <CInvalidFeedback className="help-block">{errors.email}</CInvalidFeedback>     
                         </CInputGroup>
-                        {touched.email && errors.email && <span className="error pink-txt f-11 ">{errors.email}</span>}       
 
                         <CInputGroup className="mt-4 mb-1">
                           <CInputGroupPrepend>
                             <CInputGroupText>
-                              <CIcon onClick={() => handlePassword()} name="cil-lock-locked" />
+                              <CIcon  name="cil-lock-locked" />
                             </CInputGroupText>
                           </CInputGroupPrepend>
-                          <Field type={type} name="password" placeholder="Password" className="form-control signup-input"/>
+                          <Field type={type} name="password" placeholder="Password"  className={`form-control ${touched.password && errors.password?"is-invalid": touched.password && !errors.password?"is-valid":null}`} />
+                            <CInputGroupAppend>
+                                <CInputGroupText type="button" color="light" onClick={() => handlePassword()}>
+                                    {type=== "password"?
+                                        <img src={'images/visibility_1.png'}  width="15px" className="img-fluid" alt="showpassword" />
+                                    :
+                                        <img src={'images/visibility_2.png'} width="15px" className="img-fluid" alt="showpassword" />
+                                    }
+                                </CInputGroupText>
+                            </CInputGroupAppend>
+                            <CInvalidFeedback className="help-block">{errors.password}</CInvalidFeedback>     
                         </CInputGroup>
-                        <div className="error pink-txt f-11">{(touched.password && errors.password && errors.password)}</div>
                         <CRow className="mt-4">
                           <CCol xs="6">
                             <CButton color="primary" type="submit" className="px-4">Login</CButton>
@@ -127,9 +138,10 @@ const Login = () => {
                               <CIcon name="cil-user" />
                             </CInputGroupText>
                           </CInputGroupPrepend>
-                          <Field name="email" placeholder="Email" className="form-control" />
+                          <Field name="email" placeholder="Email" className={`form-control ${touched.email && errors.email?"is-invalid": touched.email && !errors.email?"is-valid":null}`} />
+                          <CInvalidFeedback className="help-block">{errors.email}</CInvalidFeedback>     
                         </CInputGroup>
-                        <div className="error pink-txt f-11">{(touched.email && errors.email && errors.email) || forgotPasswordData&& forgotPasswordData.message}</div>
+                        {/* <div className="error pink-txt f-11">{(touched.email && errors.email && errors.email) || forgotPasswordData&& forgotPasswordData.message}</div> */}
                         <CRow className="mt-4">
                           <CCol xs="6">
                             <CButton color="primary" type="submit" className="px-4">RESET PASSWORD</CButton>
