@@ -6,7 +6,8 @@ const initialState = {
   login_Data:{},
   forgot_Password:{},
   reset_Password:{},
-  sidebarShow: 'responsive'
+  sidebarShow: 'responsive',
+  uploadData:null
 
   };
   
@@ -93,6 +94,27 @@ const initialState = {
           errorMessage:payload
         };       
 
+       //DELETE_IMAGE
+      case "DELETE_FILE_REQUEST":    
+          return {
+            ...state,
+            isLoading :true,
+          };
+
+      case "DELETE_FILE_SUCCESS":
+        return {
+          ...state,
+          isLoading:false,
+        };    
+
+      case "DELETE_FILE_FAILURE":
+        return {
+          ...state,
+          isLoading:false,
+          errorMessage:payload
+        };         
+      // UPDATE_UPLOAD
+      
       default:
         return state;
     }

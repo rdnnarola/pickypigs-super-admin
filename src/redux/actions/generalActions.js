@@ -116,3 +116,31 @@ export const resetPassword=(data,history)=>{
       }
   }
 };
+
+
+export const deleteImage=(data)=>{
+  return async(dispatch)=>{
+      try{
+          dispatch({type:"DELETE_FILE_REQUEST"});
+          let config= {
+              headers:{
+                "Content-Type":"application/json"
+              }
+           }
+          
+          let dataURL=`/restaurant_admin/fileupload/remove_file`
+          let response = await Axios.post(dataURL,JSON.stringify(data),config );
+          dispatch({type:"DELETE_FILE_SUCCESS",payload:response.data});
+          await dispatch(setAlert('Image Deleted Successfully .', 'success'));
+      }
+      catch(error){
+        dispatch({type:"DELETE_FILE_FAILURE",payload:error});
+        if (error.response) {
+          dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+        } else {
+          dispatch(setAlert('Something went wrong!', 'danger'));
+        }
+      }
+  }
+};
+

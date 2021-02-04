@@ -39,6 +39,13 @@ const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
 const ManageRestaurantPage = React.lazy(() => import('./views/pages/ManageRestaurantPage/ManageRestaurantPage'));
 const ManageUsersPage = React.lazy(() => import('./views/pages/ManageUsersPage/ManageUsersPage'));
+const ManageAllergenPage = React.lazy(() => import('./views/pages/ManageAllergenPage/ManageAllergenPage'));
+const ManageDietaryPage = React.lazy(() => import('./views/pages/ManageDietaryPage/ManageDietaryPage'));
+const ManageLifestylePage = React.lazy(() => import('./views/pages/ManageLifestylePage/ManageLifestylePage'));
+const ManageCuisinePage = React.lazy(() => import('./views/pages/ManageCuisinePage/ManageCuisinePage'));
+const ManageFeaturesPage = React.lazy(() => import('./views/pages/ManageFeaturesPage/ManageFeaturesPage'));
+const ManageCookingPage = React.lazy(() => import('./views/pages/ManageCookingPage/ManageCookingPage'));
+
 
 
 const routes = [
@@ -84,6 +91,13 @@ const routes = [
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/manage_restaurant', exact: true, name: 'Manage Restaurant', component: ManageRestaurantPage },
   { path: '/manage_users', exact: true, name: 'Manage Users', component: ManageUsersPage },
+  { path: '/manage_allergy', exact: true, name: 'Manage Allergy', component: ManageAllergenPage },
+  { path: '/manage_dietary', exact: true, name: 'Manage Dietary', component: ManageDietaryPage },
+  { path: '/manage_lifestyle', exact: true, name: 'Manage Lifestyle', component: ManageLifestylePage },
+  { path: '/manage_cuisine', exact: true, name: 'Manage Cuisine', component: ManageCuisinePage },
+  { path: '/manage_restaurantfeature', exact: true, name: 'Manage Cuisine', component: ManageFeaturesPage },
+  { path: '/manage_cooking', exact: true, name: 'Manage Cuisine', component: ManageCookingPage },
+
 
 ];
 

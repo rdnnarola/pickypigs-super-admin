@@ -29,8 +29,42 @@ const _nav =  [
     to: '/manage_users',
     icon: 'cil-people',
   },
-
-
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manage Allergy',
+    to: '/manage_allergy',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manage Dietary',
+    to: '/manage_dietary',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manage Lifestyle',
+    to: '/manage_lifestyle',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manage Cuisine',
+    to: '/manage_cuisine',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manage RestaurantFeature',
+    to: '/manage_restaurantfeature',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manage Cooking Method',
+    to: '/manage_cooking',
+    icon: 'cil-pencil',
+  },
 
 
   // {
