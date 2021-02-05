@@ -39,6 +39,19 @@ const customStyles2 = {
   },
 }
 
+const CustomTitle = ({ row }) => (
+  <div>
+    {}
+    <div>{row.name}</div>
+    <div>
+      <div data-tag="allowRowEvents" style={{ color: 'grey', overflow: 'hidden', whiteSpace: 'wrap', textOverflow: 'ellipses' }}>
+        {}
+        {row.description}
+      </div>
+    </div>
+  </div>
+);
+
 const ManageAllergenPage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
@@ -48,15 +61,32 @@ const ManageAllergenPage = () => {
     const [addAllergyModalShow, setAddAllergyModalShow] = useState(false);
     const [updateAllergyModalShow, setUpdateAllergyModalShow] = useState(false);
     const [imagePath, seImagePath] = useState("");
-    const [perPage, setPerPage] = useState(10);
+    const [perPage, setPerPage] = useState(5);
+    const [myPage, setMypage] = useState(1);
 
     // const imagelink="http://192.168.100.39:8000/"
-    
     const imagelink="https://pickypigsapi.herokuapp.com/"
 
     useEffect(()=>{
-        dispatch(getAllAllergyData({start:0,search:inputValue}));
+      dispatch(getAllAllergyData({start:0,search:inputValue}));
     },[dispatch,inputValue]);
+    
+
+  //pagination start
+  // useEffect(()=>{
+    //   dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
+    //   setMypage(1)
+    // },[dispatch,inputValue,perPage]);
+    const handlePerRowsChange = (newPerPage) => {
+      setPerPage(newPerPage);
+      dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
+    };
+    const handlePageChange = page=> {
+      setMypage(page)
+      console.log(page)
+      dispatch(getAllAllergyData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+    };
+    //pagination end
 
     let allAllergy_data = useSelector((state)=>{
         return state.allergy
@@ -66,33 +96,26 @@ const ManageAllergenPage = () => {
 
 
     const columns = [
-  
       { selector: 'name',name: 'Name', sortable: true, },
       {
         name: 'Thumbnail',
         cell: row => <img height="60px" className="border m-2" width="56px" alt={row.name} src={`${imagelink}${row.image}`} />,
       },
-      { selector: 'description',name: 'Description', sortable: true},
+      { selector: 'description',name: 'Description', sortable: true,allowOverflow:false,cell: row => <CustomTitle row={row} />,},
       { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
-     { name: 'Action', button: true,
-        cell: (row) => 
-          <CDropdown className="btn-group">
-          <CDropdownToggle color="primary"> Action </CDropdownToggle>
-          <CDropdownMenu>
-            <CDropdownItem onClick={() => {setUpdateAllergyModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
-          </CDropdownMenu>
-        </CDropdown>
-      },
+      { name: 'Action', button: true,
+          cell: (row) => 
+            <CDropdown className="btn-group">
+            <CDropdownToggle color="primary"> Action </CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem onClick={() => {setUpdateAllergyModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
+              <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
+        },
     ];
 
-    const handlePerRowsChange = async (newPerPage) => {
-      setPerPage(newPerPage);
-    };
-    const handlePageChange = page => {
-      console.log(page)
-      dispatch(getAllAllergyData({start:perPage+page-2,length:perPage,search:inputValue}));
-    };
+    
     
   return (
     <>
@@ -100,7 +123,7 @@ const ManageAllergenPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Allergy  || {perPage}
+                Manager Allergy 
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
@@ -133,15 +156,19 @@ const ManageAllergenPage = () => {
                                 columns={columns}
                                 data={allergy_Data.allergenList}
                                 highlightOnHover
-                                pagination
-                                // paginationServer
-                                // paginationTotalRows={totalrows}
-                                // onChangeRowsPerPage={handlePerRowsChange}
-                                // onChangePage={handlePageChange}
                                 noHeader
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
                                 customStyles={allergy_Data.allergenList && allergy_Data.allergenList.length===1?customStyles:customStyles2}
+                               
+                                pagination={true}
+                                // paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                // paginationPerPage={perPage}
+                                // paginationServer={true}
+                                // paginationDefaultPage	={myPage}
+                                // paginationTotalRows={totalrows}
+                                // onChangeRowsPerPage={handlePerRowsChange}
+                                // onChangePage={handlePageChange}
                               />
                             </CCard>
                             

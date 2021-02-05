@@ -101,7 +101,7 @@ const ManageAllergenPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Cooking  || {perPage}
+                Manager Cooking  
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">

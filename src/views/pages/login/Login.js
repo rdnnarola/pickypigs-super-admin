@@ -6,6 +6,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch,useSelector} from "react-redux";
 import { forgotPassword, getLogin } from "../../../redux/actions/generalActions";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 const passwordRegExp = RegExp(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,24}$/);
 
@@ -55,6 +56,10 @@ const Login = () => {
   let forgotPasswordData = useSelector((state)=>{
     return state.general.forgot_Password
   });
+  let loading = useSelector((state)=>{
+    return state.general.isLoading
+  });
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -66,6 +71,10 @@ const Login = () => {
                 <CCardBody>
                   {isLoginPage
                   ?
+                  <React.Fragment>
+                  {loading?
+                  <CustomLoadingComp/>
+                  :
                   <Formik
                       initialValues={{ email: '', password: '' }} validationSchema={validationSchemaForLogin}
                       onSubmit={(values) => { console.log('values => ', values);  handleLoginForm(values) }}
@@ -118,8 +127,13 @@ const Login = () => {
                       </Form>
                     )}
                   </Formik>
+                  }
+                  </React.Fragment>
                   :
                   <React.Fragment>
+                  {loading?
+                  <CustomLoadingComp/>
+                  :
                   <Formik
                       initialValues={{ email: '' }} validationSchema={validationSchemaForForgotPassword}
                       onSubmit={(values) => { console.log('values => ', values);  handlelForgotPassword(values) }}
@@ -154,7 +168,8 @@ const Login = () => {
                       </Form>
                     )}
                   </Formik>
-                  </React.Fragment>
+                   }
+                   </React.Fragment>
                   }
                 </CCardBody>
 

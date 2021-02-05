@@ -6,6 +6,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch,useSelector} from "react-redux";
 import {resetPassword } from "../../../redux/actions/generalActions";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 
 const ResetPasswordPage = () => {
@@ -65,6 +66,9 @@ const ResetPasswordPage = () => {
                 setConfirmType("password")
             }
         }
+    let loading = useSelector((state)=>{
+    return state.general.isLoading
+    });    
  
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -75,7 +79,10 @@ const ResetPasswordPage = () => {
             
               <CCard className="p-4">
                 <CCardBody>
-                  
+                  <React.Fragment>
+                  {loading?
+                  <CustomLoadingComp path="../"/>
+                  :
                   <Formik
                       initialValues={{ newPassword: '',confirmPassword:'' }} validationSchema={validationSchemaFormat}
                       onSubmit={(values) => { console.log('values => ', values);  handleSavePassword(values) }}
@@ -144,6 +151,8 @@ const ResetPasswordPage = () => {
                       </Form>
                     )}
                   </Formik>
+                  }
+                  </React.Fragment>
                   
                 </CCardBody>
 

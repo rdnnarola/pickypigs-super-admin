@@ -5,7 +5,8 @@ const initialState = {
     errorMessage:'',
     allergy_Data:{},
     selectedAllergy:{},
-    totalrows:null,
+    totalrows:0,
+    selectedRow:null
     };
     
     const manageAllergyReducer = (state = initialState, { type, payload }) => {
@@ -25,8 +26,9 @@ const initialState = {
                 ...state,
                 isLoading:false,
                 allergy_Data:payload,
-                totalrows:payload.totalCount
-    
+                totalrows:payload.totalCount,
+                selectedRow:payload.allergenList.length
+
             };
         case "ADD_ALLERGY_SUCCESS":
             return{

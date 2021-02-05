@@ -99,7 +99,7 @@ const ManageAllergenPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Features  || {perPage}
+                Manager Features  
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
