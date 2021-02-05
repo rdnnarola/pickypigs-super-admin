@@ -13,7 +13,7 @@ export const getAllCookingData=(data)=>{
             }
             let dataURL=`/super_admin/manage_cooking_method/list`
             let response = await Axios.post(dataURL,JSON.stringify(data),config);
-            await dispatch({type:"GET_COOKING_SUCCESS",payload:response.data});
+            dispatch({type:"GET_COOKING_SUCCESS",payload:response.data});
         }
         catch(error){
           dispatch({type:"GET_COOKING_FAILURE",payload:error});
@@ -45,8 +45,8 @@ export const getAllCookingData=(data)=>{
             let dataURL=`/super_admin/manage_cooking_method`
             let response = await Axios.post(dataURL,formData,config );
             dispatch({type:"ADD_COOKING_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Cooking Added Successfully .', 'success'));
-            await dispatch(getAllCookingData());
+            dispatch(getAllCookingData());
+            dispatch(setAlert('Cooking Added Successfully .', 'success'));
 
         }
         catch(error){
@@ -93,11 +93,11 @@ export const getAllCookingData=(data)=>{
             let dataURL=`/super_admin/manage_cooking_method/${selectedId}`
             let response = await Axios.put(dataURL,formData,config );
             dispatch({type:"UPDATE_COOKING_SUCCESS",payload:response.data});
-            await dispatch(getAllCookingData());
+            dispatch(getAllCookingData());
             if(data.image!==imagepath){
-              await dispatch(deleteImage({path:imagepath}));
+              dispatch(deleteImage({path:imagepath}));
             }
-            await dispatch(setAlert('Cooking Updated Successfully .', 'success'));
+            dispatch(setAlert('Cooking Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_COOKING_FAILURE",payload:error});
@@ -117,9 +117,9 @@ export const getAllCookingData=(data)=>{
             dispatch({type:"DELETE_COOKING_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_cooking_method/${selectedId}`)
             dispatch({type:"DELETE_COOKING_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Cooking Deleted Successfully .', 'warning'));
-            await dispatch(getAllCookingData());
-            await dispatch(deleteImage({path:imagepath}));
+            dispatch(getAllCookingData());
+            dispatch(deleteImage({path:imagepath}));
+            dispatch(setAlert('Cooking Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_COOKING_FAILURE",payload:error});

@@ -13,7 +13,7 @@ export const getAllCuisineData=(data)=>{
             }
             let dataURL=`super_admin/manage_cuisine_type/list`
             let response = await Axios.post(dataURL,JSON.stringify(data),config);
-            await dispatch({type:"GET_CUISINE_SUCCESS",payload:response.data});
+            dispatch({type:"GET_CUISINE_SUCCESS",payload:response.data});
         }
         catch(error){
           dispatch({type:"GET_CUISINE_FAILURE",payload:error});
@@ -39,8 +39,8 @@ export const getAllCuisineData=(data)=>{
             let dataURL=`super_admin/manage_cuisine_type`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_CUISINE_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Cuisine Added Successfully .', 'success'));
-            await dispatch(getAllCuisineData());
+            dispatch(getAllCuisineData());
+            dispatch(setAlert('Cuisine Added Successfully .', 'success'));
 
         }
         catch(error){
@@ -81,9 +81,8 @@ export const getAllCuisineData=(data)=>{
             let dataURL=`/super_admin/manage_cuisine_type/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_CUISINE_SUCCESS",payload:response.data});
-            await dispatch(getAllCuisineData());
-            
-            await dispatch(setAlert('Cuisine Updated Successfully .', 'success'));
+            dispatch(getAllCuisineData());
+            dispatch(setAlert('Cuisine Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_CUISINE_FAILURE",payload:error});
@@ -103,8 +102,8 @@ export const getAllCuisineData=(data)=>{
             dispatch({type:"DELETE_CUISINE_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_cuisine_type/${selectedId}`)
             dispatch({type:"DELETE_CUISINE_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Cuisine Deleted Successfully .', 'warning'));
-            await dispatch(getAllCuisineData());
+            dispatch(getAllCuisineData());
+            dispatch(setAlert('Cuisine Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_CUISINE_FAILURE",payload:error});

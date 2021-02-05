@@ -28,7 +28,7 @@ export const getLogin=(data,history)=>{
           let dataURL=`/auth/login`
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"GET_LOGIN_SUCCESS",payload:response.data});
-          await dispatch(setAlert('LogIn Success', 'success'));
+          dispatch(setAlert('LogIn Success', 'success'));
           const token = localStorage.getItem("access_token");
           if (token) axios.defaults.headers.common = { "x-access-token": token };
           history.push('/manage_restaurant');
@@ -49,7 +49,7 @@ export const logoutUser=(history)=>{
   return async(dispatch)=>{
       try{
           await dispatch({type:"LOGOUT_USER_REQUEST"});
-          await dispatch(setAlert('LogOut Success', 'success'));
+          dispatch(setAlert('LogOut Success', 'success'));
           history.push('/login') ;
       }
       catch(error){
@@ -77,7 +77,7 @@ export const forgotPassword=(data)=>{
           let dataURL=`/auth/forgot_password`
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"FORGOT_PASSWORD_SUCCESS",payload:response.data});
-          await dispatch(setAlert(`${response.data.message}`, 'success'));
+          dispatch(setAlert(`${response.data.message}`, 'success'));
       }
       catch(error){
         dispatch({type:"FORGOT_PASSWORD_FAILURE",payload:error});
@@ -103,7 +103,7 @@ export const resetPassword=(data,history)=>{
           let dataURL=`/auth/reset_password`
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"RESET_PASSWORD_SUCCESS",payload:response.data});
-          await dispatch(setAlert(`${response.data.message}`, 'success'));
+          dispatch(setAlert(`${response.data.message}`, 'success'));
           history.push('/login');
       }
       catch(error){
@@ -131,7 +131,7 @@ export const deleteImage=(data)=>{
           let dataURL=`/restaurant_admin/fileupload/remove_file`
           let response = await Axios.post(dataURL,JSON.stringify(data),config );
           dispatch({type:"DELETE_FILE_SUCCESS",payload:response.data});
-          await dispatch(setAlert('Image Deleted Successfully .', 'success'));
+          // dispatch(setAlert('Image Deleted Successfully .', 'success'));
       }
       catch(error){
         dispatch({type:"DELETE_FILE_FAILURE",payload:error});

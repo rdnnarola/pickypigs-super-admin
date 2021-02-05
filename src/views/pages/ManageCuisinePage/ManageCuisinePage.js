@@ -8,6 +8,7 @@ import DeleteCuisineComponent from './DeleteCuisineComponent';
 import AddCuisineComponent from './AddCuisineComponent';
 import UpdateCuisineComponent from './UpdateCuisineComponent';
 import { getAllCuisineData } from '../../../redux/actions/manageCuisineAction';
+import moment from "moment";
 
 const customStyles = {
   headRow: {
@@ -63,6 +64,8 @@ const ManageCuisinePage = () => {
   
       { selector: 'name',name: 'Name', sortable: true, },
       // { selector: 'description',name: 'Description', sortable: true},
+      { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
+
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">

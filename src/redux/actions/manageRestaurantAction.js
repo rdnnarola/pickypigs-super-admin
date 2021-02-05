@@ -39,8 +39,8 @@ export const getAllRestaurantData=(data)=>{
             let dataURL=`/super_admin/manage_restaurant/create`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_RESTAURANT_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Restaurant Added Successfully .', 'success'));
-            await dispatch(getAllRestaurantData());
+            dispatch(getAllRestaurantData());
+            dispatch(setAlert('Restaurant Added Successfully .', 'success'));
 
         }
         catch(error){
@@ -82,8 +82,8 @@ export const getAllRestaurantData=(data)=>{
             let dataURL=`/super_admin/manage_restaurant/update_password/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_RESTAURANT_SUCCESS",payload:response.data});
-            await dispatch(getAllRestaurantData());
-            await dispatch(setAlert('Restaurant Updated Successfully .', 'success'));
+            dispatch(getAllRestaurantData());
+            dispatch(setAlert('Restaurant Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_RESTAURANT_FAILURE",payload:error});
@@ -102,8 +102,8 @@ export const getAllRestaurantData=(data)=>{
             dispatch({type:"DELETE_RESTAURANT_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_restaurant/${selectedId}`)
             dispatch({type:"DELETE_RESTAURANT_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Restaurant Deleted Successfully .', 'warning'));
-            await dispatch(getAllRestaurantData());
+            dispatch(getAllRestaurantData());
+            dispatch(setAlert('Restaurant Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_RESTAURANT_FAILURE",payload:error});

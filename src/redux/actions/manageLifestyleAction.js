@@ -13,7 +13,7 @@ export const getAllLifestyleData=(data)=>{
             }
             let dataURL=`super_admin/manage_lifestyle/list`
             let response = await Axios.post(dataURL,JSON.stringify(data),config);
-            await dispatch({type:"GET_LIFESTYLE_SUCCESS",payload:response.data});
+            dispatch({type:"GET_LIFESTYLE_SUCCESS",payload:response.data});
         }
         catch(error){
           dispatch({type:"GET_LIFESTYLE_FAILURE",payload:error});
@@ -39,8 +39,8 @@ export const getAllLifestyleData=(data)=>{
             let dataURL=`super_admin/manage_lifestyle`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_LIFESTYLE_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Lifestyle Added Successfully .', 'success'));
-            await dispatch(getAllLifestyleData());
+            dispatch(getAllLifestyleData());
+            dispatch(setAlert('Lifestyle Added Successfully .', 'success'));
 
         }
         catch(error){
@@ -81,9 +81,8 @@ export const getAllLifestyleData=(data)=>{
             let dataURL=`/super_admin/manage_lifestyle/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_LIFESTYLE_SUCCESS",payload:response.data});
-            await dispatch(getAllLifestyleData());
-            
-            await dispatch(setAlert('Lifestyle Updated Successfully .', 'success'));
+            dispatch(getAllLifestyleData());
+            dispatch(setAlert('Lifestyle Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_LIFESTYLE_FAILURE",payload:error});
@@ -103,8 +102,8 @@ export const getAllLifestyleData=(data)=>{
             dispatch({type:"DELETE_LIFESTYLE_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_lifestyle/${selectedId}`)
             dispatch({type:"DELETE_LIFESTYLE_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Lifestyle Deleted Successfully .', 'warning'));
-            await dispatch(getAllLifestyleData());
+            dispatch(getAllLifestyleData());
+            dispatch(setAlert('Lifestyle Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_LIFESTYLE_FAILURE",payload:error});

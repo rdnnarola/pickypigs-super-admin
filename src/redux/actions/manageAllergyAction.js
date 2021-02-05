@@ -13,7 +13,7 @@ export const getAllAllergyData=(data)=>{
             }
             let dataURL=`super_admin/manage_allergen/list`
             let response = await Axios.post(dataURL,JSON.stringify(data),config);
-            await dispatch({type:"GET_ALLERGY_SUCCESS",payload:response.data});
+            dispatch({type:"GET_ALLERGY_SUCCESS",payload:response.data});
         }
         catch(error){
           dispatch({type:"GET_ALLERGY_FAILURE",payload:error});
@@ -45,8 +45,8 @@ export const getAllAllergyData=(data)=>{
             let dataURL=`/super_admin/manage_allergen`
             let response = await Axios.post(dataURL,formData,config );
             dispatch({type:"ADD_ALLERGY_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Allergy Added Successfully .', 'success'));
-            await dispatch(getAllAllergyData());
+            dispatch(getAllAllergyData());
+            dispatch(setAlert('Allergy Added Successfully .', 'success'));
 
         }
         catch(error){
@@ -93,11 +93,11 @@ export const getAllAllergyData=(data)=>{
             let dataURL=`/super_admin/manage_allergen/${selectedId}`
             let response = await Axios.put(dataURL,formData,config );
             dispatch({type:"UPDATE_ALLERGY_SUCCESS",payload:response.data});
-            await dispatch(getAllAllergyData());
+            dispatch(getAllAllergyData());
             if(data.image!==imagepath){
-              await dispatch(deleteImage({path:imagepath}));
+              dispatch(deleteImage({path:imagepath}));
             }
-            await dispatch(setAlert('Allergy Updated Successfully .', 'success'));
+            dispatch(setAlert('Allergy Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_ALLERGY_FAILURE",payload:error});
@@ -117,9 +117,9 @@ export const getAllAllergyData=(data)=>{
             dispatch({type:"DELETE_ALLERGY_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_allergen/${selectedId}`)
             dispatch({type:"DELETE_ALLERGY_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Allergy Deleted Successfully .', 'warning'));
-            await dispatch(getAllAllergyData());
-            await dispatch(deleteImage({path:imagepath}));
+            dispatch(getAllAllergyData());
+            dispatch(deleteImage({path:imagepath}));
+            dispatch(setAlert('Allergy Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_ALLERGY_FAILURE",payload:error});

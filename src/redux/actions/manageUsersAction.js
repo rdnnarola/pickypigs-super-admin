@@ -40,10 +40,8 @@ export const getAllUsersData=(data)=>{
             let dataURL=`/super_admin/manage_user/update_password/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_USER_SUCCESS",payload:response.data});
-            await dispatch(getAllUsersData());
-            await dispatch(setAlert('UserPassword Updated Successfully .', 'success'));
-
-
+            dispatch(getAllUsersData());
+            dispatch(setAlert('UserPassword Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_USER_FAILURE",payload:error});

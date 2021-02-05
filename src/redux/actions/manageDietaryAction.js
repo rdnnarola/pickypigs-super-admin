@@ -13,7 +13,7 @@ export const getAllDietaryData=(data)=>{
             }
             let dataURL=`super_admin/manage_dietary/list`
             let response = await Axios.post(dataURL,JSON.stringify(data),config);
-            await dispatch({type:"GET_DIETARY_SUCCESS",payload:response.data});
+            dispatch({type:"GET_DIETARY_SUCCESS",payload:response.data});
         }
         catch(error){
           dispatch({type:"GET_DIETARY_FAILURE",payload:error});
@@ -39,8 +39,8 @@ export const getAllDietaryData=(data)=>{
             let dataURL=`super_admin/manage_dietary`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_DIETARY_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Dietary Added Successfully .', 'success'));
-            await dispatch(getAllDietaryData());
+             dispatch(setAlert('Dietary Added Successfully .', 'success'));
+             dispatch(getAllDietaryData());
 
         }
         catch(error){
@@ -81,9 +81,8 @@ export const getAllDietaryData=(data)=>{
             let dataURL=`/super_admin/manage_dietary/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_DIETARY_SUCCESS",payload:response.data});
-            await dispatch(getAllDietaryData());
-            
-            await dispatch(setAlert('Dietary Updated Successfully .', 'success'));
+             dispatch(getAllDietaryData());
+             dispatch(setAlert('Dietary Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_DIETARY_FAILURE",payload:error});
@@ -103,8 +102,9 @@ export const getAllDietaryData=(data)=>{
             dispatch({type:"DELETE_DIETARY_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_dietary/${selectedId}`)
             dispatch({type:"DELETE_DIETARY_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Dietary Deleted Successfully .', 'warning'));
-            await dispatch(getAllDietaryData());
+            dispatch(getAllDietaryData());
+            dispatch(setAlert('Dietary Deleted Successfully .', 'warning'));
+
         }
         catch(error){
             dispatch({type:"DELETE_DIETARY_FAILURE",payload:error});

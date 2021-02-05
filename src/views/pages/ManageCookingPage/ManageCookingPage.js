@@ -73,6 +73,8 @@ const ManageAllergenPage = () => {
         cell: row => <img height="60px" className="border m-2" width="56px" alt={row.name} src={`${imagelink}${row.image}`} />,
       },
       // { selector: 'description',name: 'Description', sortable: true},
+      { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
+
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">

@@ -13,7 +13,7 @@ export const getAllFeaturesData=(data)=>{
             }
             let dataURL=`/super_admin/manage_restaurant_features_option/list`
             let response = await Axios.post(dataURL,JSON.stringify(data),config);
-            await dispatch({type:"GET_FEATURES_SUCCESS",payload:response.data});
+            dispatch({type:"GET_FEATURES_SUCCESS",payload:response.data});
         }
         catch(error){
           dispatch({type:"GET_FEATURES_FAILURE",payload:error});
@@ -45,8 +45,8 @@ export const getAllFeaturesData=(data)=>{
             let dataURL=`/super_admin/manage_restaurant_features_option`
             let response = await Axios.post(dataURL,formData,config );
             dispatch({type:"ADD_FEATURES_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Features Added Successfully .', 'success'));
-            await dispatch(getAllFeaturesData());
+            dispatch(getAllFeaturesData());
+            dispatch(setAlert('Features Added Successfully .', 'success'));
 
         }
         catch(error){
@@ -93,11 +93,11 @@ export const getAllFeaturesData=(data)=>{
             let dataURL=`/super_admin/manage_restaurant_features_option/${selectedId}`
             let response = await Axios.put(dataURL,formData,config );
             dispatch({type:"UPDATE_FEATURES_SUCCESS",payload:response.data});
-            await dispatch(getAllFeaturesData());
+            dispatch(getAllFeaturesData());
             if(data.image!==imagepath){
-              await dispatch(deleteImage({path:imagepath}));
+              dispatch(deleteImage({path:imagepath}));
             }
-            await dispatch(setAlert('Features Updated Successfully .', 'success'));
+            dispatch(setAlert('Features Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_FEATURES_FAILURE",payload:error});
@@ -117,9 +117,9 @@ export const getAllFeaturesData=(data)=>{
             dispatch({type:"DELETE_FEATURES_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_restaurant_features_option/${selectedId}`)
             dispatch({type:"DELETE_FEATURES_SUCCESS",payload:response.data});
-            await dispatch(setAlert('Features Deleted Successfully .', 'warning'));
-            await dispatch(getAllFeaturesData());
-            await dispatch(deleteImage({path:imagepath}));
+            dispatch(getAllFeaturesData());
+            dispatch(deleteImage({path:imagepath}));
+            dispatch(setAlert('Features Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_FEATURES_FAILURE",payload:error});
