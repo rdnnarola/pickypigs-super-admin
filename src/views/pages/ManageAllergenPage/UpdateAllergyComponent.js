@@ -99,7 +99,7 @@ const UpdateAllergyComponent = (props) => {
                                             {values.image &&
                                              <div className="d-flex justify-content-center align-items-center p-3">
                                                {typeof values.image === 'string' || values.image instanceof String ?
-                                                    <img src={`${props.imagelink}${values.image}`} width="160px" height="100px" alt={values&&values.name?values.name:"image"}/>
+                                                    <img src={`${props.imagelink}${values.image}`} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
                                                     :
                                                     <img src={URL.createObjectURL(values.image)} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
                                             }

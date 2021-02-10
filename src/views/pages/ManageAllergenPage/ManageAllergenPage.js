@@ -43,12 +43,12 @@ const ManageAllergenPage = () => {
     useEffect(()=>{
       dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
-    },[dispatch,inputValue,]);
+    },[dispatch,inputValue,perPage,]);
 
      
     const handlePerRowsChange = (newPerPage) => {
       setPerPage(newPerPage);
-      dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
+      // dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
     };
     const handlePageChange = page=> {
       setMypage(page)
@@ -169,7 +169,7 @@ const ManageAllergenPage = () => {
     <React.Fragment>
         <UpdateAllergyComponent show={updateAllergyModalShow} 
           onClose={() => setUpdateAllergyModalShow(false)} 
-          selectedid={selectedId} 
+          selectedid={selectedId} imagelink={imagelink}
           imagepath={imagePath} perPage={perPage} 
           myPage={myPage} inputValue={inputValue}
         />
