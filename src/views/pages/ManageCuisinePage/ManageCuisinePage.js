@@ -62,9 +62,9 @@ const ManageCuisinePage = () => {
 
     const columns = [
   
-      { selector: 'name',name: 'Name', sortable: true, },
+      { selector: 'name',name: 'Name',  },
       // { selector: 'description',name: 'Description', sortable: true},
-      { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
+      // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
 
      { name: 'Action', button: true,
         cell: (row) => 

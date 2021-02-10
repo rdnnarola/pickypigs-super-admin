@@ -62,7 +62,7 @@ const ManageDietaryPage = () => {
 
     const columns = [
   
-      { selector: 'name',name: 'Name', sortable: true, },
+      { selector: 'name',name: 'Name',  },
       // { selector: 'description',name: 'Description', sortable: true},
      { name: 'Action', button: true,
         cell: (row) => 

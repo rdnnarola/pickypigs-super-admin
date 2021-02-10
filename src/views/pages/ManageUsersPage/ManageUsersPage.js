@@ -74,14 +74,14 @@ const ManageUsersPage = () => {
 
     const columns = [
   
-      { selector: 'user_preferenceDetail.name',name: 'Name', sortable: true, },
+      { selector: 'user_preferenceDetail.name',name: 'Name',  },
       { selector: 'email', name: 'Email', sortable: true},
-      // { selector: 'user_preferenceDetail.myPreferences.allergenInformation', name: 'Allergen Info', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.allergenInformation.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
-      // { selector: 'user_preferenceDetail.myPreferences.dietaryPreferences', name: 'Dietary Preferences', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.dietaryPreferences.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
-      // { selector: 'user_preferenceDetail.myPreferences.lifestyleChoice', name: 'Lifestyle Choice', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.lifestyleChoice.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
-      // { selector: 'user_preferenceDetail.myPreferences.restaurantFeatures', name: 'restaurant Features', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.myPreferences.restaurantFeatures.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
-      { selector: 'user_preferenceDetail.phone',name: 'Mobile', sortable: true, cell:(row)=><span>{row.user_preferenceDetail.phone}</span> },
-      { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
+      // { selector: 'user_preferenceDetail.myPreferences.allergenInformation', name: 'Allergen Info',  cell:(row)=><span>{row.user_preferenceDetail.myPreferences.allergenInformation.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      // { selector: 'user_preferenceDetail.myPreferences.dietaryPreferences', name: 'Dietary Preferences',  cell:(row)=><span>{row.user_preferenceDetail.myPreferences.dietaryPreferences.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      // { selector: 'user_preferenceDetail.myPreferences.lifestyleChoice', name: 'Lifestyle Choice',  cell:(row)=><span>{row.user_preferenceDetail.myPreferences.lifestyleChoice.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      // { selector: 'user_preferenceDetail.myPreferences.restaurantFeatures', name: 'restaurant Features',  cell:(row)=><span>{row.user_preferenceDetail.myPreferences.restaurantFeatures.map((data,index)=>{return(<div key={index}><p>{data.name}</p></div>)})}</span> },
+      { selector: 'user_preferenceDetail.phone',name: 'Mobile',  cell:(row)=><span>{row.user_preferenceDetail.phone}</span> },
+      { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
       { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">

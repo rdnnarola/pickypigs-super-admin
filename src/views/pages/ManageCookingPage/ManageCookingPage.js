@@ -67,13 +67,13 @@ const ManageAllergenPage = () => {
 
     const columns = [
   
-      { selector: 'name',name: 'Name', sortable: true, },
+      { selector: 'name',name: 'Name',  },
       {
         name: 'Thumbnail',
         cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${imagelink}${row.image}`} />,
       },
       // { selector: 'description',name: 'Description', sortable: true},
-      { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
+      // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
 
      { name: 'Action', button: true,
         cell: (row) => 
@@ -102,7 +102,7 @@ const ManageAllergenPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manage Cooking  
+                Manage Cooking Method 
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
@@ -117,7 +117,7 @@ const ManageAllergenPage = () => {
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
                 <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddCookingModalShow(true);setSelectedId(null)}}>
                   <span className="add-icon">
-                     Add Cooking
+                     Add Cooking Method
                   </span> 
                 </CButton>
               </CCol>

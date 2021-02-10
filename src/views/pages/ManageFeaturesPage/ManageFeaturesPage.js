@@ -10,34 +10,17 @@ import AddFeaturesComponent from './AddFeaturesComponent';
 import UpdateFeaturesComponent from './UpdateFeaturesComponent';
 import { getAllFeaturesData } from '../../../redux/actions/manageFeaturesAction';
 
-const customStyles = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '90px',
-      },
-    },
-  },
-}
-const customStyles2 = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '65px',
-      },
-    },
-  },
-}
+const CustomDesc = ({ row }) => (
+  <div>
+    {}
+    <div>
+      <div data-tag="allowRowEvents" style={{ overflow: 'hidden', whiteSpace: 'wrap', textOverflow: 'ellipses' }}>
+        {}
+        {row.description}
+      </div>
+    </div>
+  </div>
+);
 
 const ManageAllergenPage = () => {
     const dispatch=useDispatch();  
@@ -67,12 +50,12 @@ const ManageAllergenPage = () => {
 
     const columns = [
   
-      { selector: 'name',name: 'Name', sortable: true, },
+      { selector: 'name',name: 'Name',  },
       {
         name: 'Thumbnail',
         cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${imagelink}${row.image}`} />,
       },
-      { selector: 'description',name: 'Description', sortable: true},
+      { selector: 'description',name: 'Description', allowOverflow:false,cell: row => <CustomDesc row={row} />,},
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
@@ -100,7 +83,7 @@ const ManageAllergenPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manage Features  
+                Manage Restaurant Features  
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
@@ -115,7 +98,7 @@ const ManageAllergenPage = () => {
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
                 <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddFeaturesModalShow(true);setSelectedId(null)}}>
                   <span className="add-icon">
-                     Add Features
+                     Add Restaurant Features
                   </span> 
                 </CButton>
               </CCol>
@@ -149,7 +132,6 @@ const ManageAllergenPage = () => {
                                 overflowY
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
-                                customStyles={features_Data.restaurantFeatureList && features_Data.restaurantFeatureList.length===1?customStyles:customStyles2}
                               />
                             </CCard>
                             

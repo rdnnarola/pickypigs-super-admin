@@ -10,41 +10,12 @@ import AddAllergyComponent from './AddAllergyComponent';
 import UpdateAllergyComponent from './UpdateAllergyComponent';
 import { getAllAllergyData } from '../../../redux/actions/manageAllergyAction';
 
-const customStyles = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '90px',
-      },
-    },
-  },
-}
-const customStyles2 = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '65px',
-      },
-    },
-  },
-}
 
 const CustomDesc = ({ row }) => (
   <div>
     {}
-    <div>{row.name}</div>
     <div>
-      <div data-tag="allowRowEvents" style={{ color: 'grey', overflow: 'hidden', whiteSpace: 'wrap', textOverflow: 'ellipses' }}>
+      <div data-tag="allowRowEvents" style={{ overflow: 'hidden', whiteSpace: 'wrap', textOverflow: 'ellipses' }}>
         {}
         {row.description}
       </div>
@@ -70,21 +41,19 @@ const ManageAllergenPage = () => {
 
     // pagination start
     useEffect(()=>{
-      dispatch(getAllAllergyData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
-    },[dispatch,inputValue,perPage,myPage]);
-
-     useEffect(()=>{
+      dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
-    },[dispatch,perPage]);
+    },[dispatch,inputValue,]);
 
+     
     const handlePerRowsChange = (newPerPage) => {
       setPerPage(newPerPage);
-      // dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
+      dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
     };
     const handlePageChange = page=> {
       setMypage(page)
       console.log(page)
-      // dispatch(getAllAllergyData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+      dispatch(getAllAllergyData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
 
@@ -96,13 +65,13 @@ const ManageAllergenPage = () => {
 
 
     const columns = [
-      { selector: 'name',name: 'Name', sortable: true, },
+      { selector: 'name',name: 'Name',  },
       {
         name: 'Thumbnail',
         cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${imagelink}${row.image}`} />,
       },
-      { selector: 'description',name: 'Description', sortable: true,allowOverflow:false,cell: row => <CustomDesc row={row} />,},
-      { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
+      { selector: 'description',name: 'Description', allowOverflow:false,cell: row => <CustomDesc row={row} />,},
+      // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
       { name: 'Action', button: true,
           cell: (row) => 
             <CDropdown className="btn-group">

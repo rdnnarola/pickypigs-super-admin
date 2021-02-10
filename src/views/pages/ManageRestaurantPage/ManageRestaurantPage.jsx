@@ -11,75 +11,6 @@ import AddRestaurantModalComp from './AddRestaurantModalComp';
 import UpdatePasswordModalComp from './UpdatePasswordModalComp';
 import './ManageRestaurantPage.scss'
 
-const customStyles = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-      backgroundColor:"#cb007b",
-    },
-  },
-  headCells: {
-    style: {
-      '&:not(:last-of-type)': {
-      },
-      color:'#ffffff'
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '90px',
-      },
-    },
-  },
-}
-const customStyles2 = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '65px',
-      },
-    },
-  },
-}
-
-const customStyles3 = {
-  header: {
-    style: {
-      minHeight: '56px',
-    },
-  },
-  headRow: {
-    style: {
-      borderTopStyle: 'solid',
-      borderTopWidth: '1px',
-      borderTopColor: defaultThemes.default.divider.default,
-    },
-  },
-  headCells: {
-    style: {
-      '&:not(:last-of-type)': {
-        borderRightStyle: 'solid',
-        borderRightWidth: '1px',
-        borderRightColor: defaultThemes.default.divider.default,
-      },
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        borderRightStyle: 'solid',
-        borderRightWidth: '1px',
-        borderRightColor: defaultThemes.default.divider.default,
-      },
-    },
-  },
-};
 
 const ManageRestaurantPage = () => {
     const dispatch=useDispatch();  
@@ -120,7 +51,7 @@ const ManageRestaurantPage = () => {
         cell: (row) => 
           <CDropdown className="btn d-inline-block">
           <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
-          <CDropdownMenu placement="bottom">
+          <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateRestaurantModalShow(true);setSelectedId(row._id)}}>Update Password</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem>
           </CDropdownMenu>
@@ -137,7 +68,7 @@ const ManageRestaurantPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manage Restaurant
+                Manager Restaurant
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
