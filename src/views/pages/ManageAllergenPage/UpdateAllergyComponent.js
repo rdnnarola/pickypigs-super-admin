@@ -45,7 +45,7 @@ const UpdateAllergyComponent = (props) => {
             image:input.image,
             description:input.description,
         }
-        dispatch(updateSelectedAllergy(props.selectedid,obj,props.imagepath));
+        dispatch(updateSelectedAllergy(props.selectedid,obj,props.imagepath,props.perPage,props.myPage,props.inputValue));
         props.onClose();
         resetForm();
 

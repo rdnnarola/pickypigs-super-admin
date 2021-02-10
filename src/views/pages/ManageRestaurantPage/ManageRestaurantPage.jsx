@@ -15,6 +15,14 @@ const customStyles = {
   headRow: {
     style: {
       minHeight: '65px',
+      backgroundColor:"#cb007b",
+    },
+  },
+  headCells: {
+    style: {
+      '&:not(:last-of-type)': {
+      },
+      color:'#ffffff'
     },
   },
   cells: {
@@ -39,6 +47,39 @@ const customStyles2 = {
     },
   },
 }
+
+const customStyles3 = {
+  header: {
+    style: {
+      minHeight: '56px',
+    },
+  },
+  headRow: {
+    style: {
+      borderTopStyle: 'solid',
+      borderTopWidth: '1px',
+      borderTopColor: defaultThemes.default.divider.default,
+    },
+  },
+  headCells: {
+    style: {
+      '&:not(:last-of-type)': {
+        borderRightStyle: 'solid',
+        borderRightWidth: '1px',
+        borderRightColor: defaultThemes.default.divider.default,
+      },
+    },
+  },
+  cells: {
+    style: {
+      '&:not(:last-of-type)': {
+        borderRightStyle: 'solid',
+        borderRightWidth: '1px',
+        borderRightColor: defaultThemes.default.divider.default,
+      },
+    },
+  },
+};
 
 const ManageRestaurantPage = () => {
     const dispatch=useDispatch();  
@@ -77,15 +118,16 @@ const ManageRestaurantPage = () => {
       { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
       { name: 'Action', button: true,
         cell: (row) => 
-          <CDropdown className="btn-group">
-          <CDropdownToggle color="primary"> Action </CDropdownToggle>
-          <CDropdownMenu>
+          <CDropdown className="btn d-inline-block">
+          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownMenu placement="bottom">
             <CDropdownItem onClick={() => {setUpdateRestaurantModalShow(true);setSelectedId(row._id)}}>Update Password</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem>
           </CDropdownMenu>
-        </CDropdown>
+        </CDropdown>,
+            allowOverflow: true,
       },
-  
+
     ];
 
 
@@ -95,16 +137,23 @@ const ManageRestaurantPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Restaurant
+                Manage Restaurant
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
-              <CCol md="4" className="mb-4">
-                <input className="form-control" type="text" onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search" />
+              <CCol sm="4" className="mb-4">
+                <input className="form-control position-relative"  type="text" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+               {inputValue&&
+                <CButton onClick={(e)=>{setInputValue("")}} className="position-absolute" style={{top:0,right:7}}>
+                  <CIcon name="cil-x" alt="Settings" className="mr-1"/>
+                </CButton>
+                }
               </CCol>
-              <CCol className="mb-4 d-flex justify-content-end" md="8">
-                <CButton color="primary" onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null)}}>
-                  + Add Restaurant
+              <CCol className="mb-4 d-flex justify-content-end" sm="8">
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null)}}>
+                  <span className="add-icon">
+                     Add Restaurant
+                  </span>
                 </CButton>
               </CCol>
               <div>
@@ -129,12 +178,11 @@ const ManageRestaurantPage = () => {
                                 columns={columns}
                                 data={search(restaurant_Data.restaurantList)}
                                 highlightOnHover
-                                pagination
+                                overflowY
                                 noHeader
                                 striped
-                                className="managerestaurant-table"
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
-                                customStyles={restaurant_Data.restaurantList && restaurant_Data.restaurantList.length===1?customStyles:customStyles2}
+                                pagination
 
                               />
                             </CCard>

@@ -39,7 +39,7 @@ const customStyles2 = {
   },
 }
 
-const CustomTitle = ({ row }) => (
+const CustomDesc = ({ row }) => (
   <div>
     {}
     <div>{row.name}</div>
@@ -67,24 +67,24 @@ const ManageAllergenPage = () => {
     // const imagelink="http://192.168.100.39:8000/"
     const imagelink="https://pickypigsapi.herokuapp.com/"
 
-    useEffect(()=>{
-      dispatch(getAllAllergyData({start:0,search:inputValue}));
-    },[dispatch,inputValue]);
-    
 
-  //pagination start
-  // useEffect(()=>{
-    //   dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
-    //   setMypage(1)
-    // },[dispatch,inputValue,perPage]);
+    // pagination start
+    useEffect(()=>{
+      dispatch(getAllAllergyData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
+    },[dispatch,inputValue,perPage,myPage]);
+
+     useEffect(()=>{
+      setMypage(1)
+    },[dispatch,perPage]);
+
     const handlePerRowsChange = (newPerPage) => {
       setPerPage(newPerPage);
-      dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
+      // dispatch(getAllAllergyData({start:0,length:perPage,search:inputValue}));
     };
     const handlePageChange = page=> {
       setMypage(page)
       console.log(page)
-      dispatch(getAllAllergyData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+      // dispatch(getAllAllergyData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
 
@@ -99,19 +99,20 @@ const ManageAllergenPage = () => {
       { selector: 'name',name: 'Name', sortable: true, },
       {
         name: 'Thumbnail',
-        cell: row => <img height="60px" className="border m-2" width="56px" alt={row.name} src={`${imagelink}${row.image}`} />,
+        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${imagelink}${row.image}`} />,
       },
-      { selector: 'description',name: 'Description', sortable: true,allowOverflow:false,cell: row => <CustomTitle row={row} />,},
+      { selector: 'description',name: 'Description', sortable: true,allowOverflow:false,cell: row => <CustomDesc row={row} />,},
       { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
       { name: 'Action', button: true,
           cell: (row) => 
             <CDropdown className="btn-group">
-            <CDropdownToggle color="primary"> Action </CDropdownToggle>
-            <CDropdownMenu>
+            <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+            <CDropdownMenu placement="left" >
               <CDropdownItem onClick={() => {setUpdateAllergyModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
               <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
             </CDropdownMenu>
-          </CDropdown>
+          </CDropdown>,
+            allowOverflow: true,
         },
     ];
 
@@ -123,20 +124,33 @@ const ManageAllergenPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Allergy 
+                Manage Allergy
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
-              <CCol md="4" className="mb-4">
-                <input className="form-control" type="text" onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+              <CCol sm="4"  className="mb-4">
+                <input className="form-control position-relative"  type="text" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+               {inputValue&&
+                <CButton onClick={(e)=>{setInputValue("")}} className="position-absolute" style={{top:0,right:7}}>
+                  <CIcon name="cil-x" alt="Settings" className="mr-1"/>
+                </CButton>
+                }
               </CCol>
-              <CCol className="mb-4 d-flex justify-content-end" md="8">
-                <CButton color="primary" onClick={() => {setAddAllergyModalShow(true);setSelectedId(null)}}>
-                  + Add Allergy
+              <CCol className="mb-4 d-flex justify-content-end" sm="8">
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddAllergyModalShow(true);setSelectedId(null)}}>
+                  <span className="add-icon">
+                     Add Allergy
+                  </span>  
                 </CButton>
               </CCol>
               <div>
-                <AddAllergyComponent show={addAllergyModalShow} onClose={() => setAddAllergyModalShow(false)} imagelink={imagelink} />
+                <AddAllergyComponent 
+                  show={addAllergyModalShow} 
+                  onClose={() => setAddAllergyModalShow(false)} 
+                  perPage={perPage} 
+                  myPage={myPage}
+                  inputValue={inputValue}
+                />
               </div>
             </CRow>
               {
@@ -159,16 +173,16 @@ const ManageAllergenPage = () => {
                                 noHeader
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
-                                customStyles={allergy_Data.allergenList && allergy_Data.allergenList.length===1?customStyles:customStyles2}
-                               
+                                overflowY
+
                                 pagination={true}
-                                // paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
-                                // paginationPerPage={perPage}
-                                // paginationServer={true}
-                                // paginationDefaultPage	={myPage}
-                                // paginationTotalRows={totalrows}
-                                // onChangeRowsPerPage={handlePerRowsChange}
-                                // onChangePage={handlePageChange}
+                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationPerPage={perPage}
+                                paginationServer={true}
+                                paginationDefaultPage	={myPage}
+                                paginationTotalRows={totalrows}
+                                onChangeRowsPerPage={handlePerRowsChange}
+                                onChangePage={handlePageChange}
                               />
                             </CCard>
                             
@@ -184,10 +198,20 @@ const ManageAllergenPage = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdateAllergyComponent show={updateAllergyModalShow} onClose={() => setUpdateAllergyModalShow(false)} selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}/>
+        <UpdateAllergyComponent show={updateAllergyModalShow} 
+          onClose={() => setUpdateAllergyModalShow(false)} 
+          selectedid={selectedId} 
+          imagepath={imagePath} perPage={perPage} 
+          myPage={myPage} inputValue={inputValue}
+        />
     </React.Fragment>
     <React.Fragment>
-      <DeleteAllergyComponent show={deleteModalShow} onClose={() => setDeleteModalShow(false)} selectedid={selectedId} imagepath={imagePath} />
+      <DeleteAllergyComponent show={deleteModalShow} 
+        onClose={() => setDeleteModalShow(false)} 
+        selectedid={selectedId} imagepath={imagePath} 
+        perPage={perPage} myPage={myPage} 
+        inputValue={inputValue}
+      />
     </React.Fragment>
     </>
 

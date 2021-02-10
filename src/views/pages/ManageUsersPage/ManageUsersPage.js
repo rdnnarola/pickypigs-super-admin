@@ -85,12 +85,13 @@ const ManageUsersPage = () => {
       { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
-          <CDropdownToggle color="primary"> Action </CDropdownToggle>
-          <CDropdownMenu>
+          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateUserPasswordModalShow(true);setSelectedId(row._id);setSelectedMail(row.email)}}>Update Password</CDropdownItem>
             {/* <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem> */}
           </CDropdownMenu>
-        </CDropdown>
+        </CDropdown>,
+            allowOverflow: true,
       },
   
     ];
@@ -126,20 +127,29 @@ const  handleDownloadScv = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Users
+                Manage Users
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
-              <CCol md="4" className="mb-4">
-                <input className="form-control" type="text" onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search" />
-              </CCol>
-              <CCol className="mb-4 d-flex justify-content-end" md="8">
-                <CButton color="primary" disabled onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null);setSelectedMail(null)}}>
-                  + Add User
+              <CCol sm="4" className="mb-4">
+                <input className="form-control position-relative"  type="text" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+               {inputValue&&
+                <CButton onClick={(e)=>{setInputValue("")}} className="position-absolute" style={{top:0,right:7}}>
+                  <CIcon name="cil-x" alt="Settings" className="mr-1"/>
                 </CButton>
-                <CButton onClick={handleDownloadScv} color="primary" className="ml-3">
+                }
+              </CCol>
+              <CCol className="mb-4 d-flex justify-content-end" sm="8">
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" disabled onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null);setSelectedMail(null)}}>
+                  <span className="add-icon">
+                     Add User
+                  </span> 
+                </CButton>
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill ml-3" onClick={handleDownloadScv}>
                     <CIcon name="cil-cloud-download" alt="Settings" className="mr-1"/>
-                    Export CSV
+                    {/* <span className="edit-icon"> */}
+                      Export CSV
+                    {/* </span>  */}
                 </CButton>
               </CCol>
               <div>
@@ -166,6 +176,7 @@ const  handleDownloadScv = () => {
                                 highlightOnHover
                                 pagination
                                 noHeader
+                                overflowY
                                 striped
                                 responsive
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}

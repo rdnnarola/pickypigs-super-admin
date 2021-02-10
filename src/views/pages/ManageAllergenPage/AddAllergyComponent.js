@@ -20,9 +20,7 @@ const AddAllergyComponent = (props) => {
         name:'',
         image:null,
         description:'',
-       
     }
-
     const validationSchema  = Yup.object().shape({
         name:Yup.string().required(' Name is required'),
         image:Yup.mixed().required('Please Upload Image'),
@@ -32,7 +30,7 @@ const AddAllergyComponent = (props) => {
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addAllergyData(fields));
+        dispatch(addAllergyData(fields,props.perPage,props.myPage,props.inputValue));
         props.onClose();
         resetForm();
     }

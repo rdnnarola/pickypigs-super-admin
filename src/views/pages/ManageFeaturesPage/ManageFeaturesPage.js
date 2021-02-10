@@ -70,18 +70,19 @@ const ManageAllergenPage = () => {
       { selector: 'name',name: 'Name', sortable: true, },
       {
         name: 'Thumbnail',
-        cell: row => <img height="60px" className="border m-2" width="56px" alt={row.name} src={`${imagelink}${row.image}`} />,
+        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${imagelink}${row.image}`} />,
       },
       { selector: 'description',name: 'Description', sortable: true},
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
-          <CDropdownToggle color="primary"> Action </CDropdownToggle>
-          <CDropdownMenu>
+          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateFeaturesModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
           </CDropdownMenu>
-        </CDropdown>
+        </CDropdown>,
+            allowOverflow: true,
       },
     ];
 
@@ -99,16 +100,23 @@ const ManageAllergenPage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Features  
+                Manage Features  
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
-              <CCol md="4" className="mb-4">
-                <input className="form-control" type="text" onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+              <CCol sm="4" className="mb-4">
+                <input className="form-control position-relative"  type="text" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+               {inputValue&&
+                <CButton onClick={(e)=>{setInputValue("")}} className="position-absolute" style={{top:0,right:7}}>
+                  <CIcon name="cil-x" alt="Settings" className="mr-1"/>
+                </CButton>
+                }
               </CCol>
-              <CCol className="mb-4 d-flex justify-content-end" md="8">
-                <CButton color="primary" onClick={() => {setAddFeaturesModalShow(true);setSelectedId(null)}}>
-                  + Add Features
+              <CCol className="mb-4 d-flex justify-content-end" sm="8">
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddFeaturesModalShow(true);setSelectedId(null)}}>
+                  <span className="add-icon">
+                     Add Features
+                  </span> 
                 </CButton>
               </CCol>
               <div>
@@ -138,6 +146,7 @@ const ManageAllergenPage = () => {
                                 // onChangeRowsPerPage={handlePerRowsChange}
                                 // onChangePage={handlePageChange}
                                 noHeader
+                                overflowY
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
                                 customStyles={features_Data.restaurantFeatureList && features_Data.restaurantFeatureList.length===1?customStyles:customStyles2}

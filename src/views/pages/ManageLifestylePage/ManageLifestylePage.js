@@ -8,6 +8,7 @@ import DeleteLifestyleComponent from './DeleteLifestyleComponent';
 import AddLifestyleComponent from './AddLifestyleComponent';
 import UpdateLifestyleComponent from './UpdateLifestyleComponent';
 import { getAllLifestyleData } from '../../../redux/actions/manageLifestyleAction';
+import moment from "moment";
 
 const customStyles = {
   headRow: {
@@ -64,15 +65,18 @@ const ManageLifestylePage = () => {
   
       { selector: 'name',name: 'Name', sortable: true, },
       // { selector: 'description',name: 'Description', sortable: true},
+      { selector: 'updatedAt', name: 'Updated At', sortable: true,cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
+
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
-          <CDropdownToggle color="primary"> Action </CDropdownToggle>
-          <CDropdownMenu>
+          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateLifestyleModalShow(true);setSelectedId(row._id);}}>Update</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);}}>Delete</CDropdownItem>
           </CDropdownMenu>
-        </CDropdown>
+        </CDropdown>,
+            allowOverflow: true,
       },
     ];
     const handlePerRowsChange = async (newPerPage) => {
@@ -89,16 +93,23 @@ const ManageLifestylePage = () => {
       <CCol >
         <CCard>
           <CCardHeader>
-                Manager Lifestyle 
+                Manage Lifestyle 
           </CCardHeader>
           <CCardBody>
             <CRow className="justify-content-between align-items-center ">
-              <CCol md="4" className="mb-4">
-                <input className="form-control" type="text" onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+              <CCol sm="4" className="mb-4">
+                <input className="form-control position-relative"  type="text" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} placeholder="Search By Name" />
+               {inputValue&&
+                <CButton onClick={(e)=>{setInputValue("")}} className="position-absolute" style={{top:0,right:7}}>
+                  <CIcon name="cil-x" alt="Settings" className="mr-1"/>
+                </CButton>
+                }
               </CCol>
-              <CCol className="mb-4 d-flex justify-content-end" md="8">
-                <CButton color="primary" onClick={() => {setAddLifestyleModalShow(true);setSelectedId(null)}}>
-                  + Add Lifestyle
+              <CCol className="mb-4 d-flex justify-content-end" sm="8">
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddLifestyleModalShow(true);setSelectedId(null)}}>
+                  <span className="add-icon">
+                     Add Lifestyle
+                  </span> 
                 </CButton>
               </CCol>
               <div>
@@ -128,6 +139,7 @@ const ManageLifestylePage = () => {
                                 // onChangeRowsPerPage={handlePerRowsChange}
                                 // onChangePage={handlePageChange}
                                 noHeader
+                                overflowY
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
                                 customStyles={lifestyle_Data.lifestyleList && lifestyle_Data.lifestyleList.length===1?customStyles:customStyles2}

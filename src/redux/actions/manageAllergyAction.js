@@ -27,7 +27,7 @@ export const getAllAllergyData=(data)=>{
   };
 
 
-  export const addAllergyData=(data)=>{
+  export const addAllergyData=(data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"ADD_ALLERGY_REQUEST"});
@@ -45,7 +45,7 @@ export const getAllAllergyData=(data)=>{
             let dataURL=`/super_admin/manage_allergen`
             let response = await Axios.post(dataURL,formData,config );
             dispatch({type:"ADD_ALLERGY_SUCCESS",payload:response.data});
-            dispatch(getAllAllergyData());
+            dispatch(getAllAllergyData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Allergy Added Successfully .', 'success'));
 
         }
@@ -75,7 +75,7 @@ export const getAllAllergyData=(data)=>{
   }
 
 
-  export const updateSelectedAllergy=(selectedId,data,imagepath)=>{
+  export const updateSelectedAllergy=(selectedId,data,imagepath,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"UPDATE_ALLERGY_REQUEST"});
@@ -93,7 +93,7 @@ export const getAllAllergyData=(data)=>{
             let dataURL=`/super_admin/manage_allergen/${selectedId}`
             let response = await Axios.put(dataURL,formData,config );
             dispatch({type:"UPDATE_ALLERGY_SUCCESS",payload:response.data});
-            dispatch(getAllAllergyData());
+            dispatch(getAllAllergyData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             if(data.image!==imagepath){
               dispatch(deleteImage({path:imagepath}));
             }
@@ -111,14 +111,16 @@ export const getAllAllergyData=(data)=>{
   };
 
 
-  export const deleteSelectedAllergyData=(selectedId,imagepath)=>{
+  export const deleteSelectedAllergyData=(selectedId,imagepath,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"DELETE_ALLERGY_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_allergen/${selectedId}`)
             dispatch({type:"DELETE_ALLERGY_SUCCESS",payload:response.data});
-            dispatch(getAllAllergyData());
-            dispatch(deleteImage({path:imagepath}));
+            dispatch(getAllAllergyData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
+            if(imagepath){
+              dispatch(deleteImage({path:imagepath}));
+            }
             dispatch(setAlert('Allergy Deleted Successfully .', 'warning'));
         }
         catch(error){
