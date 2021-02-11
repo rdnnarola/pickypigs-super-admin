@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import { useDispatch,useSelector} from "react-redux";
 import { forgotPassword, getLogin } from "../../../redux/actions/generalActions";
 import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
+import Logo from '../../../assets/images/logo2.svg'
+
 
 const passwordRegExp = RegExp(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,24}$/);
 
@@ -71,10 +73,7 @@ const Login = () => {
                 <CCardBody>
                   {isLoginPage
                   ?
-                  <React.Fragment>
-                  {loading?
-                  <CustomLoadingComp/>
-                  :
+                  
                   <Formik
                       initialValues={{ email: '', password: '' }} validationSchema={validationSchemaForLogin}
                       onSubmit={(values) => { console.log('values => ', values);  handleLoginForm(values) }}
@@ -117,23 +116,27 @@ const Login = () => {
                         </CInputGroup>
                         <CRow className="mt-4">
                           <CCol xs="6">
-                            <CButton color="primary" type="submit" className="px-4">Login</CButton>
+                            <CButton  type="submit" className="px-4 pinkbg-btn">Login</CButton>
                           </CCol>
                           <CCol xs="6" className="text-right">
-                            <CButton onClick={() =>{setLoginPage(false)}} color="link" className="px-0">Forgot password?</CButton>
+                            <CButton onClick={() =>{setLoginPage(false)}} color="link" className="px-0 pink-txt trans_button">Forgot password?</CButton>
                           </CCol>
                         </CRow>
-
+                        <React.Fragment>
+                          {loading?
+                          <section className="container">
+                            <CustomLoadingComp/>
+                            </section>
+                          :
+                            null
+                          }
+                        </React.Fragment>
                       </Form>
                     )}
                   </Formik>
-                  }
-                  </React.Fragment>
+                  
                   :
-                  <React.Fragment>
-                  {loading?
-                  <CustomLoadingComp/>
-                  :
+                  
                   <Formik
                       initialValues={{ email: '' }} validationSchema={validationSchemaForForgotPassword}
                       onSubmit={(values) => { console.log('values => ', values);  handlelForgotPassword(values) }}
@@ -158,30 +161,32 @@ const Login = () => {
                         {/* <div className="error pink-txt f-11">{(touched.email && errors.email && errors.email) || forgotPasswordData&& forgotPasswordData.message}</div> */}
                         <CRow className="mt-4">
                           <CCol xs="6">
-                            <CButton color="primary" type="submit" className="px-4">RESET PASSWORD</CButton>
+                            <CButton  type="submit" className="px-4 pinkbg-btn">Reset Password</CButton>
                           </CCol>
                           <CCol xs="6" className="text-right">
-                            <CButton onClick={() =>{setLoginPage(true)}} color="link" className="px-0">Sign In ?</CButton>
+                            <CButton onClick={() =>{setLoginPage(true)}} color="link" className="px-0 pink-txt trans_button">Sign In ?</CButton>
                           </CCol>
                         </CRow>
-
+                        <React.Fragment>
+                          {loading?
+                            <CustomLoadingComp/>
+                          :
+                            null
+                          }
+                        </React.Fragment>
                       </Form>
                     )}
                   </Formik>
-                   }
-                   </React.Fragment>
+                  
                   }
                 </CCardBody>
 
               </CCard>
 
               
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+              <CCard className="text-white bg-pickypigs py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center d-flex align-items-center">
-                  <div >
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
-                  </div>
+                    <img src={Logo} className="img-fluid m-auto" width="150px" alt="Logo"/>
                 </CCardBody>
               </CCard>
             </CCardGroup>

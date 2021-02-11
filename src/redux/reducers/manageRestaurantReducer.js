@@ -5,6 +5,7 @@ const initialState = {
     errorMessage:'',
     restaurant_Data:{},
     selectedRestaurant:{},
+    totalrows:0,
     };
     
     const manageRestaurantReducer = (state = initialState, { type, payload }) => {
@@ -24,6 +25,7 @@ const initialState = {
                 ...state,
                 isLoading:false,
             restaurant_Data:payload,
+            totalrows:payload.totalCount,
     
             };
         case "ADD_RESTAURANT_SUCCESS":

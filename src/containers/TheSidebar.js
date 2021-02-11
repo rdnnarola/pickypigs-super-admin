@@ -34,6 +34,8 @@ const TheSidebar = () => {
           name="logo-negative"
           height={35}
         /> */}
+
+        <section className="c-sidebar-brand-full">
         <div className="d-flex justify-content-center align-items-center">
           <CImg
               src={'avatars/logo.svg'}
@@ -43,12 +45,22 @@ const TheSidebar = () => {
             />
           <p style={{color:'#ffffff',fontSize:25,fontWeight:'bold'}} className="ml-3 mb-0">Picky Pigs</p>
         </div>
+        </section>
         
-        <CIcon
+        <section className="c-sidebar-brand-minimized">
+          <CImg
+              src={'avatars/logo.svg'}
+              className="c-avatar-img"
+              style={{width:30}}
+              alt="Picky_pigs_super_admin"
+          />
+        </section>
+
+        {/* <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"
           height={35}
-        />
+        /> */}
       </CSidebarBrand>
       <CSidebarNav>
 

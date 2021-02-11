@@ -20,16 +20,36 @@ const ManageRestaurantPage = () => {
     const [selectedId,setSelectedId]=useState('')
     const [addRestaurantModalShow, setAddRestaurantModalShow] = useState(false);
     const [updateRestaurantModalShow, setUpdateRestaurantModalShow] = useState(false);
+    const [perPage, setPerPage] = useState(5);
+    const [myPage, setMypage] = useState(1);
 
+    // useEffect(()=>{
+    //     dispatch(getAllRestaurantData({start:0}));
+    // },[dispatch]);
+
+  // pagination start
     useEffect(()=>{
-        dispatch(getAllRestaurantData({start:0}));
-    },[dispatch]);
+      dispatch(getAllRestaurantData({start:0,length:perPage,search:inputValue}));
+      setMypage(1)
+    },[dispatch,inputValue,perPage,]);
+
+     
+    const handlePerRowsChange = (newPerPage) => {
+      setPerPage(newPerPage);
+      // dispatch(getAllRestaurantData({start:0,length:perPage,search:inputValue}));
+    };
+    const handlePageChange = page=> {
+      setMypage(page)
+      console.log(page)
+      dispatch(getAllRestaurantData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+    };
+    //pagination end
 
     let allRestaurant_data = useSelector((state)=>{
         return state.restaurant
     });
 
-    let {isLoading,restaurant_Data}=allRestaurant_data;
+    let {isLoading,restaurant_Data,totalrows}=allRestaurant_data;
 
     const search=(datas)=>{
         return datas.filter(
@@ -50,7 +70,7 @@ const ManageRestaurantPage = () => {
       { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn d-inline-block">
-          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateRestaurantModalShow(true);setSelectedId(row._id)}}>Update Password</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem>
@@ -113,7 +133,15 @@ const ManageRestaurantPage = () => {
                                 noHeader
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
-                                pagination
+
+                                pagination={true}
+                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationPerPage={perPage}
+                                paginationServer={true}
+                                paginationDefaultPage	={myPage}
+                                paginationTotalRows={totalrows}
+                                onChangeRowsPerPage={handlePerRowsChange}
+                                onChangePage={handlePageChange}
 
                               />
                             </CCard>

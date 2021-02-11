@@ -10,34 +10,6 @@ import UpdateLifestyleComponent from './UpdateLifestyleComponent';
 import { getAllLifestyleData } from '../../../redux/actions/manageLifestyleAction';
 import moment from "moment";
 
-const customStyles = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '90px',
-      },
-    },
-  },
-}
-const customStyles2 = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '65px',
-      },
-    },
-  },
-}
 
 const ManageLifestylePage = () => {
     const dispatch=useDispatch();  
@@ -47,12 +19,30 @@ const ManageLifestylePage = () => {
     const [selectedId,setSelectedId]=useState('')
     const [addLifestyleModalShow, setAddLifestyleModalShow] = useState(false);
     const [updateLifestyleModalShow, setUpdateLifestyleModalShow] = useState(false);
-    const [perPage, setPerPage] = useState(10);
+    const [perPage, setPerPage] = useState(5);
+    const [myPage, setMypage] = useState(1);
 
+    // useEffect(()=>{
+    //     dispatch(getAllLifestyleData({start:0,search:inputValue}));
+    // },[dispatch,inputValue]);
 
+    // pagination start
     useEffect(()=>{
-        dispatch(getAllLifestyleData({start:0,search:inputValue}));
-    },[dispatch,inputValue]);
+      dispatch(getAllLifestyleData({start:0,length:perPage,search:inputValue}));
+      setMypage(1)
+    },[dispatch,inputValue,perPage,]);
+
+     
+    const handlePerRowsChange = (newPerPage) => {
+      setPerPage(newPerPage);
+      // dispatch(getAllLifestyleData({start:0,length:perPage,search:inputValue}));
+    };
+    const handlePageChange = page=> {
+      setMypage(page)
+      console.log(page)
+      dispatch(getAllLifestyleData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+    };
+    //pagination end
 
     let allLifestyle_data = useSelector((state)=>{
         return state.lifestyle
@@ -70,7 +60,7 @@ const ManageLifestylePage = () => {
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
-          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateLifestyleModalShow(true);setSelectedId(row._id);}}>Update</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);}}>Delete</CDropdownItem>
@@ -79,13 +69,6 @@ const ManageLifestylePage = () => {
             allowOverflow: true,
       },
     ];
-    const handlePerRowsChange = async (newPerPage) => {
-      setPerPage(newPerPage);
-    };
-    const handlePageChange = page => {
-      console.log(page)
-      dispatch(getAllLifestyleData({start:perPage+page-2,length:perPage,search:inputValue}));
-    };
     
   return (
     <>
@@ -133,16 +116,19 @@ const ManageLifestylePage = () => {
                                 columns={columns}
                                 data={lifestyle_Data.lifestyleList}
                                 highlightOnHover
-                                pagination
-                                // paginationServer
-                                // paginationTotalRows={totalrows}
-                                // onChangeRowsPerPage={handlePerRowsChange}
-                                // onChangePage={handlePageChange}
                                 noHeader
                                 overflowY
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
-                                customStyles={lifestyle_Data.lifestyleList && lifestyle_Data.lifestyleList.length===1?customStyles:customStyles2}
+
+                                pagination={true}
+                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationPerPage={perPage}
+                                paginationServer={true}
+                                paginationDefaultPage	={myPage}
+                                paginationTotalRows={totalrows}
+                                onChangeRowsPerPage={handlePerRowsChange}
+                                onChangePage={handlePageChange}
                               />
                             </CCard>
                             

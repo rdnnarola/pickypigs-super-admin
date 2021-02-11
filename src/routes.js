@@ -95,8 +95,8 @@ const routes = [
   { path: '/manage_dietary', exact: true, name: 'Manage Dietary', component: ManageDietaryPage },
   { path: '/manage_lifestyle', exact: true, name: 'Manage Lifestyle', component: ManageLifestylePage },
   { path: '/manage_cuisine', exact: true, name: 'Manage Cuisine', component: ManageCuisinePage },
-  { path: '/manage_restaurantfeature', exact: true, name: 'Manage Cuisine', component: ManageFeaturesPage },
-  { path: '/manage_cooking', exact: true, name: 'Manage Cuisine', component: ManageCookingPage },
+  { path: '/manage_restaurantfeature', exact: true, name: 'Manage Restaurant Feature', component: ManageFeaturesPage },
+  { path: '/manage_cooking', exact: true, name: 'Manage Cooking Method', component: ManageCookingPage },
 
 
 ];

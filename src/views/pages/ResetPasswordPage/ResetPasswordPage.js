@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { useDispatch,useSelector} from "react-redux";
 import {resetPassword } from "../../../redux/actions/generalActions";
 import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
+import Logo from '../../../assets/images/logo2.svg'
 
 
 const ResetPasswordPage = () => {
@@ -79,10 +80,6 @@ const ResetPasswordPage = () => {
             
               <CCard className="p-4">
                 <CCardBody>
-                  <React.Fragment>
-                  {loading?
-                  <CustomLoadingComp path="../"/>
-                  :
                   <Formik
                       initialValues={{ newPassword: '',confirmPassword:'' }} validationSchema={validationSchemaFormat}
                       onSubmit={(values) => { console.log('values => ', values);  handleSavePassword(values) }}
@@ -143,28 +140,28 @@ const ResetPasswordPage = () => {
 
                         <CRow className="mt-4">
                           <CCol xs="6">
-                            <CButton color="primary" type="submit" className="px-4">Change Password</CButton>
+                            <CButton type="submit" className="px-4 pinkbg-btn">Change Password</CButton>
                           </CCol>
-                         
                         </CRow>
-
+                        <React.Fragment>
+                          {loading?
+                            <CustomLoadingComp path="../"/>
+                          :
+                            null
+                          }
+                        </React.Fragment>
                       </Form>
                     )}
                   </Formik>
-                  }
-                  </React.Fragment>
                   
                 </CCardBody>
 
               </CCard>
 
               
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+              <CCard className="text-white bg-pickypigs py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center d-flex align-items-center">
-                  <div >
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
-                  </div>
+                  <img src={Logo} className="img-fluid m-auto" width="150px" alt="Logo"/>
                 </CCardBody>
               </CCard>
             </CCardGroup>

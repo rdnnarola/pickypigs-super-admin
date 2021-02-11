@@ -75,7 +75,7 @@ const ManageAllergenPage = () => {
       { name: 'Action', button: true,
           cell: (row) => 
             <CDropdown className="btn-group">
-            <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+            <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
             <CDropdownMenu placement="left" >
               <CDropdownItem onClick={() => {setUpdateAllergyModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
               <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>

@@ -5,6 +5,7 @@ const initialState = {
     errorMessage:'',
     users_Data:null,
     selectedUser:{},
+    totalrows:0,
     };
     
     const manageUsersReducer = (state = initialState, { type, payload }) => {
@@ -22,10 +23,8 @@ const initialState = {
                 ...state,
                 isLoading:false,
                 users_Data:payload,
-    
+                totalrows:payload.totalCount
             };
-      
-      
       
         case "UPDATE_USER_SUCCESS":            
             return{

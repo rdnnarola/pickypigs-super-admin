@@ -12,36 +12,6 @@ import UpdateUserPasswordModalComp from './UpdateUserPasswordModalComp';
 import Axios from '../../../redux/actions/axios';
 
 
-const customStyles = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '90px',
-      },
-    },
-  },
-}
-const customStyles2 = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '65px',
-      },
-    },
-  },
-}
-
-
 
 
 const ManageUsersPage = () => {
@@ -53,16 +23,36 @@ const ManageUsersPage = () => {
     const [selectedMail,setSelectedMail]=useState('')
     const [addRestaurantModalShow, setAddRestaurantModalShow] = useState(false);
     const [updateUserPasswordModalShow, setUpdateUserPasswordModalShow] = useState(false);
+    const [perPage, setPerPage] = useState(5);
+    const [myPage, setMypage] = useState(1);
 
+    // useEffect(()=>{
+    //     dispatch(getAllUsersData({start:0}));
+    // },[dispatch]);
+
+    // pagination start
     useEffect(()=>{
-        dispatch(getAllUsersData({start:0}));
-    },[dispatch]);
+      dispatch(getAllUsersData({start:0,length:perPage,search:inputValue}));
+      setMypage(1)
+    },[dispatch,inputValue,perPage,]);
+
+     
+    const handlePerRowsChange = (newPerPage) => {
+      setPerPage(newPerPage);
+      // dispatch(getAllUsersData({start:0,length:perPage,search:inputValue}));
+    };
+    const handlePageChange = page=> {
+      setMypage(page)
+      console.log(page)
+      dispatch(getAllUsersData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+    };
+    //pagination end
 
     let allUsers_Data = useSelector((state)=>{
         return state.users
     });
 
-    let {isLoading,users_Data}=allUsers_Data;
+    let {isLoading,users_Data,totalrows}=allUsers_Data;
 
     const search=(datas)=>{
         return datas.filter(
@@ -85,7 +75,7 @@ const ManageUsersPage = () => {
       { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
-          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateUserPasswordModalShow(true);setSelectedId(row._id);setSelectedMail(row.email)}}>Update Password</CDropdownItem>
             {/* <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem> */}
@@ -174,13 +164,20 @@ const  handleDownloadScv = () => {
                                 columns={columns}
                                 data={search(users_Data.userList)}
                                 highlightOnHover
-                                pagination
                                 noHeader
                                 overflowY
                                 striped
                                 responsive
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
-                                customStyles={users_Data && users_Data.userList.length===1?customStyles:customStyles2}
+
+                                pagination={true}
+                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationPerPage={perPage}
+                                paginationServer={true}
+                                paginationDefaultPage	={myPage}
+                                paginationTotalRows={totalrows}
+                                onChangeRowsPerPage={handlePerRowsChange}
+                                onChangePage={handlePageChange}
                               />
                             </CCard>
                             

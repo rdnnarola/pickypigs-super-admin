@@ -5,7 +5,7 @@ const initialState = {
     errorMessage:'',
     features_Data:{},
     selectedFeatures:{},
-    totalrows:null,
+    totalrows:0,
     };
     
     const manageFeaturesReducer = (state = initialState, { type, payload }) => {

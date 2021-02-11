@@ -5,7 +5,7 @@ const initialState = {
     errorMessage:'',
     cuisine_Data:{},
     selectedCuisine:{},
-    totalrows:null,
+    totalrows:0,
     };
     
     const manageCuisineReducer = (state = initialState, { type, payload }) => {

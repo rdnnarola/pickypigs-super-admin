@@ -5,7 +5,7 @@ const initialState = {
     errorMessage:'',
     lifestyle_Data:{},
     selectedLifestyle:{},
-    totalrows:null,
+    totalrows:0,
     };
     
     const manageLifestyleReducer = (state = initialState, { type, payload }) => {

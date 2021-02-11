@@ -10,34 +10,6 @@ import AddCookingComponent from './AddCookingComponent';
 import UpdateCookingComponent from './UpdateCookingComponent';
 import { getAllCookingData } from '../../../redux/actions/manageCookingAction';
 
-const customStyles = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '90px',
-      },
-    },
-  },
-}
-const customStyles2 = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '65px',
-      },
-    },
-  },
-}
 
 const ManageAllergenPage = () => {
     const dispatch=useDispatch();  
@@ -48,15 +20,34 @@ const ManageAllergenPage = () => {
     const [addCookingModalShow, setAddCookingModalShow] = useState(false);
     const [updateCookingModalShow, setUpdateCookingModalShow] = useState(false);
     const [imagePath, seImagePath] = useState("");
-    const [perPage, setPerPage] = useState(10);
+    const [perPage, setPerPage] = useState(5);
+    const [myPage, setMypage] = useState(1);
 
     // const imagelink="http://192.168.100.39:8000/"
-    
     const imagelink="https://pickypigsapi.herokuapp.com/"
 
+    // useEffect(()=>{
+    //     dispatch(getAllCookingData({start:0,search:inputValue}));
+    // },[dispatch,inputValue]);
+
+    // pagination start
     useEffect(()=>{
-        dispatch(getAllCookingData({start:0,search:inputValue}));
-    },[dispatch,inputValue]);
+      dispatch(getAllCookingData({start:0,length:perPage,search:inputValue}));
+      setMypage(1)
+    },[dispatch,inputValue,perPage,]);
+
+     
+    const handlePerRowsChange = (newPerPage) => {
+      setPerPage(newPerPage);
+      // dispatch(getAllCookingData({start:0,length:perPage,search:inputValue}));
+    };
+    const handlePageChange = page=> {
+      setMypage(page)
+      console.log(page)
+      dispatch(getAllCookingData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+    };
+    //pagination end
+
 
     let allCooking_data = useSelector((state)=>{
         return state.cooking
@@ -78,7 +69,7 @@ const ManageAllergenPage = () => {
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
-          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateCookingModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
@@ -88,13 +79,6 @@ const ManageAllergenPage = () => {
       },
     ];
 
-    const handlePerRowsChange = async (newPerPage) => {
-      setPerPage(newPerPage);
-    };
-    const handlePageChange = page => {
-      console.log(page)
-      dispatch(getAllCookingData({start:perPage+page-2,length:perPage,search:inputValue}));
-    };
     
   return (
     <>
@@ -142,15 +126,19 @@ const ManageAllergenPage = () => {
                                 columns={columns}
                                 data={cooking_Data.cooking_methodList}
                                 highlightOnHover
-                                // paginationServer
-                                // paginationTotalRows={totalrows}
-                                // onChangeRowsPerPage={handlePerRowsChange}
-                                // onChangePage={handlePageChange}
                                 noHeader
                                 overflowY
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
-                                pagination
+
+                                pagination={true}
+                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationPerPage={perPage}
+                                paginationServer={true}
+                                paginationDefaultPage	={myPage}
+                                paginationTotalRows={totalrows}
+                                onChangeRowsPerPage={handlePerRowsChange}
+                                onChangePage={handlePageChange}
                               />
                             </CCard>
                             

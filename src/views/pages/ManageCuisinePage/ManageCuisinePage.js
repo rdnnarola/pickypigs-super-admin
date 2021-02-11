@@ -10,34 +10,6 @@ import UpdateCuisineComponent from './UpdateCuisineComponent';
 import { getAllCuisineData } from '../../../redux/actions/manageCuisineAction';
 import moment from "moment";
 
-const customStyles = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '90px',
-      },
-    },
-  },
-}
-const customStyles2 = {
-  headRow: {
-    style: {
-      minHeight: '65px',
-    },
-  },
-  cells: {
-    style: {
-      '&:not(:last-of-type)': {
-        minHeight: '65px',
-      },
-    },
-  },
-}
 
 const ManageCuisinePage = () => {
     const dispatch=useDispatch();  
@@ -47,12 +19,30 @@ const ManageCuisinePage = () => {
     const [selectedId,setSelectedId]=useState('')
     const [addCuisineModalShow, setAddCuisineModalShow] = useState(false);
     const [updateCuisineModalShow, setUpdateCuisineModalShow] = useState(false);
-    const [perPage, setPerPage] = useState(10);
+    const [perPage, setPerPage] = useState(5);
+    const [myPage, setMypage] = useState(1);
 
+    // useEffect(()=>{
+    //     dispatch(getAllCuisineData({start:0,search:inputValue}));
+    // },[dispatch,inputValue]);
 
+    // pagination start
     useEffect(()=>{
-        dispatch(getAllCuisineData({start:0,search:inputValue}));
-    },[dispatch,inputValue]);
+      dispatch(getAllCuisineData({start:0,length:perPage,search:inputValue}));
+      setMypage(1)
+    },[dispatch,inputValue,perPage,]);
+
+     
+    const handlePerRowsChange = (newPerPage) => {
+      setPerPage(newPerPage);
+      // dispatch(getAllCuisineData({start:0,length:perPage,search:inputValue}));
+    };
+    const handlePageChange = page=> {
+      setMypage(page)
+      console.log(page)
+      dispatch(getAllCuisineData({start:(page-1)*perPage,length:perPage,search:inputValue}));
+    };
+    //pagination end
 
     let allCuisine_data = useSelector((state)=>{
         return state.cuisine
@@ -69,7 +59,7 @@ const ManageCuisinePage = () => {
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
-          <CDropdownToggle className="pinkbg-btn" size="sm"> Action </CDropdownToggle>
+          <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
             <CDropdownItem onClick={() => {setUpdateCuisineModalShow(true);setSelectedId(row._id);}}>Update</CDropdownItem>
             <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);}}>Delete</CDropdownItem>
@@ -78,13 +68,7 @@ const ManageCuisinePage = () => {
             allowOverflow: true,
       },
     ];
-    const handlePerRowsChange = async (newPerPage) => {
-      setPerPage(newPerPage);
-    };
-    const handlePageChange = page => {
-      console.log(page)
-      dispatch(getAllCuisineData({start:perPage+page-2,length:perPage,search:inputValue}));
-    };
+    
     
   return (
     <>
@@ -132,15 +116,19 @@ const ManageCuisinePage = () => {
                                 columns={columns}
                                 data={cuisine_Data.cuisineTypeList}
                                 highlightOnHover
-                                pagination
-                                // paginationServer
-                                // paginationTotalRows={totalrows}
-                                // onChangeRowsPerPage={handlePerRowsChange}
-                                // onChangePage={handlePageChange}
                                 noHeader
                                 overflowY
                                 striped
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
+
+                                pagination={true}
+                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationPerPage={perPage}
+                                paginationServer={true}
+                                paginationDefaultPage	={myPage}
+                                paginationTotalRows={totalrows}
+                                onChangeRowsPerPage={handlePerRowsChange}
+                                onChangePage={handlePageChange}
                               />
                             </CCard>
                             

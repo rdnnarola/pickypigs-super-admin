@@ -5,7 +5,7 @@ const initialState = {
     errorMessage:'',
     dietary_Data:{},
     selectedDietary:{},
-    totalrows:null,
+    totalrows:0,
     };
     
     const manageDietaryReducer = (state = initialState, { type, payload }) => {
