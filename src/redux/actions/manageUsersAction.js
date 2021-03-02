@@ -21,7 +21,7 @@ export const getAllUsersData=(data)=>{
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
           } else {
-            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+            dispatch(setAlert('Something Went wrong!', 'danger'));
           }
         }
     }
@@ -48,7 +48,7 @@ export const getAllUsersData=(data)=>{
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
           } else {
-            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+            dispatch(setAlert('Something Went wrong!', 'danger'));
           }
         }
     }

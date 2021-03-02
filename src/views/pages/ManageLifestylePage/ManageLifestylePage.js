@@ -19,7 +19,7 @@ const ManageLifestylePage = () => {
     const [selectedId,setSelectedId]=useState('')
     const [addLifestyleModalShow, setAddLifestyleModalShow] = useState(false);
     const [updateLifestyleModalShow, setUpdateLifestyleModalShow] = useState(false);
-    const [perPage, setPerPage] = useState(5);
+    const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
 
     // useEffect(()=>{
@@ -125,7 +125,7 @@ const ManageLifestylePage = () => {
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
 
                                 pagination={true}
-                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationRowsPerPageOptions={[10, 15, 20, 25, 30]}
                                 paginationPerPage={perPage}
                                 paginationServer={true}
                                 paginationDefaultPage	={myPage}

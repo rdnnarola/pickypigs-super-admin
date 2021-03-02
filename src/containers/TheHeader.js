@@ -9,7 +9,8 @@ import {
   CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
-  CLink
+  CLink,
+  CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -50,7 +51,25 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo"/>
+        {/* <CIcon name="logo" height="48" alt="Logo"/> */}
+        <div className="d-flex justify-content-center align-items-center">
+          <CImg
+              src={'avatars/logo.svg'}
+              className="c-avatar-img"
+              style={{width:30}}
+              alt="Picky_pigs_super_admin"
+            />
+          <p style={{color:'#ffffff',fontSize:25,fontWeight:'bold'}} className="ml-3 mb-0">Picky Pigs</p>
+        </div>
+        {/* <div className="d-flex justify-content-center align-items-center">
+          <CImg
+              src={'avatars/logo_pink.svg'}
+              className="c-avatar-img"
+              style={{width:30}}
+              alt="Picky_pigs_super_admin"
+            />
+          <p style={{color:'#cb007b',fontSize:25,fontWeight:'bold'}} className="ml-3 mb-0">Picky Pigs</p>
+        </div> */}
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">

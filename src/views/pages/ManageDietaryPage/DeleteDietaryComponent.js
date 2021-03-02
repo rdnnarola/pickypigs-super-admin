@@ -22,7 +22,7 @@ const DeleteDietaryComponent = (props) => {
               size=""
             >
               <CModalHeader >
-                <CModalTitle>Are you sure to delete this record? </CModalTitle>
+                <CModalTitle>Are you sure to delete this Dietary? </CModalTitle>
               </CModalHeader>
              
               <CModalFooter className="d-flex justify-content-center">

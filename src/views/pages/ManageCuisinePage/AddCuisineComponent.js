@@ -45,7 +45,7 @@ const AddCuisineComponent = (props) => {
             >
                 <CModalHeader className="align-items-center">
                     <CModalTitle className="brandon-Medium" id="contained-modal-title-vcenter">
-                        Add  Cuisine || 
+                        Add  Cuisine
                     </CModalTitle>
                 </CModalHeader>
                 <CModalBody>

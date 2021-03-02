@@ -45,7 +45,7 @@ const AddLifestyleComponent = (props) => {
             >
                 <CModalHeader className="align-items-center">
                     <CModalTitle className="brandon-Medium" id="contained-modal-title-vcenter">
-                        Add  Lifestyle || 
+                        Add  Lifestyle 
                     </CModalTitle>
                 </CModalHeader>
                 <CModalBody>

@@ -48,7 +48,7 @@ const AddAllergyComponent = (props) => {
             >
                 <CModalHeader className="align-items-center">
                     <CModalTitle className="brandon-Medium" id="contained-modal-title-vcenter">
-                        Add  Allergy || 
+                        Add  Allergy
                     </CModalTitle>
                 </CModalHeader>
                 <CModalBody>

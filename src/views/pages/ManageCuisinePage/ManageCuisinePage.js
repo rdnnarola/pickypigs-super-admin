@@ -19,7 +19,7 @@ const ManageCuisinePage = () => {
     const [selectedId,setSelectedId]=useState('')
     const [addCuisineModalShow, setAddCuisineModalShow] = useState(false);
     const [updateCuisineModalShow, setUpdateCuisineModalShow] = useState(false);
-    const [perPage, setPerPage] = useState(5);
+    const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
 
     // useEffect(()=>{
@@ -125,7 +125,7 @@ const ManageCuisinePage = () => {
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
 
                                 pagination={true}
-                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationRowsPerPageOptions={[10, 15, 20, 25, 30]}
                                 paginationPerPage={perPage}
                                 paginationServer={true}
                                 paginationDefaultPage	={myPage}

@@ -22,7 +22,7 @@ const DeleteCookingComponent = (props) => {
               size=""
             >
               <CModalHeader >
-                <CModalTitle>Are you sure to delete this record? </CModalTitle>
+                <CModalTitle>Are you sure to delete this Cooking Method? </CModalTitle>
               </CModalHeader>
              
               <CModalFooter className="d-flex justify-content-center">

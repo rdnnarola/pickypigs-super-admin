@@ -22,7 +22,7 @@ const DeleteLifestyleComponent = (props) => {
               size=""
             >
               <CModalHeader >
-                <CModalTitle>Are you sure to delete this record? </CModalTitle>
+                <CModalTitle>Are you sure to delete this LifeStyle? </CModalTitle>
               </CModalHeader>
              
               <CModalFooter className="d-flex justify-content-center">

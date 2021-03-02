@@ -31,7 +31,7 @@ const ManageAllergenPage = () => {
     const [addFeaturesModalShow, setAddFeaturesModalShow] = useState(false);
     const [updateFeaturesModalShow, setUpdateFeaturesModalShow] = useState(false);
     const [imagePath, seImagePath] = useState("");
-    const [perPage, setPerPage] = useState(5);
+    const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
 
     // const imagelink="http://192.168.100.39:8000/"
@@ -144,7 +144,7 @@ const ManageAllergenPage = () => {
                                 sortIcon={<CIcon name={"cil-arrow-top"} />}
 
                                 pagination={true}
-                                paginationRowsPerPageOptions={[5,10, 15, 20, 25, 30]}
+                                paginationRowsPerPageOptions={[10, 15, 20, 25, 30]}
                                 paginationPerPage={perPage}
                                 paginationServer={true}
                                 paginationDefaultPage	={myPage}

@@ -10,7 +10,6 @@ import { addRestaurantData } from "../../../redux/actions/manageRestaurantAction
 
 
 const packages = ["basic","standard","premiun"];
-const roles=["restaurant_admin"]
 const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
 
@@ -26,7 +25,7 @@ const AddRestaurantModalComp = (props) => {
         email:'',
         password:'',
         package:'',
-        role:'',
+        role:'restaurant_admin',
         isAgreeToTerms:false
     }
 
@@ -44,7 +43,6 @@ const AddRestaurantModalComp = (props) => {
         .max(24, 'Please try a shorter password(Max 24 characters).')
         .matches(passwordRegExp, 'Password should Have 1 Uppercase,1 Lowercase,1 digit,1 special characte'),  
         package:Yup.string().required('Please Select a package'),
-        role:Yup.string().required('Please Select a Role'),
         isAgreeToTerms:Yup.boolean().oneOf([true], "You must accept the terms and conditions").required()
     });
 
@@ -135,8 +133,7 @@ const AddRestaurantModalComp = (props) => {
                                             <CInvalidFeedback className="help-block">{errors.phoneNumber}</CInvalidFeedback>
                                         </CFormGroup> 
                                     
-                                        <CRow>
-                                            <CCol xs="6">
+                                       
                                                 <CFormGroup>
                                                     <CLabel>Packages</CLabel>
                                                     <Field as="select" name="package" className={`text-capitalize form-control ${touched.package && errors.package?"is-invalid": touched.package && !errors.package?"is-valid":null}`}>
@@ -151,8 +148,7 @@ const AddRestaurantModalComp = (props) => {
                                                     </Field>
                                                     <CInvalidFeedback className="help-block">{errors.package}</CInvalidFeedback>
                                                 </CFormGroup>
-                                            </CCol>
-                                            <CCol xs="6">
+                                            {/* <CCol xs="6">
                                                 <CFormGroup>
                                                     <CLabel>Role</CLabel>
                                                     <Field as="select" name="role" className={`text-capitalize form-control ${touched.role && errors.role?"is-invalid": touched.role && !errors.role?"is-valid":null}`}>
@@ -167,8 +163,8 @@ const AddRestaurantModalComp = (props) => {
                                                     </Field>
                                                     <CInvalidFeedback className="help-block">{errors.role}</CInvalidFeedback>
                                                 </CFormGroup>
-                                            </CCol>   
-                                        </CRow>
+                                            </CCol>    */}
+                                    
                                         
                                         <CFormGroup>
                                             <Field type="checkbox" name="isAgreeToTerms"  className={`pb-4 mr-2 ${ errors.isAgreeToTerms?"is-invalid": !errors.isAgreeToTerms?"is-valid":null}`}/>

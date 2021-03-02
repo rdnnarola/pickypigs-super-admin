@@ -50,7 +50,7 @@ const AddFeaturesComponent = (props) => {
             >
                 <CModalHeader className="align-items-center">
                     <CModalTitle className="brandon-Medium" id="contained-modal-title-vcenter">
-                        Add  Features || 
+                        Add  Features
                     </CModalTitle>
                 </CModalHeader>
                 <CModalBody>

@@ -45,7 +45,7 @@ const AddDietaryComponent = (props) => {
             >
                 <CModalHeader className="align-items-center">
                     <CModalTitle className="brandon-Medium" id="contained-modal-title-vcenter">
-                        Add  Dietary || 
+                        Add  Dietary
                     </CModalTitle>
                 </CModalHeader>
                 <CModalBody>

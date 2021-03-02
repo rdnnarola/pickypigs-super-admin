@@ -39,7 +39,7 @@ export const getLogin=(data,history)=>{
         if (error.response) {
           dispatch(setAlert('Wrong Credential !', 'danger'));
         } else {
-          dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          dispatch(setAlert('Something Went wrong!', 'danger'));
         }
       }
   }
@@ -57,7 +57,7 @@ export const logoutUser=(history)=>{
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
           } else {
-            dispatch(setAlert('Something wwnt wrong!', 'danger'));
+            dispatch(setAlert('Something Went wrong!', 'danger'));
           }
 
       }
@@ -84,7 +84,7 @@ export const forgotPassword=(data)=>{
         if (error.response) {
           dispatch(setAlert(`${error.response.data.message}`, 'danger'));
         } else {
-          dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          dispatch(setAlert('Something Went wrong!', 'danger'));
         }
       }
   }
@@ -111,7 +111,7 @@ export const resetPassword=(data,history)=>{
         if (error.response) {
           dispatch(setAlert(`${error.response.data.message}`, 'danger'));
         } else {
-          dispatch(setAlert('Something wwnt wrong!', 'danger'));
+          dispatch(setAlert('Something Went wrong!', 'danger'));
         }
       }
   }
