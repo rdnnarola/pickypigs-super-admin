@@ -96,7 +96,10 @@ const ManageCuisinePage = () => {
                 </CButton>
               </CCol>
               <div>
-                <AddCuisineComponent show={addCuisineModalShow} onClose={() => setAddCuisineModalShow(false)} />
+                <AddCuisineComponent 
+                  show={addCuisineModalShow} onClose={() => setAddCuisineModalShow(false)} 
+                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                />
               </div>
             </CRow>
               {
@@ -144,10 +147,18 @@ const ManageCuisinePage = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdateCuisineComponent show={updateCuisineModalShow} onClose={() => setUpdateCuisineModalShow(false)} selectedid={selectedId} />
+        <UpdateCuisineComponent 
+          show={updateCuisineModalShow} onClose={() => setUpdateCuisineModalShow(false)} 
+          selectedid={selectedId} 
+          perPage={perPage} myPage={myPage} inputValue={inputValue}
+        />
     </React.Fragment>
     <React.Fragment>
-      <DeleteCuisineComponent show={deleteModalShow} onClose={() => setDeleteModalShow(false)} selectedid={selectedId} />
+      <DeleteCuisineComponent 
+        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        selectedid={selectedId}
+        perPage={perPage} myPage={myPage} inputValue={inputValue}
+      />
     </React.Fragment>
     </>
 

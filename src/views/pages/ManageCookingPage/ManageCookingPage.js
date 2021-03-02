@@ -106,7 +106,11 @@ const ManageAllergenPage = () => {
                 </CButton>
               </CCol>
               <div>
-                <AddCookingComponent show={addCookingModalShow} onClose={() => setAddCookingModalShow(false)} imagelink={imagelink} />
+                <AddCookingComponent 
+                  show={addCookingModalShow} onClose={() => setAddCookingModalShow(false)} 
+                  imagelink={imagelink} perPage={perPage} 
+                  myPage={myPage} inputValue={inputValue}
+                />
               </div>
             </CRow>
               {
@@ -154,10 +158,18 @@ const ManageAllergenPage = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdateCookingComponent show={updateCookingModalShow} onClose={() => setUpdateCookingModalShow(false)} selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}/>
+        <UpdateCookingComponent 
+          show={updateCookingModalShow} onClose={() => setUpdateCookingModalShow(false)} 
+          selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}
+          perPage={perPage} myPage={myPage} inputValue={inputValue}
+        />
     </React.Fragment>
     <React.Fragment>
-      <DeleteCookingComponent show={deleteModalShow} onClose={() => setDeleteModalShow(false)} selectedid={selectedId} imagepath={imagePath} />
+      <DeleteCookingComponent 
+        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        selectedid={selectedId} imagepath={imagePath} 
+        perPage={perPage} myPage={myPage} inputValue={inputValue}
+      />
     </React.Fragment>
     </>
 

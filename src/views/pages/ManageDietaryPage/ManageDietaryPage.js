@@ -95,7 +95,10 @@ const ManageDietaryPage = () => {
                 </CButton>
               </CCol>
               <div>
-                <AddDietaryComponent show={addDietaryModalShow} onClose={() => setAddDietaryModalShow(false)} />
+                <AddDietaryComponent 
+                  show={addDietaryModalShow} onClose={() => setAddDietaryModalShow(false)} 
+                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                />
               </div>
             </CRow>
               {
@@ -143,10 +146,18 @@ const ManageDietaryPage = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdateDietaryComponent show={updateDietaryModalShow} onClose={() => setUpdateDietaryModalShow(false)} selectedid={selectedId} />
+        <UpdateDietaryComponent 
+          show={updateDietaryModalShow} onClose={() => setUpdateDietaryModalShow(false)} 
+          selectedid={selectedId} 
+          perPage={perPage} myPage={myPage} inputValue={inputValue}
+        />
     </React.Fragment>
     <React.Fragment>
-      <DeleteDietaryComponent show={deleteModalShow} onClose={() => setDeleteModalShow(false)} selectedid={selectedId} />
+      <DeleteDietaryComponent 
+        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        selectedid={selectedId} 
+        perPage={perPage} myPage={myPage} inputValue={inputValue}
+      />
     </React.Fragment>
     </>
 

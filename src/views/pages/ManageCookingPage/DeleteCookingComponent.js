@@ -10,7 +10,7 @@ const DeleteCookingComponent = (props) => {
   const dispatch=useDispatch();
 
     const handleDelete=()=>{
-        dispatch(deleteSelectedCookingData(props.selectedid,props.imagepath));
+        dispatch(deleteSelectedCookingData(props.selectedid,props.imagepath,props.perPage,props.myPage,props.inputValue));
         props.onClose();
     }
     return (

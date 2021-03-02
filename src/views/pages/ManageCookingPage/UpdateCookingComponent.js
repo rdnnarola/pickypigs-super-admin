@@ -45,7 +45,7 @@ const UpdateCookingComponent = (props) => {
             image:input.image,
             // description:input.description,
         }
-        dispatch(updateSelectedCooking(props.selectedid,obj,props.imagepath));
+        dispatch(updateSelectedCooking(props.selectedid,obj,props.imagepath,props.perPage,props.myPage,props.inputValue));
         props.onClose();
         resetForm();
 

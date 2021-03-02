@@ -27,7 +27,7 @@ const AddCuisineComponent = (props) => {
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addCuisineData(fields));
+        dispatch(addCuisineData(fields,props.perPage,props.myPage,props.inputValue));
         props.onClose();
         resetForm();
     }

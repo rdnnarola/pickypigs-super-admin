@@ -27,7 +27,7 @@ export const getAllCuisineData=(data)=>{
   };
 
 
-  export const addCuisineData=(data)=>{
+  export const addCuisineData=(data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"ADD_CUISINE_REQUEST"});
@@ -39,7 +39,7 @@ export const getAllCuisineData=(data)=>{
             let dataURL=`super_admin/manage_cuisine_type`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_CUISINE_SUCCESS",payload:response.data});
-            dispatch(getAllCuisineData());
+            dispatch(getAllCuisineData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Cuisine Added Successfully .', 'success'));
 
         }
@@ -69,7 +69,7 @@ export const getAllCuisineData=(data)=>{
   }
 
 
-  export const updateSelectedCuisine=(selectedId,data)=>{
+  export const updateSelectedCuisine=(selectedId,data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"UPDATE_CUISINE_REQUEST"});
@@ -81,7 +81,7 @@ export const getAllCuisineData=(data)=>{
             let dataURL=`/super_admin/manage_cuisine_type/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_CUISINE_SUCCESS",payload:response.data});
-            dispatch(getAllCuisineData());
+            dispatch(getAllCuisineData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Cuisine Updated Successfully .', 'success'));
         }
         catch(error){
@@ -96,13 +96,13 @@ export const getAllCuisineData=(data)=>{
   };
 
 
-  export const deleteSelectedCuisineData=(selectedId)=>{
+  export const deleteSelectedCuisineData=(selectedId,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"DELETE_CUISINE_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_cuisine_type/${selectedId}`)
             dispatch({type:"DELETE_CUISINE_SUCCESS",payload:response.data});
-            dispatch(getAllCuisineData());
+            dispatch(getAllCuisineData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Cuisine Deleted Successfully .', 'warning'));
         }
         catch(error){

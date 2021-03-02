@@ -96,7 +96,10 @@ const ManageLifestylePage = () => {
                 </CButton>
               </CCol>
               <div>
-                <AddLifestyleComponent show={addLifestyleModalShow} onClose={() => setAddLifestyleModalShow(false)} />
+                <AddLifestyleComponent 
+                  show={addLifestyleModalShow} onClose={() => setAddLifestyleModalShow(false)} 
+                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                />
               </div>
             </CRow>
               {
@@ -144,10 +147,18 @@ const ManageLifestylePage = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdateLifestyleComponent show={updateLifestyleModalShow} onClose={() => setUpdateLifestyleModalShow(false)} selectedid={selectedId} />
+        <UpdateLifestyleComponent 
+          show={updateLifestyleModalShow} onClose={() => setUpdateLifestyleModalShow(false)} 
+          selectedid={selectedId} 
+          perPage={perPage} myPage={myPage} inputValue={inputValue}
+        />
     </React.Fragment>
     <React.Fragment>
-      <DeleteLifestyleComponent show={deleteModalShow} onClose={() => setDeleteModalShow(false)} selectedid={selectedId} />
+      <DeleteLifestyleComponent 
+        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        selectedid={selectedId} 
+        perPage={perPage} myPage={myPage} inputValue={inputValue}
+      />
     </React.Fragment>
     </>
 

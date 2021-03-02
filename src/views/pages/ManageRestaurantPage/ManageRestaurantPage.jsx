@@ -108,7 +108,10 @@ const ManageRestaurantPage = () => {
                 </CButton>
               </CCol>
               <div>
-                <AddRestaurantModalComp show={addRestaurantModalShow} onClose={() => setAddRestaurantModalShow(false)} />
+                <AddRestaurantModalComp 
+                  show={addRestaurantModalShow} onClose={() => setAddRestaurantModalShow(false)} 
+                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                />
               </div>
             </CRow>
 
@@ -158,10 +161,18 @@ const ManageRestaurantPage = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdatePasswordModalComp show={updateRestaurantModalShow} onClose={() => setUpdateRestaurantModalShow(false)} selectedid={selectedId}/>
+        <UpdatePasswordModalComp 
+          show={updateRestaurantModalShow} onClose={() => setUpdateRestaurantModalShow(false)} 
+          selectedid={selectedId}
+          perPage={perPage} myPage={myPage} inputValue={inputValue}
+        />
     </React.Fragment>
     <React.Fragment>
-      <DeleteRestaurantModalComp show={deleteModalShow} onClose={() => setDeleteModalShow(false)} selectedid={selectedId}/>
+      <DeleteRestaurantModalComp 
+        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        selectedid={selectedId}
+        perPage={perPage} myPage={myPage} inputValue={inputValue}
+      />
     </React.Fragment>
     </>
 

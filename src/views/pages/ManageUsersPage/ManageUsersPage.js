@@ -193,7 +193,11 @@ const  handleDownloadScv = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdateUserPasswordModalComp show={updateUserPasswordModalShow} onClose={() => setUpdateUserPasswordModalShow(false)} selectedid={selectedId} selectedmail={selectedMail} />
+        <UpdateUserPasswordModalComp 
+          show={updateUserPasswordModalShow} onClose={() => setUpdateUserPasswordModalShow(false)} 
+          selectedid={selectedId} selectedmail={selectedMail} 
+          perPage={perPage} myPage={myPage} inputValue={inputValue}
+        />
     </React.Fragment>
     <React.Fragment>
       {/* <DeleteRestaurantModalComp show={deleteModalShow} onClose={() => setDeleteModalShow(false)} selectedid={selectedId}/> */}
