@@ -36,7 +36,7 @@ const ManageAllergenPage = () => {
     const [myPage, setMypage] = useState(1);
 
     // const imagelink="http://192.168.100.39:8000/"
-    const imagelink="https://pickypigsapi.herokuapp.com/"
+    const imagelink="http://apps.narola.online:5003/"
 
 
     // pagination start

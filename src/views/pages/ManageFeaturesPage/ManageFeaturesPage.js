@@ -35,7 +35,7 @@ const ManageAllergenPage = () => {
     const [myPage, setMypage] = useState(1);
 
     // const imagelink="http://192.168.100.39:8000/"
-    const imagelink="https://pickypigsapi.herokuapp.com/"
+    const imagelink="http://apps.narola.online:5003/"
 
     // useEffect(()=>{
     //     dispatch(getAllFeaturesData({start:0,search:inputValue}));
@@ -167,7 +167,7 @@ const ManageAllergenPage = () => {
     </CRow>
     <React.Fragment>
         <UpdateFeaturesComponent show={updateFeaturesModalShow} onClose={() => setUpdateFeaturesModalShow(false)}
-          electedid={selectedId} imagelink={imagelink} imagepath={imagePath}
+          selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}
           perPage={perPage} myPage={myPage} inputValue={inputValue}
         />
     </React.Fragment>
