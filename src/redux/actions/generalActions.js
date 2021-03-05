@@ -135,11 +135,11 @@ export const deleteImage=(data)=>{
       }
       catch(error){
         dispatch({type:"DELETE_FILE_FAILURE",payload:error});
-        if (error.response) {
-          dispatch(setAlert(`${error.response.data.message}`, 'danger'));
-        } else {
-          dispatch(setAlert('Something went wrong!', 'danger'));
-        }
+        // if (error.response) {
+        //   dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+        // } else {
+        //   dispatch(setAlert('Something went wrong!', 'danger'));
+        // }
       }
   }
 };
