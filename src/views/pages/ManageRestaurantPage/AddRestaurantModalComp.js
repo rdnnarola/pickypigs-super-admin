@@ -9,7 +9,7 @@ import moment from 'moment'
 import { addRestaurantData } from "../../../redux/actions/manageRestaurantAction";
 
 
-const packages = ["basic","standard","premiun"];
+const packages = ["basic","standard","premium"];
 const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
 
@@ -173,7 +173,7 @@ const AddRestaurantModalComp = (props) => {
                                         </CFormGroup>
                                     </div>
                                     <CCardFooter className="d-flex justify-content-end">
-                                        <CButton color="secondary" className="mr-4" type="reset" onClick={props.onClose}>CANCLE</CButton>
+                                        <CButton color="secondary" className="mr-4" type="reset" onClick={props.onClose}>CANCEL</CButton>
                                         <CButton color="success" type="submit">ADD</CButton>
                                     </CCardFooter>
                                 </Form>

@@ -130,11 +130,11 @@ const  handleDownloadScv = () => {
                 }
               </CCol>
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
-                <CButton className="btn pinkline-btn text-uppercase rounded-pill" disabled onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null);setSelectedMail(null)}}>
+                {/* <CButton className="btn pinkline-btn text-uppercase rounded-pill" disabled onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null);setSelectedMail(null)}}>
                   <span className="add-icon">
                      Add User
                   </span> 
-                </CButton>
+                </CButton> */}
                 <CButton className="btn pinkline-btn text-uppercase rounded-pill ml-3" onClick={handleDownloadScv}>
                     <CIcon name="cil-cloud-download" alt="Settings" className="mr-1"/>
                     {/* <span className="edit-icon"> */}

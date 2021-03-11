@@ -8,7 +8,7 @@ import { updateSelectedRestaurantPassword } from "../../../redux/actions/manageR
 import { CFormGroup,CLabel,CInvalidFeedback,CCardFooter} from '@coreui/react'
 
 
-const packages = ["basic","standard","premiun"];
+const packages = ["basic","standard","premium"];
 const roles=["restaurant_admin"]
 
 const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
@@ -127,7 +127,7 @@ const UpdatePasswordModalComp = (props) => {
                                         </CFormGroup>
                                     </div>
                                     <CCardFooter className="d-flex justify-content-end">
-                                        <CButton color="secondary" className="mr-4" type="reset" onClick={props.onClose}>CANCLE</CButton>
+                                        <CButton color="secondary" className="mr-4" type="reset" onClick={props.onClose}>CANCEL</CButton>
                                         <CButton color="success" type="submit">Update</CButton>
                                     </CCardFooter>
                                 </Form>

@@ -80,7 +80,7 @@ const AddAllergyComponent = (props) => {
 
                                     </div>
                                     <CCardFooter className="d-flex justify-content-end">
-                                        <CButton color="secondary" className="mr-4" type="reset" onClick={()=>{props.onClose()}}>CANCLE</CButton>
+                                        <CButton color="secondary" className="mr-4" type="reset" onClick={()=>{props.onClose()}}>CANCEL</CButton>
                                         <CButton color="success" type="submit" disabled={isSubmitting}>ADD</CButton>
                                     </CCardFooter>
                                 </Form>
