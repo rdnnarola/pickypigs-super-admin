@@ -21,6 +21,7 @@ const ManageUsersPage = () => {
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
     const [selectedMail,setSelectedMail]=useState('')
+    const [accountType,setAccountType]=useState('')
     const [addRestaurantModalShow, setAddRestaurantModalShow] = useState(false);
     const [updateUserPasswordModalShow, setUpdateUserPasswordModalShow] = useState(false);
     const [perPage, setPerPage] = useState(10);
@@ -54,13 +55,7 @@ const ManageUsersPage = () => {
 
     let {isLoading,users_Data,totalrows}=allUsers_Data;
 
-    const search=(datas)=>{
-        return datas.filter(
-            (data)=>data.email.toLowerCase().indexOf(inputValue)>-1
-            );
-        // const columns=datas[0]&&Object.keys(datas[0]);
-        // return datas.filter((data)=>columns.some((column)=>data[column].toString().toLowerCase().indexOf(inputValue.toLowerCase())>-1));
-    }
+    
 
     const columns = [
   
@@ -77,7 +72,7 @@ const ManageUsersPage = () => {
           <CDropdown className="btn-group">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateUserPasswordModalShow(true);setSelectedId(row._id);setSelectedMail(row.email)}}>Update Password</CDropdownItem>
+            <CDropdownItem onClick={() => {setUpdateUserPasswordModalShow(true);setSelectedId(row._id);setSelectedMail(row.user_preferenceDetail.name);setAccountType(row.accountType)}}>Update Password</CDropdownItem>
             {/* <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem> */}
           </CDropdownMenu>
         </CDropdown>,
@@ -162,7 +157,7 @@ const  handleDownloadScv = () => {
                             <CCard>
                               <DataTable
                                 columns={columns}
-                                data={search(users_Data.userList)}
+                                data={users_Data.userList}
                                 highlightOnHover
                                 noHeader
                                 overflowY
@@ -195,7 +190,7 @@ const  handleDownloadScv = () => {
     <React.Fragment>
         <UpdateUserPasswordModalComp 
           show={updateUserPasswordModalShow} onClose={() => setUpdateUserPasswordModalShow(false)} 
-          selectedid={selectedId} selectedmail={selectedMail} 
+          selectedid={selectedId} selectedmail={selectedMail} accounttype={accountType}
           perPage={perPage} myPage={myPage} inputValue={inputValue}
         />
     </React.Fragment>

@@ -79,10 +79,14 @@ const UpdateUserPasswordModalComp = (props) => {
             >
                 <CModalHeader className="align-items-center">
                     <CModalTitle className="brandon-Medium" id="contained-modal-title-vcenter">
-                        Update User Password 
+                        Update <span className="text-capitalize"><em>{props.selectedmail}</em></span>'s Password
                     </CModalTitle>
                 </CModalHeader>
                 <CModalBody>
+                    {props.accounttype=="email"?
+                    <React.Fragment>
+
+                    
                     <Formik 
                         enableReinitialize={true} 
                         initialValues={initialValues} 
@@ -136,7 +140,16 @@ const UpdateUserPasswordModalComp = (props) => {
                         }}
                     </Formik>
                                     
-                     
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                       <p>Can't Update Password.As User Login through <b className="text-capitalize">{props.accounttype}</b> </p>
+                       <CCardFooter className="d-flex justify-content-end">
+                            <CButton color="secondary" className="mr-4" type="reset" onClick={props.onClose}>CANCEL</CButton>
+                            <CButton color="success" type="submit" disabled>Update</CButton>
+                        </CCardFooter>
+                    </React.Fragment>
+                    }
                     
 
                 </CModalBody>
