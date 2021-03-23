@@ -46,7 +46,7 @@ export const getAllCookingData=(data)=>{
             let response = await Axios.post(dataURL,formData,config );
             dispatch({type:"ADD_COOKING_SUCCESS",payload:response.data});
             dispatch(getAllCookingData());
-            dispatch(setAlert('Cooking Added Successfully .', 'success'));
+            dispatch(setAlert('Cooking Method Added Successfully .', 'success'));
 
         }
         catch(error){
@@ -97,7 +97,7 @@ export const getAllCookingData=(data)=>{
             if(data.image!==imagepath){
               dispatch(deleteImage({path:imagepath}));
             }
-            dispatch(setAlert('Cooking Updated Successfully .', 'success'));
+            dispatch(setAlert('Cooking Method Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_COOKING_FAILURE",payload:error});
@@ -119,7 +119,7 @@ export const getAllCookingData=(data)=>{
             dispatch({type:"DELETE_COOKING_SUCCESS",payload:response.data});
             dispatch(getAllCookingData());
             dispatch(deleteImage({path:imagepath}));
-            dispatch(setAlert('Cooking Deleted Successfully .', 'warning'));
+            dispatch(setAlert('Cooking Method Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_COOKING_FAILURE",payload:error});

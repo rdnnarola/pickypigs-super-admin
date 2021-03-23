@@ -118,7 +118,7 @@ const ManageAllergenPage = () => {
                   onClose={() => setAddAllergyModalShow(false)} 
                   perPage={perPage} 
                   myPage={myPage}
-                  inputValue={inputValue}
+                  inputvalue={inputValue}
                 />
               </div>
             </CRow>

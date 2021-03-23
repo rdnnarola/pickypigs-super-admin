@@ -30,7 +30,7 @@ const AddAllergyComponent = (props) => {
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addAllergyData(fields,props.perPage,props.myPage,props.inputValue));
+        dispatch(addAllergyData(fields,props.perPage,props.myPage,props.inputvalue));
         props.onClose();
         resetForm();
     }

@@ -16,6 +16,17 @@ export const setAlert=(message,color)=>{
       }
     }
   };
-
+  
+  export const removeAlert=(id)=>{
+  
+    return async(dispatch)=>{
+      try {
+        await  dispatch({type : "REMOVE_ALERT" , payload: {id}});
+      }
+      catch (error) {
+          console.error(error);
+      }
+    }
+  };
 
  

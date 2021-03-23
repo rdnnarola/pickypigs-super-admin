@@ -26,7 +26,7 @@ export const getLogin=(data,history)=>{
                }
            }
           let dataURL=`/auth/login`
-          let response = await Axios.post(dataURL,JSON.stringify(data),config );
+          let response = await Axios.post(dataURL,JSON.stringify({...data,role:"super_admin"}),config );
           dispatch({type:"GET_LOGIN_SUCCESS",payload:response.data});
           dispatch(setAlert('LogIn Success', 'success'));
           const token = localStorage.getItem("access_token");
@@ -75,7 +75,7 @@ export const forgotPassword=(data)=>{
                }
            }
           let dataURL=`/auth/forgot_password`
-          let response = await Axios.post(dataURL,JSON.stringify(data),config );
+          let response = await Axios.post(dataURL,JSON.stringify({...data,role:"super_admin"}),config );
           dispatch({type:"FORGOT_PASSWORD_SUCCESS",payload:response.data});
           dispatch(setAlert(`${response.data.message}`, 'success'));
       }
