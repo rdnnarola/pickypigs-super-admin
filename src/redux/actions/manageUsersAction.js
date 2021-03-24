@@ -28,7 +28,7 @@ export const getAllUsersData=(data)=>{
   };
 
 
- export const updateSelectedUserPassword=(selectedId,data)=>{
+ export const updateSelectedUserPassword=(selectedId,data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"UPDATE_USER_REQUEST"});
@@ -40,7 +40,7 @@ export const getAllUsersData=(data)=>{
             let dataURL=`/super_admin/manage_user/update_password/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_USER_SUCCESS",payload:response.data});
-            dispatch(getAllUsersData());
+            dispatch(getAllUsersData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('UserPassword Updated Successfully .', 'success'));
         }
         catch(error){

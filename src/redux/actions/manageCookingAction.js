@@ -27,7 +27,7 @@ export const getAllCookingData=(data)=>{
   };
 
 
-  export const addCookingData=(data)=>{
+  export const addCookingData=(data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"ADD_COOKING_REQUEST"});
@@ -45,7 +45,7 @@ export const getAllCookingData=(data)=>{
             let dataURL=`/super_admin/manage_cooking_method`
             let response = await Axios.post(dataURL,formData,config );
             dispatch({type:"ADD_COOKING_SUCCESS",payload:response.data});
-            dispatch(getAllCookingData());
+            dispatch(getAllCookingData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Cooking Method Added Successfully .', 'success'));
 
         }
@@ -75,7 +75,7 @@ export const getAllCookingData=(data)=>{
   }
 
 
-  export const updateSelectedCooking=(selectedId,data,imagepath)=>{
+  export const updateSelectedCooking=(selectedId,data,imagepath,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"UPDATE_COOKING_REQUEST"});
@@ -93,7 +93,7 @@ export const getAllCookingData=(data)=>{
             let dataURL=`/super_admin/manage_cooking_method/${selectedId}`
             let response = await Axios.put(dataURL,formData,config );
             dispatch({type:"UPDATE_COOKING_SUCCESS",payload:response.data});
-            dispatch(getAllCookingData());
+            dispatch(getAllCookingData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             if(data.image!==imagepath){
               dispatch(deleteImage({path:imagepath}));
             }
@@ -111,13 +111,13 @@ export const getAllCookingData=(data)=>{
   };
 
 
-  export const deleteSelectedCookingData=(selectedId,imagepath)=>{
+  export const deleteSelectedCookingData=(selectedId,imagepath,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"DELETE_COOKING_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_cooking_method/${selectedId}`)
             dispatch({type:"DELETE_COOKING_SUCCESS",payload:response.data});
-            dispatch(getAllCookingData());
+            dispatch(getAllCookingData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(deleteImage({path:imagepath}));
             dispatch(setAlert('Cooking Method Deleted Successfully .', 'warning'));
         }

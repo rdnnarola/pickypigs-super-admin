@@ -43,8 +43,8 @@ const ManageAllergenPage = () => {
 
     // pagination start
     useEffect(()=>{
-      dispatch(getAllFeaturesData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
+      dispatch(getAllFeaturesData({start:0,length:perPage,search:inputValue}));
     },[dispatch,inputValue,perPage,]);
 
      
@@ -54,7 +54,7 @@ const ManageAllergenPage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllFeaturesData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -117,7 +117,7 @@ const ManageAllergenPage = () => {
               <div>
                 <AddFeaturesComponent show={addFeaturesModalShow} onClose={() => setAddFeaturesModalShow(false)} 
                   imagelink={imagelink} 
-                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                  perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
             </CRow>
@@ -168,13 +168,13 @@ const ManageAllergenPage = () => {
     <React.Fragment>
         <UpdateFeaturesComponent show={updateFeaturesModalShow} onClose={() => setUpdateFeaturesModalShow(false)}
           selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}
-          perPage={perPage} myPage={myPage} inputValue={inputValue}
+          perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteFeaturesComponent show={deleteModalShow} onClose={() => setDeleteModalShow(false)}
         selectedid={selectedId} imagepath={imagePath} 
-        perPage={perPage} myPage={myPage} inputValue={inputValue}
+        perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />
     </React.Fragment>
     </>

@@ -27,7 +27,7 @@ const AddDietaryComponent = (props) => {
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addDietaryData(fields));
+        dispatch(addDietaryData(fields,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
     }

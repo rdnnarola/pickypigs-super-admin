@@ -29,8 +29,8 @@ const ManageRestaurantPage = () => {
 
   // pagination start
     useEffect(()=>{
-      dispatch(getAllRestaurantData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
+      dispatch(getAllRestaurantData({start:0,length:perPage,search:inputValue}));
     },[dispatch,inputValue,perPage,]);
 
      
@@ -40,7 +40,7 @@ const ManageRestaurantPage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllRestaurantData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -51,13 +51,13 @@ const ManageRestaurantPage = () => {
 
     let {isLoading,restaurant_Data,totalrows}=allRestaurant_data;
 
-    const search=(datas)=>{
-        return datas.filter(
-            (data)=>data.email.toLowerCase().indexOf(inputValue)>-1
-            );
-        // const columns=datas[0]&&Object.keys(datas[0]);
-        // return datas.filter((data)=>columns.some((column)=>data[column].toString().toLowerCase().indexOf(inputValue.toLowerCase())>-1));
-    }
+    // const search=(datas)=>{
+    //     return datas.filter(
+    //         (data)=>data.email.toLowerCase().indexOf(inputValue)>-1
+    //         );
+    //     // const columns=datas[0]&&Object.keys(datas[0]);
+    //     // return datas.filter((data)=>columns.some((column)=>data[column].toString().toLowerCase().indexOf(inputValue.toLowerCase())>-1));
+    // }
 
     const columns = [
   
@@ -110,7 +110,7 @@ const ManageRestaurantPage = () => {
               <div>
                 <AddRestaurantModalComp 
                   show={addRestaurantModalShow} onClose={() => setAddRestaurantModalShow(false)} 
-                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                  perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
             </CRow>
@@ -130,7 +130,7 @@ const ManageRestaurantPage = () => {
                             <CCard>
                               <DataTable
                                 columns={columns}
-                                data={search(restaurant_Data.restaurantList)}
+                                data={restaurant_Data.restaurantList}
                                 highlightOnHover
                                 overflowY
                                 noHeader
@@ -164,14 +164,14 @@ const ManageRestaurantPage = () => {
         <UpdatePasswordModalComp 
           show={updateRestaurantModalShow} onClose={() => setUpdateRestaurantModalShow(false)} 
           selectedid={selectedId}
-          perPage={perPage} myPage={myPage} inputValue={inputValue}
+          perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteRestaurantModalComp 
         show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
         selectedid={selectedId}
-        perPage={perPage} myPage={myPage} inputValue={inputValue}
+        perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />
     </React.Fragment>
     </>

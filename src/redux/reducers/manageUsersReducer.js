@@ -23,7 +23,7 @@ const initialState = {
                 ...state,
                 isLoading:false,
                 users_Data:payload,
-                totalrows:payload.totalCount
+                totalrows:payload.totalRecord
             };
       
         case "UPDATE_USER_SUCCESS":            

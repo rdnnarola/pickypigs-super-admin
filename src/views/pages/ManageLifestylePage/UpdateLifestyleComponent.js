@@ -44,7 +44,7 @@ const UpdateLifestyleComponent = (props) => {
             name: input.name,
             // description:input.description,
         }
-        dispatch(updateSelectedLifestyle(props.selectedid,obj));
+        dispatch(updateSelectedLifestyle(props.selectedid,obj,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
 

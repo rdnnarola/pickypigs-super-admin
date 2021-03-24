@@ -45,7 +45,7 @@ const UpdateFeaturesComponent = (props) => {
             image:input.image,
             description:input.description,
         }
-        dispatch(updateSelectedFeatures(props.selectedid,obj,props.imagepath));
+        dispatch(updateSelectedFeatures(props.selectedid,obj,props.imagepath,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
 

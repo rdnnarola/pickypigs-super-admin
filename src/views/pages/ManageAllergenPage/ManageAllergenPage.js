@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import {CBadge,CCard,CCardBody,CCardHeader,CCol,CDataTable,CButton,CRow,CDropdownMenu,CDropdownItem,CDropdown,CDropdownToggle} from '@coreui/react'
+import { useHistory } from 'react-router-dom'
+import {CCard,CCardBody,CCardHeader,CCol,CButton,CRow,CDropdownMenu,CDropdownItem,CDropdown,CDropdownToggle} from '@coreui/react'
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable, { defaultThemes }from 'react-data-table-component';
 import CIcon from '@coreui/icons-react'
-import moment from "moment";
+// import moment from "moment";
 import DeleteAllergyComponent from './DeleteAllergyComponent';
 import AddAllergyComponent from './AddAllergyComponent';
 import UpdateAllergyComponent from './UpdateAllergyComponent';
@@ -52,7 +52,7 @@ const ManageAllergenPage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllAllergyData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -116,8 +116,8 @@ const ManageAllergenPage = () => {
                 <AddAllergyComponent 
                   show={addAllergyModalShow} 
                   onClose={() => setAddAllergyModalShow(false)} 
-                  perPage={perPage} 
-                  myPage={myPage}
+                  perpage={perPage} 
+                  mypage={myPage}
                   inputvalue={inputValue}
                 />
               </div>
@@ -170,16 +170,16 @@ const ManageAllergenPage = () => {
         <UpdateAllergyComponent show={updateAllergyModalShow} 
           onClose={() => setUpdateAllergyModalShow(false)} 
           selectedid={selectedId} imagelink={imagelink}
-          imagepath={imagePath} perPage={perPage} 
-          myPage={myPage} inputValue={inputValue}
+          imagepath={imagePath} perpage={perPage} 
+          mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteAllergyComponent show={deleteModalShow} 
         onClose={() => setDeleteModalShow(false)} 
         selectedid={selectedId} imagepath={imagePath} 
-        perPage={perPage} myPage={myPage} 
-        inputValue={inputValue}
+        perpage={perPage} mypage={myPage} 
+        inputvalue={inputValue}
       />
     </React.Fragment>
     </>

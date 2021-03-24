@@ -18,7 +18,7 @@ const UpdateDietaryComponent = (props) => {
     
     useEffect(()=>{
         if (props.show) {
-            dispatch(getSelectedDietaryData(props.selectedid));
+            dispatch(getSelectedDietaryData(props.selectedid,));
         }
     },[dispatch,props.show,props.selectedid]);
 
@@ -45,7 +45,7 @@ const UpdateDietaryComponent = (props) => {
             name: input.name,
             // description:input.description,
         }
-        dispatch(updateSelectedDietary(props.selectedid,obj));
+        dispatch(updateSelectedDietary(props.selectedid,obj,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
 

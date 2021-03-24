@@ -27,7 +27,7 @@ export const getAllRestaurantData=(data)=>{
   };
 
 
-  export const addRestaurantData=(data)=>{
+  export const addRestaurantData=(data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"ADD_RESTAURANT_REQUEST"});
@@ -39,7 +39,7 @@ export const getAllRestaurantData=(data)=>{
             let dataURL=`/super_admin/manage_restaurant/create`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_RESTAURANT_SUCCESS",payload:response.data});
-            dispatch(getAllRestaurantData());
+            dispatch(getAllRestaurantData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Restaurant Added Successfully .', 'success'));
 
         }
@@ -70,7 +70,7 @@ export const getAllRestaurantData=(data)=>{
 
 
 
-  export const updateSelectedRestaurantPassword=(selectedId,data)=>{
+  export const updateSelectedRestaurantPassword=(selectedId,data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"UPDATE_RESTAURANT_REQUEST"});
@@ -82,7 +82,7 @@ export const getAllRestaurantData=(data)=>{
             let dataURL=`/super_admin/manage_restaurant/update_password/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_RESTAURANT_SUCCESS",payload:response.data});
-            dispatch(getAllRestaurantData());
+            dispatch(getAllRestaurantData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Restaurant Updated Successfully .', 'success'));
         }
         catch(error){
@@ -96,13 +96,13 @@ export const getAllRestaurantData=(data)=>{
     }
   };
   
-  export const deleteSelectedRestaurantData=(selectedId)=>{
+  export const deleteSelectedRestaurantData=(selectedId,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"DELETE_RESTAURANT_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_restaurant/${selectedId}`)
             dispatch({type:"DELETE_RESTAURANT_SUCCESS",payload:response.data});
-            dispatch(getAllRestaurantData());
+            dispatch(getAllRestaurantData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Restaurant Deleted Successfully .', 'warning'));
         }
         catch(error){

@@ -22,4 +22,5 @@ export const RESTAURANT_ADMIN_URL = `${window.location.host === "localhost:3001"
 
 export const SERVER_URL = "http://apps.narola.online:5003";
 
+export const SUPERADMIN_URL="http://super-admin.pickypigs.com";
 

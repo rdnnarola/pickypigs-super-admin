@@ -25,7 +25,7 @@ const initialState = {
                 ...state,
                 isLoading:false,
             restaurant_Data:payload,
-            totalrows:payload.totalCount,
+            totalrows:payload.totalRecord,
     
             };
         case "ADD_RESTAURANT_SUCCESS":

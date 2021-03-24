@@ -28,8 +28,8 @@ const ManageDietaryPage = () => {
 
     // pagination start
     useEffect(()=>{
-      dispatch(getAllDietaryData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
+      dispatch(getAllDietaryData({start:0,length:perPage,search:inputValue}));
     },[dispatch,inputValue,perPage,]);
 
      
@@ -39,7 +39,7 @@ const ManageDietaryPage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllDietaryData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -97,7 +97,7 @@ const ManageDietaryPage = () => {
               <div>
                 <AddDietaryComponent 
                   show={addDietaryModalShow} onClose={() => setAddDietaryModalShow(false)} 
-                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                  perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
             </CRow>
@@ -149,14 +149,14 @@ const ManageDietaryPage = () => {
         <UpdateDietaryComponent 
           show={updateDietaryModalShow} onClose={() => setUpdateDietaryModalShow(false)} 
           selectedid={selectedId} 
-          perPage={perPage} myPage={myPage} inputValue={inputValue}
+          perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteDietaryComponent 
         show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
         selectedid={selectedId} 
-        perPage={perPage} myPage={myPage} inputValue={inputValue}
+        perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />
     </React.Fragment>
     </>

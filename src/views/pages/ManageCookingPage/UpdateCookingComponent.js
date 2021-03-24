@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from "react";
-import {CButton,CModal,CModalFooter,CModalHeader,CModalTitle,CModalBody,CInputGroupAppend,CInputGroupText,CInputGroup} from '@coreui/react';
+import React,{useEffect} from "react";
+import {CButton,CModal,CModalHeader,CModalTitle,CModalBody} from '@coreui/react';
 import {useDispatch,useSelector} from "react-redux";
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -9,7 +9,7 @@ import { useDropzone } from "react-dropzone";
 
 
 
-const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+// const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
 
 const UpdateCookingComponent = (props) => {
     const dispatch=useDispatch();
@@ -45,7 +45,7 @@ const UpdateCookingComponent = (props) => {
             image:input.image,
             // description:input.description,
         }
-        dispatch(updateSelectedCooking(props.selectedid,obj,props.imagepath,props.perPage,props.myPage,props.inputValue));
+        dispatch(updateSelectedCooking(props.selectedid,obj,props.imagepath,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
 
@@ -132,7 +132,7 @@ export default UpdateCookingComponent;
 
 
 const UploadComponent = props => {
-    const dispatch=useDispatch();
+    // const dispatch=useDispatch();
     const { setFieldValue ,setSubmitting} = props;
 
 

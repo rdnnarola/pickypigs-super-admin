@@ -10,7 +10,7 @@ const DeleteDietaryComponent = (props) => {
   const dispatch=useDispatch();
 
     const handleDelete=()=>{
-        dispatch(deleteSelectedDietaryData(props.selectedid));
+        dispatch(deleteSelectedDietaryData(props.selectedid,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
     }
     return (

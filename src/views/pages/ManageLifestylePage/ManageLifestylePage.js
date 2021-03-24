@@ -28,8 +28,8 @@ const ManageLifestylePage = () => {
 
     // pagination start
     useEffect(()=>{
-      dispatch(getAllLifestyleData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
+      dispatch(getAllLifestyleData({start:0,length:perPage,search:inputValue}));
     },[dispatch,inputValue,perPage,]);
 
      
@@ -39,7 +39,7 @@ const ManageLifestylePage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllLifestyleData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -98,7 +98,7 @@ const ManageLifestylePage = () => {
               <div>
                 <AddLifestyleComponent 
                   show={addLifestyleModalShow} onClose={() => setAddLifestyleModalShow(false)} 
-                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                  perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
             </CRow>
@@ -150,14 +150,14 @@ const ManageLifestylePage = () => {
         <UpdateLifestyleComponent 
           show={updateLifestyleModalShow} onClose={() => setUpdateLifestyleModalShow(false)} 
           selectedid={selectedId} 
-          perPage={perPage} myPage={myPage} inputValue={inputValue}
+          perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteLifestyleComponent 
         show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
         selectedid={selectedId} 
-        perPage={perPage} myPage={myPage} inputValue={inputValue}
+        perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />
     </React.Fragment>
     </>

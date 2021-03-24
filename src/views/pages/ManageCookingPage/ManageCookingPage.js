@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import {CBadge,CCard,CCardBody,CCardHeader,CCol,CDataTable,CButton,CRow,CDropdownMenu,CDropdownItem,CDropdown,CDropdownToggle} from '@coreui/react'
+import { useHistory } from 'react-router-dom'
+import {CCard,CCardBody,CCardHeader,CCol,CButton,CRow,CDropdownMenu,CDropdownItem,CDropdown,CDropdownToggle} from '@coreui/react'
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable, { defaultThemes }from 'react-data-table-component';
 import CIcon from '@coreui/icons-react'
@@ -32,8 +32,8 @@ const ManageAllergenPage = () => {
 
     // pagination start
     useEffect(()=>{
-      dispatch(getAllCookingData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
+      dispatch(getAllCookingData({start:0,length:perPage,search:inputValue}));
     },[dispatch,inputValue,perPage,]);
 
      
@@ -43,7 +43,7 @@ const ManageAllergenPage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllCookingData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -108,8 +108,8 @@ const ManageAllergenPage = () => {
               <div>
                 <AddCookingComponent 
                   show={addCookingModalShow} onClose={() => setAddCookingModalShow(false)} 
-                  imagelink={imagelink} perPage={perPage} 
-                  myPage={myPage} inputValue={inputValue}
+                  imagelink={imagelink} perpage={perPage} 
+                  mypage={myPage} inputvalue={inputValue}
                 />
               </div>
             </CRow>
@@ -161,7 +161,7 @@ const ManageAllergenPage = () => {
         <UpdateCookingComponent 
           show={updateCookingModalShow} onClose={() => setUpdateCookingModalShow(false)} 
           selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}
-          perPage={perPage} myPage={myPage} inputValue={inputValue}
+          perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>

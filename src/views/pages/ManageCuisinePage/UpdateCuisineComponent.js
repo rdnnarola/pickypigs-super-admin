@@ -44,7 +44,7 @@ const UpdateCuisineComponent = (props) => {
             name: input.name,
             // description:input.description,
         }
-        dispatch(updateSelectedCuisine(props.selectedid,obj,props.perPage,props.myPage,props.inputValue));
+        dispatch(updateSelectedCuisine(props.selectedid,obj,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
 

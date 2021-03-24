@@ -32,7 +32,7 @@ const AddFeaturesComponent = (props) => {
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addFeaturesData(fields));
+        dispatch(addFeaturesData(fields,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
     }

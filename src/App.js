@@ -5,6 +5,8 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import TheContent from './containers/TheContent';
 import AlertSystemPage from './views/pages/AlertSystemPage/AlertSystemPage'
+import ErrorBoundary from './views/pages/ErrorBoundary';
+
 
 const loading = (
   <div className="pt-3 text-center">
@@ -25,6 +27,7 @@ function App() {
 
     return (
           <React.Suspense fallback={loading}>
+            <ErrorBoundary>
              <div>
                 <AlertSystemPage/>
               </div>
@@ -38,6 +41,7 @@ function App() {
                 <TheContent/>
               </PrivateRoute>
             </Switch>
+            </ErrorBoundary>
           </React.Suspense>
     );
 }

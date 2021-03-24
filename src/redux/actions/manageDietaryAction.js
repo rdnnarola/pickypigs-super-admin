@@ -27,7 +27,7 @@ export const getAllDietaryData=(data)=>{
   };
 
 
-  export const addDietaryData=(data)=>{
+  export const addDietaryData=(data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"ADD_DIETARY_REQUEST"});
@@ -40,7 +40,7 @@ export const getAllDietaryData=(data)=>{
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_DIETARY_SUCCESS",payload:response.data});
              dispatch(setAlert('Dietary Added Successfully .', 'success'));
-             dispatch(getAllDietaryData());
+             dispatch(getAllDietaryData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
 
         }
         catch(error){
@@ -69,7 +69,7 @@ export const getAllDietaryData=(data)=>{
   }
 
 
-  export const updateSelectedDietary=(selectedId,data)=>{
+  export const updateSelectedDietary=(selectedId,data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"UPDATE_DIETARY_REQUEST"});
@@ -81,7 +81,7 @@ export const getAllDietaryData=(data)=>{
             let dataURL=`/super_admin/manage_dietary/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_DIETARY_SUCCESS",payload:response.data});
-             dispatch(getAllDietaryData());
+             dispatch(getAllDietaryData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
              dispatch(setAlert('Dietary Updated Successfully .', 'success'));
         }
         catch(error){
@@ -96,13 +96,13 @@ export const getAllDietaryData=(data)=>{
   };
 
 
-  export const deleteSelectedDietaryData=(selectedId)=>{
+  export const deleteSelectedDietaryData=(selectedId,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"DELETE_DIETARY_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_dietary/${selectedId}`)
             dispatch({type:"DELETE_DIETARY_SUCCESS",payload:response.data});
-            dispatch(getAllDietaryData());
+            dispatch(getAllDietaryData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Dietary Deleted Successfully .', 'warning'));
 
         }

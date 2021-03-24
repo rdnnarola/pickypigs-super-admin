@@ -46,7 +46,7 @@ const UpdateUserPasswordModalComp = (props) => {
         let obj = {
             password: input.password,
         }
-        dispatch(updateSelectedUserPassword(props.selectedid,obj));
+        dispatch(updateSelectedUserPassword(props.selectedid,obj,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
 

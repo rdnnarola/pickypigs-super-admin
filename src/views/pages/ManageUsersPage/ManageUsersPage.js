@@ -33,8 +33,8 @@ const ManageUsersPage = () => {
 
     // pagination start
     useEffect(()=>{
-      dispatch(getAllUsersData({start:0,length:perPage,search:inputValue}));
       setMypage(1)
+      dispatch(getAllUsersData({start:0,length:perPage,search:inputValue}));
     },[dispatch,inputValue,perPage,]);
 
      
@@ -44,7 +44,7 @@ const ManageUsersPage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllUsersData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -191,7 +191,7 @@ const  handleDownloadScv = () => {
         <UpdateUserPasswordModalComp 
           show={updateUserPasswordModalShow} onClose={() => setUpdateUserPasswordModalShow(false)} 
           selectedid={selectedId} selectedmail={selectedMail} accounttype={accountType}
-          perPage={perPage} myPage={myPage} inputValue={inputValue}
+          perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>

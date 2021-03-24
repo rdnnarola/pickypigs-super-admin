@@ -1,15 +1,15 @@
-import React,{useState,useEffect} from "react";
-import {CButton,CModal,CFormGroup,CLabel,CRow,CCol,CInvalidFeedback,CCardFooter,
-    CModalHeader,CModalTitle,CModalBody ,CInputGroupAppend,CInputGroup,CInputGroupText} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import {useDispatch,useSelector} from "react-redux";
+import React,{useState} from "react";
+import {CButton,CModal,CFormGroup,CLabel,CInvalidFeedback,CCardFooter,
+    CModalHeader,CModalTitle,CModalBody } from '@coreui/react'
+// import CIcon from '@coreui/icons-react'
+import {useDispatch} from "react-redux";
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { addAllergyData } from "../../../redux/actions/manageAllergyAction";
 import { useDropzone } from "react-dropzone";
 
-const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
-const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
+// const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+// const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
 
 const AddAllergyComponent = (props) => {
     const dispatch=useDispatch();
@@ -30,7 +30,7 @@ const AddAllergyComponent = (props) => {
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addAllergyData(fields,props.perPage,props.myPage,props.inputvalue));
+        dispatch(addAllergyData(fields,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
     }

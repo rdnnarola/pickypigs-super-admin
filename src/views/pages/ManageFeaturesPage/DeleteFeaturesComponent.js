@@ -10,7 +10,7 @@ const DeleteFeaturesComponent = (props) => {
   const dispatch=useDispatch();
 
     const handleDelete=()=>{
-        dispatch(deleteSelectedFeaturesData(props.selectedid,props.imagepath));
+        dispatch(deleteSelectedFeaturesData(props.selectedid,props.imagepath,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
     }
     return (

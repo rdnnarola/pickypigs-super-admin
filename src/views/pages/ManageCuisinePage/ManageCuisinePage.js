@@ -39,7 +39,7 @@ const ManageCuisinePage = () => {
     };
     const handlePageChange = page=> {
       setMypage(page)
-      console.log(page)
+      // console.log(page)
       dispatch(getAllCuisineData({start:(page-1)*perPage,length:perPage,search:inputValue}));
     };
     //pagination end
@@ -98,7 +98,7 @@ const ManageCuisinePage = () => {
               <div>
                 <AddCuisineComponent 
                   show={addCuisineModalShow} onClose={() => setAddCuisineModalShow(false)} 
-                  perPage={perPage} myPage={myPage} inputValue={inputValue}
+                  perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
             </CRow>
@@ -150,15 +150,15 @@ const ManageCuisinePage = () => {
         <UpdateCuisineComponent 
           show={updateCuisineModalShow} onClose={() => setUpdateCuisineModalShow(false)} 
           selectedid={selectedId} 
-          perPage={perPage} myPage={myPage} inputValue={inputValue}
-        />
+          perpage={perPage} mypage={myPage} inputvalue={inputValue}
+          />
     </React.Fragment>
     <React.Fragment>
       <DeleteCuisineComponent 
         show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
         selectedid={selectedId}
-        perPage={perPage} myPage={myPage} inputValue={inputValue}
-      />
+        perpage={perPage} mypage={myPage} inputvalue={inputValue}
+        />
     </React.Fragment>
     </>
 

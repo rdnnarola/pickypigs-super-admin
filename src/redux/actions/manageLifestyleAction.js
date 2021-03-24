@@ -27,7 +27,7 @@ export const getAllLifestyleData=(data)=>{
   };
 
 
-  export const addLifestyleData=(data)=>{
+  export const addLifestyleData=(data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"ADD_LIFESTYLE_REQUEST"});
@@ -39,7 +39,7 @@ export const getAllLifestyleData=(data)=>{
             let dataURL=`super_admin/manage_lifestyle`
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_LIFESTYLE_SUCCESS",payload:response.data});
-            dispatch(getAllLifestyleData());
+            dispatch(getAllLifestyleData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Lifestyle Added Successfully .', 'success'));
 
         }
@@ -69,7 +69,7 @@ export const getAllLifestyleData=(data)=>{
   }
 
 
-  export const updateSelectedLifestyle=(selectedId,data)=>{
+  export const updateSelectedLifestyle=(selectedId,data,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"UPDATE_LIFESTYLE_REQUEST"});
@@ -81,7 +81,7 @@ export const getAllLifestyleData=(data)=>{
             let dataURL=`/super_admin/manage_lifestyle/${selectedId}`
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_LIFESTYLE_SUCCESS",payload:response.data});
-            dispatch(getAllLifestyleData());
+            dispatch(getAllLifestyleData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Lifestyle Updated Successfully .', 'success'));
         }
         catch(error){
@@ -96,13 +96,13 @@ export const getAllLifestyleData=(data)=>{
   };
 
 
-  export const deleteSelectedLifestyleData=(selectedId)=>{
+  export const deleteSelectedLifestyleData=(selectedId,perPage,myPage,inputValue)=>{
     return async(dispatch)=>{
         try{
             dispatch({type:"DELETE_LIFESTYLE_REQUEST"});
             let response = await Axios.delete(`/super_admin/manage_lifestyle/${selectedId}`)
             dispatch({type:"DELETE_LIFESTYLE_SUCCESS",payload:response.data});
-            dispatch(getAllLifestyleData());
+            dispatch(getAllLifestyleData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(setAlert('Lifestyle Deleted Successfully .', 'warning'));
         }
         catch(error){

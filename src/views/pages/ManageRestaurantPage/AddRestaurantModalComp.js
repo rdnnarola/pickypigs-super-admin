@@ -57,7 +57,7 @@ const AddRestaurantModalComp = (props) => {
 
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addRestaurantData(fields));
+        dispatch(addRestaurantData(fields,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
     }

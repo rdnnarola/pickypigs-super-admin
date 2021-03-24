@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from "react";
-import {CButton,CModal,CModalFooter,CModalHeader,CModalTitle,CModalBody,CInputGroupAppend,CInputGroupText,CInputGroup} from '@coreui/react';
+import React,{useEffect} from "react";
+import {CButton,CModal,CModalHeader,CModalTitle,CModalBody} from '@coreui/react';
 import {useDispatch,useSelector} from "react-redux";
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -45,7 +45,7 @@ const UpdateAllergyComponent = (props) => {
             image:input.image,
             description:input.description,
         }
-        dispatch(updateSelectedAllergy(props.selectedid,obj,props.imagepath,props.perPage,props.myPage,props.inputValue));
+        dispatch(updateSelectedAllergy(props.selectedid,obj,props.imagepath,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
 

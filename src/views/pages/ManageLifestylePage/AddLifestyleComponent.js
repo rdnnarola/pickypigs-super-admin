@@ -27,7 +27,7 @@ const AddLifestyleComponent = (props) => {
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
-        dispatch(addLifestyleData(fields));
+        dispatch(addLifestyleData(fields,props.perpage,props.mypage,props.inputvalue));
         props.onClose();
         resetForm();
     }
