@@ -82,7 +82,7 @@ const ResetPasswordPage = () => {
                 <CCardBody>
                   <Formik
                       initialValues={{ newPassword: '',confirmPassword:'' }} validationSchema={validationSchemaFormat}
-                      onSubmit={(values) => { console.log('values => ', values);  handleSavePassword(values) }}
+                      onSubmit={(values) => {  handleSavePassword(values) }}
                     >
                     {({
                       values, errors, touched, handleChange, handleBlur, isSubmitting,

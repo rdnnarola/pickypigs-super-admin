@@ -10,8 +10,8 @@ const DeleteLifestyleComponent = (props) => {
   const dispatch=useDispatch();
 
     const handleDelete=()=>{
-        dispatch(deleteSelectedLifestyleData(props.selectedid,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
+        dispatch(deleteSelectedLifestyleData(props.selectedid,props.imagepath,props.perpage,props.mypage,props.inputvalue));
+        // props.onClose();
     }
     return (
         <>

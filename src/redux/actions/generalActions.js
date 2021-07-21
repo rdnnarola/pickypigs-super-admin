@@ -91,7 +91,7 @@ export const forgotPassword=(data)=>{
 };
 
 export const resetPassword=(data,history)=>{
-  console.log(data);
+  // console.log(data);
   return async(dispatch)=>{
       try{
           dispatch({type:"RESET_PASSWORD_REQUEST"});

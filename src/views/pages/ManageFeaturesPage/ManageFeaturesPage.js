@@ -8,7 +8,8 @@ import moment from "moment";
 import DeleteFeaturesComponent from './DeleteFeaturesComponent';
 import AddFeaturesComponent from './AddFeaturesComponent';
 import UpdateFeaturesComponent from './UpdateFeaturesComponent';
-import { getAllFeaturesData } from '../../../redux/actions/manageFeaturesAction';
+import { getAllFeaturesData, showAddFeaturesModal, showDeleteFeaturesModal, showUpdateFeaturesModal } from '../../../redux/actions/manageFeaturesAction';
+import { SERVER_URL } from '../../../shared/constant';
 
 const CustomDesc = ({ row }) => (
   <div>
@@ -26,16 +27,18 @@ const ManageAllergenPage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
     const [inputValue,setInputValue]=useState("");
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    // const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
-    const [addFeaturesModalShow, setAddFeaturesModalShow] = useState(false);
-    const [updateFeaturesModalShow, setUpdateFeaturesModalShow] = useState(false);
+    // const [addFeaturesModalShow, setAddFeaturesModalShow] = useState(false);
+    // const [updateFeaturesModalShow, setUpdateFeaturesModalShow] = useState(false);
     const [imagePath, seImagePath] = useState("");
     const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
 
-    // const imagelink="http://192.168.100.39:8000/"
-    const imagelink="http://apps.narola.online:5003/"
+    
+    const addFeaturesModalShow = useSelector(state => state.features.showAddFeaturesModalData);
+    const updateFeaturesModalShow = useSelector(state => state.features.showUpdateFeaturesModalData);
+    const deleteModalShow = useSelector(state => state.features.showDeleteFeaturesModalData);
 
     // useEffect(()=>{
     //     dispatch(getAllFeaturesData({start:0,search:inputValue}));
@@ -71,7 +74,7 @@ const ManageAllergenPage = () => {
       { selector: 'name',name: 'Name',  },
       {
         name: 'Thumbnail',
-        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${imagelink}${row.image}`} />,
+        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${SERVER_URL}/${row.image}`} />,
       },
       { selector: 'description',name: 'Description', allowOverflow:false,cell: row => <CustomDesc row={row} />,},
      { name: 'Action', button: true,
@@ -79,8 +82,8 @@ const ManageAllergenPage = () => {
           <CDropdown className="btn-group">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateFeaturesModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showUpdateFeaturesModal(true));setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showDeleteFeaturesModal(true));setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
           </CDropdownMenu>
         </CDropdown>,
             allowOverflow: true,
@@ -108,15 +111,14 @@ const ManageAllergenPage = () => {
                 }
               </CCol>
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
-                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddFeaturesModalShow(true);setSelectedId(null)}}>
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {dispatch(showAddFeaturesModal(true));setSelectedId(null)}}>
                   <span className="add-icon">
                      Add Restaurant Features
                   </span> 
                 </CButton>
               </CCol>
               <div>
-                <AddFeaturesComponent show={addFeaturesModalShow} onClose={() => setAddFeaturesModalShow(false)} 
-                  imagelink={imagelink} 
+                <AddFeaturesComponent show={addFeaturesModalShow} onClose={() => dispatch(showAddFeaturesModal(false))} 
                   perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
@@ -166,13 +168,13 @@ const ManageAllergenPage = () => {
       </CCol>
     </CRow>
     <React.Fragment>
-        <UpdateFeaturesComponent show={updateFeaturesModalShow} onClose={() => setUpdateFeaturesModalShow(false)}
-          selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}
+        <UpdateFeaturesComponent show={updateFeaturesModalShow} onClose={() => dispatch(showUpdateFeaturesModal(false))}
+          selectedid={selectedId}  imagepath={imagePath}
           perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
-      <DeleteFeaturesComponent show={deleteModalShow} onClose={() => setDeleteModalShow(false)}
+      <DeleteFeaturesComponent show={deleteModalShow} onClose={() => dispatch(showDeleteFeaturesModal(false))}
         selectedid={selectedId} imagepath={imagePath} 
         perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />

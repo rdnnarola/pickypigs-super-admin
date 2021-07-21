@@ -6,10 +6,11 @@ import * as Yup from 'yup';
 import { CFormGroup,CLabel,CInvalidFeedback,CCardFooter} from '@coreui/react'
 import { getSelectedAllergyData, updateSelectedAllergy } from "../../../redux/actions/manageAllergyAction";
 import { useDropzone } from "react-dropzone";
+import { SERVER_URL } from "../../../shared/constant";
 
 
 
-const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+// const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
 
 const UpdateAllergyComponent = (props) => {
     const dispatch=useDispatch();
@@ -25,9 +26,9 @@ const UpdateAllergyComponent = (props) => {
     });
 
     const initialValues = {
-        name:selectedAllergyData&&selectedAllergyData.name,
-        image:selectedAllergyData&&selectedAllergyData.image,
-        description:selectedAllergyData&&selectedAllergyData.description,
+        name:selectedAllergyData&&selectedAllergyData.name?selectedAllergyData&&selectedAllergyData.name:'',
+        image:selectedAllergyData&&selectedAllergyData.image?selectedAllergyData&&selectedAllergyData.image:'',
+        description:selectedAllergyData&&selectedAllergyData.description?selectedAllergyData&&selectedAllergyData.description:'',
        
     }
     const validationSchemaForm  = Yup.object().shape({
@@ -46,9 +47,7 @@ const UpdateAllergyComponent = (props) => {
             description:input.description,
         }
         dispatch(updateSelectedAllergy(props.selectedid,obj,props.imagepath,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
         resetForm();
-
     }
    
 
@@ -99,7 +98,7 @@ const UpdateAllergyComponent = (props) => {
                                             {values.image &&
                                              <div className="d-flex justify-content-center align-items-center p-3">
                                                {typeof values.image === 'string' || values.image instanceof String ?
-                                                    <img src={`${props.imagelink}${values.image}`} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
+                                                    <img src={`${SERVER_URL}/${values.image}`} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
                                                     :
                                                     <img src={URL.createObjectURL(values.image)} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
                                             }
@@ -109,7 +108,13 @@ const UpdateAllergyComponent = (props) => {
                                     </div>
                                     <CCardFooter className="d-flex justify-content-end">
                                         <CButton color="secondary" className="mr-4" type="reset" onClick={()=>{props.onClose();}}>CANCEL</CButton>
-                                        <CButton color="success" type="submit" disabled={isSubmitting}>Update</CButton>
+                                        <CButton 
+                                            color="success" 
+                                            type="submit" 
+                                            disabled={(selectedAllergyData&&selectedAllergyData.name === values.name && selectedAllergyData&&selectedAllergyData.image === values.image && selectedAllergyData&&selectedAllergyData.description === values.description) ?true:false}
+                                        >
+                                            Update
+                                        </CButton>
                                     </CCardFooter>
                                 </Form>
                             );

@@ -11,7 +11,7 @@ const DeleteRestaurantModalComp = (props) => {
 
     const handleDelete=()=>{
         dispatch(deleteSelectedRestaurantData(props.selectedid,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
+        // props.onClose();
     }
     return (
         <>

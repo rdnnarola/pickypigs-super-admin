@@ -15,15 +15,15 @@ const CustomLoadingComp=(props)=>{
                             <img src={`images/logo-white.svg`} className="img-fluid" />
                             }
                         </div>
-                        <div class="text-center mt-3">
-                            <p class="text-white">Fuss Free Food</p>
+                        <div className="text-center mt-3">
+                            <p className="text-white">Fuss Free Food</p>
                         </div>
-                        <div class="loading d-flex">
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
+                        <div className="loading d-flex">
+                            <div className="dot"></div>
+                            <div className="dot"></div>
+                            <div className="dot"></div>
+                            <div className="dot"></div>
+                            <div className="dot"></div>
                         </div>  
                     </div>
                 </div>

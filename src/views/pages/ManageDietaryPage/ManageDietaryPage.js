@@ -7,7 +7,8 @@ import CIcon from '@coreui/icons-react'
 import DeleteDietaryComponent from './DeleteDietaryComponent';
 import AddDietaryComponent from './AddDietaryComponent';
 import UpdateDietaryComponent from './UpdateDietaryComponent';
-import { getAllDietaryData } from '../../../redux/actions/manageDietaryAction';
+import { getAllDietaryData, showAddDietaryModal, showDeleteDietaryModal, showUpdateDietaryModal } from '../../../redux/actions/manageDietaryAction';
+import { SERVER_URL } from '../../../shared/constant';
 
 
 
@@ -15,12 +16,17 @@ const ManageDietaryPage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
     const [inputValue,setInputValue]=useState("");
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    // const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
-    const [addDietaryModalShow, setAddDietaryModalShow] = useState(false);
-    const [updateDietaryModalShow, setUpdateDietaryModalShow] = useState(false);
+    // const [addDietaryModalShow, setAddDietaryModalShow] = useState(false);
+    // const [updateDietaryModalShow, setUpdateDietaryModalShow] = useState(false);
+    const [imagePath, seImagePath] = useState("");
     const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
+
+    const addDietaryModalShow = useSelector(state => state.dietary.showAddDietaryModalData)
+    const updateDietaryModalShow = useSelector(state => state.dietary.showUpdateDietaryModalData)
+    const deleteModalShow = useSelector(state => state.dietary.showDeleteDietaryModalData)
 
     // useEffect(()=>{
     //     dispatch(getAllDietaryData({start:0,search:inputValue}));
@@ -54,14 +60,18 @@ const ManageDietaryPage = () => {
     const columns = [
   
       { selector: 'name',name: 'Name',  },
+      {
+        name: 'Thumbnail',
+        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${SERVER_URL}/${row.image}`} />,
+      },
       // { selector: 'description',name: 'Description', sortable: true},
      { name: 'Action', button: true,
         cell: (row) => 
           <CDropdown className="btn-group">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateDietaryModalShow(true);setSelectedId(row._id);}}>Update</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);}}>Delete</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showUpdateDietaryModal(true));setSelectedId(row._id);seImagePath(row.image);}}>Update</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showDeleteDietaryModal(true));setSelectedId(row._id);seImagePath(row.image);}}>Delete</CDropdownItem>
           </CDropdownMenu>
         </CDropdown>,
             allowOverflow: true,
@@ -88,7 +98,7 @@ const ManageDietaryPage = () => {
                 }
               </CCol>
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
-                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddDietaryModalShow(true);setSelectedId(null)}}>
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {dispatch(showAddDietaryModal(true));setSelectedId(null)}}>
                   <span className="add-icon">
                      Add Dietary
                   </span>  
@@ -96,7 +106,7 @@ const ManageDietaryPage = () => {
               </CCol>
               <div>
                 <AddDietaryComponent 
-                  show={addDietaryModalShow} onClose={() => setAddDietaryModalShow(false)} 
+                  show={addDietaryModalShow} onClose={() => dispatch(showAddDietaryModal(false))} 
                   perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
@@ -147,15 +157,15 @@ const ManageDietaryPage = () => {
     </CRow>
     <React.Fragment>
         <UpdateDietaryComponent 
-          show={updateDietaryModalShow} onClose={() => setUpdateDietaryModalShow(false)} 
-          selectedid={selectedId} 
+          show={updateDietaryModalShow} onClose={() => dispatch(showUpdateDietaryModal(false))} 
+          imagepath={imagePath} selectedid={selectedId} 
           perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteDietaryComponent 
-        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
-        selectedid={selectedId} 
+        show={deleteModalShow} onClose={() => dispatch(showDeleteDietaryModal(false))} 
+        imagepath={imagePath} selectedid={selectedId} 
         perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />
     </React.Fragment>

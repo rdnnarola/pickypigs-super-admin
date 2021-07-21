@@ -33,7 +33,7 @@ const AddCookingComponent = (props) => {
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
         dispatch(addCookingData(fields,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
+        // props.onClose();
         resetForm();
     }
 

@@ -6,6 +6,10 @@ const initialState = {
     features_Data:{},
     selectedFeatures:{},
     totalrows:0,
+
+    showAddFeaturesModalData:false,
+    showUpdateFeaturesModalData:false,
+    showDeleteFeaturesModalData:false,
     };
     
     const manageFeaturesReducer = (state = initialState, { type, payload }) => {
@@ -62,6 +66,23 @@ const initialState = {
                 isLoading:false,
                 errorMessage:payload
             };
+
+        case 'SHOW_ADDFEATURES_MODAL':
+            return  { 
+              ...state, 
+              showAddFeaturesModalData:payload
+            }; 
+        case 'SHOW_UPDATEFEATURES_MODAL':
+            return  { 
+              ...state, 
+              showUpdateFeaturesModalData:payload
+            };    
+        case 'SHOW_DELETEFEATURES_MODAL':
+            return  { 
+              ...state, 
+              showDeleteFeaturesModalData:payload
+            };        
+        
   
     
 

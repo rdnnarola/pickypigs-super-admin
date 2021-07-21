@@ -5,13 +5,13 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { CFormGroup,CLabel,CInvalidFeedback,CCardFooter} from '@coreui/react'
 import { getSelectedLifestyleData, updateSelectedLifestyle } from "../../../redux/actions/manageLifestyleAction";
+import { useDropzone } from "react-dropzone";
+import { SERVER_URL } from "../../../shared/constant";
 
 
-
-const packages = ["basic","standard","premium"];
-const roles=["restaurant_admin"]
-
-const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+// const packages = ["basic","standard","premium"];
+// const roles=["restaurant_admin"]
+// const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
 
 const UpdateLifestyleComponent = (props) => {
     const dispatch=useDispatch();
@@ -28,11 +28,13 @@ const UpdateLifestyleComponent = (props) => {
 
     const initialValues = {
         name:selectedLifestyleData&&selectedLifestyleData.name,
+        image:selectedLifestyleData&&selectedLifestyleData.image,
         // description:selectedLifestyleData&&selectedLifestyleData.description,
        
     }
     const validationSchemaForm  = Yup.object().shape({
         name:Yup.string().required('Lifestyle Name is required'),
+        image:Yup.string().required('Lifestyle Image is required'),
         // description:Yup.string().required('Lifestyle Description is required'),
     });
 
@@ -42,10 +44,11 @@ const UpdateLifestyleComponent = (props) => {
         setStatus();
         let obj = {
             name: input.name,
+            image:input.image,
             // description:input.description,
         }
-        dispatch(updateSelectedLifestyle(props.selectedid,obj,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
+        dispatch(updateSelectedLifestyle(props.selectedid,obj,props.imagepath,props.perpage,props.mypage,props.inputvalue));
+        // props.onClose();
         resetForm();
 
     }
@@ -72,7 +75,7 @@ const UpdateLifestyleComponent = (props) => {
                         validationSchema={validationSchemaForm} 
                         onSubmit={onSubmit}
                     >
-                        {({ errors, touched,values, setFieldValue,handleChange }) => {
+                        {({errors, touched,values, setSubmitting , isSubmitting, setFieldValue,handleChange }) => {
                             return (
                                 <Form>
                                     <div >
@@ -86,6 +89,20 @@ const UpdateLifestyleComponent = (props) => {
                                             <Field component="textarea" style={{height:100}} name="description" placeholder="Enter here" className={`form-control ${touched.description && errors.description?"is-invalid": touched.description && !errors.description?"is-valid":null}`} />
                                             <CInvalidFeedback className="help-block">{errors.description}</CInvalidFeedback>
                                         </CFormGroup>  */}
+                                        <CFormGroup >
+                                            <CLabel >Allergy Image</CLabel>
+                                            <UploadComponent setFieldValue={setFieldValue} setSubmitting={setSubmitting} className={`form-control ${touched.image && errors.image?"is-invalid": touched.image && !errors.image?"is-valid":null}`}/>
+                                            <small className="text-danger  mt-1">{(touched.image && errors.image && errors.image) }</small>
+                                            {values.image &&
+                                             <div className="d-flex justify-content-center align-items-center p-3">
+                                               {typeof values.image === 'string' || values.image instanceof String ?
+                                                    <img src={`${SERVER_URL}/${values.image}`} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
+                                                    :
+                                                    <img src={URL.createObjectURL(values.image)} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
+                                            }
+                                            </div>
+                                              }
+                                        </CFormGroup>
                                     </div>
                                     <CCardFooter className="d-flex justify-content-end">
                                         <CButton color="secondary" className="mr-4" type="reset" onClick={()=>{props.onClose();}}>CANCEL</CButton>
@@ -111,3 +128,31 @@ export default UpdateLifestyleComponent;
 
 
 
+const UploadComponent = props => {
+    const { setFieldValue ,setSubmitting} = props;
+    
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+      accept: "image/*",
+      onDrop: acceptedFiles => {
+          setFieldValue("image", acceptedFiles[0]);
+      }
+    });
+    
+
+    return (
+      <div className="border bg-primary" type="button">
+        {}
+        <div {...getRootProps({ className: "dropzone" })}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <div className="d-flex justify-content-center align-items-center p-2">
+              <img src={'images/upload.svg'}  width="30px" className="img-fluid mr-4" alt="showpassword" />
+              <p className="text-white m-0">Click to Upload Image</p>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };

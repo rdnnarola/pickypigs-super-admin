@@ -49,7 +49,7 @@ const UpdatePasswordModalComp = (props) => {
             password: input.password,
         }
         dispatch(updateSelectedRestaurantPassword(props.selectedid,obj,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
+        // props.onClose();
         resetForm();
 
     }

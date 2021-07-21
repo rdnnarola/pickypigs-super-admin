@@ -7,20 +7,25 @@ import CIcon from '@coreui/icons-react'
 import DeleteLifestyleComponent from './DeleteLifestyleComponent';
 import AddLifestyleComponent from './AddLifestyleComponent';
 import UpdateLifestyleComponent from './UpdateLifestyleComponent';
-import { getAllLifestyleData } from '../../../redux/actions/manageLifestyleAction';
-import moment from "moment";
+import { getAllLifestyleData, showAddLifestyleModal, showDeleteLifestyleModal, showUpdateLifestyleModal } from '../../../redux/actions/manageLifestyleAction';
+import { SERVER_URL } from '../../../shared/constant';
 
 
 const ManageLifestylePage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
     const [inputValue,setInputValue]=useState("");
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    // const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
-    const [addLifestyleModalShow, setAddLifestyleModalShow] = useState(false);
-    const [updateLifestyleModalShow, setUpdateLifestyleModalShow] = useState(false);
+    // const [addLifestyleModalShow, setAddLifestyleModalShow] = useState(false);
+    // const [updateLifestyleModalShow, setUpdateLifestyleModalShow] = useState(false);
+    const [imagePath, seImagePath] = useState("");
     const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
+
+    const addLifestyleModalShow = useSelector(state => state.lifestyle.showAddLifestyleModalData);
+    const updateLifestyleModalShow = useSelector(state => state.lifestyle.showUpdateLifestyleModalData);
+    const deleteModalShow = useSelector(state => state.lifestyle.showDeleteLifestyleModalData);
 
     // useEffect(()=>{
     //     dispatch(getAllLifestyleData({start:0,search:inputValue}));
@@ -54,6 +59,10 @@ const ManageLifestylePage = () => {
     const columns = [
   
       { selector: 'name',name: 'Name',  },
+      {
+        name: 'Thumbnail',
+        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${SERVER_URL}/${row.image}`} />,
+      },
       // { selector: 'description',name: 'Description', sortable: true},
       // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
 
@@ -62,8 +71,8 @@ const ManageLifestylePage = () => {
           <CDropdown className="btn-group">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateLifestyleModalShow(true);setSelectedId(row._id);}}>Update</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);}}>Delete</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showUpdateLifestyleModal(true));setSelectedId(row._id);seImagePath(row.image);}}>Update</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showDeleteLifestyleModal(true));setSelectedId(row._id);seImagePath(row.image);}}>Delete</CDropdownItem>
           </CDropdownMenu>
         </CDropdown>,
             allowOverflow: true,
@@ -89,7 +98,7 @@ const ManageLifestylePage = () => {
                 }
               </CCol>
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
-                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddLifestyleModalShow(true);setSelectedId(null)}}>
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {dispatch(showAddLifestyleModal(true));setSelectedId(null)}}>
                   <span className="add-icon">
                      Add Lifestyle
                   </span> 
@@ -97,7 +106,7 @@ const ManageLifestylePage = () => {
               </CCol>
               <div>
                 <AddLifestyleComponent 
-                  show={addLifestyleModalShow} onClose={() => setAddLifestyleModalShow(false)} 
+                  show={addLifestyleModalShow} onClose={() => dispatch(showAddLifestyleModal(false))} 
                   perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
@@ -148,15 +157,15 @@ const ManageLifestylePage = () => {
     </CRow>
     <React.Fragment>
         <UpdateLifestyleComponent 
-          show={updateLifestyleModalShow} onClose={() => setUpdateLifestyleModalShow(false)} 
-          selectedid={selectedId} 
+          show={updateLifestyleModalShow} onClose={() => dispatch(showUpdateLifestyleModal(false))} 
+          imagepath={imagePath} selectedid={selectedId} 
           perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteLifestyleComponent 
-        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
-        selectedid={selectedId} 
+        show={deleteModalShow} onClose={() => dispatch(showDeleteLifestyleModal(false)) } 
+        imagepath={imagePath} selectedid={selectedId} 
         perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />
     </React.Fragment>

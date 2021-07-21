@@ -33,9 +33,9 @@ const AlertSystemPage=()=>{
                                             {alert.message}
                                             <button className="close"  onClick={()=>{dispatch(removeAlert(alert.id))}} ><CIcon name="cil-x" /></button>
                                         </CAlert>
-                                        {/* <div class={`alert alert-${alert.color} alert-dismissible fade show`} role="alert">
+                                        {/* <div className={`alert alert-${alert.color} alert-dismissible fade show`} role="alert">
                                             <strong>{alert.message}</strong> 
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div> */}
                                        
                                     </React.Fragment>

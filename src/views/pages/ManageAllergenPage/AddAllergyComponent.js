@@ -1,8 +1,8 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import {CButton,CModal,CFormGroup,CLabel,CInvalidFeedback,CCardFooter,
     CModalHeader,CModalTitle,CModalBody } from '@coreui/react'
 // import CIcon from '@coreui/icons-react'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { addAllergyData } from "../../../redux/actions/manageAllergyAction";
@@ -27,15 +27,25 @@ const AddAllergyComponent = (props) => {
         description:Yup.string().required('Description is required'),
     });
 
+
+    // const ResetOnError = (resetForm) => {
+      
+    //     useEffect(() => {
+    //       if (!addAllergyModalShow) {
+    //         resetForm()
+    //       }
+    //     }, [addAllergyModalShow])
+    //     return null
+    //   }
     
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
         dispatch(addAllergyData(fields,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
         resetForm();
+        // ResetOnError(resetForm());
     }
 
-   
+  
 
     return (
         <>
@@ -81,7 +91,7 @@ const AddAllergyComponent = (props) => {
                                     </div>
                                     <CCardFooter className="d-flex justify-content-end">
                                         <CButton color="secondary" className="mr-4" type="reset" onClick={()=>{props.onClose()}}>CANCEL</CButton>
-                                        <CButton color="success" type="submit" disabled={isSubmitting}>ADD</CButton>
+                                        <CButton color="success" type="submit">ADD</CButton>
                                     </CCardFooter>
                                 </Form>
                             );

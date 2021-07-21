@@ -8,7 +8,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { icons } from './assets/icons'
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import history from "./history";
 
 import { Provider } from 'react-redux'
 import store from './redux/store/'
@@ -16,11 +17,11 @@ import store from './redux/store/'
 React.icons = icons
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router history={history}>
     <Provider store={store}>
       <App/>
     </Provider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );
 

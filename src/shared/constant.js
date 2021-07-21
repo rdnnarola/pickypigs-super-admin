@@ -1,4 +1,4 @@
-export const HOST_URL = "http://localhost:8000"
+export const HOST_URL = "https://localhost:8000"
 
 export const INVALID_CRED = "Invalid credential !"
 
@@ -18,9 +18,9 @@ export const EDAMAM_APP_ID = "2bbcafaf";
 
 export const EDAMAM_APP_KEY = "f779cbf3ef41e8fc15a42df1cff35d0d";
 
-export const RESTAURANT_ADMIN_URL = `${window.location.host === "localhost:3001"?"http://pickypigs.charlieandco.co.nz/#/restaurant_login":"http://pickypigs.charlieandco.co.nz/#/restaurant_login"}`;
+export const RESTAURANT_ADMIN_URL = `${window.location.host === "localhost:3001"?"https://pickypigs.charlieandco.co.nz/restaurant_login":"https://pickypigs.charlieandco.co.nz/restaurant_login"}`;
 
-export const SERVER_URL = "http://apps.narola.online:5003";
+export const SERVER_URL = "https://apps.narola.online:5003";
 
-export const SUPERADMIN_URL="http://super-admin.pickypigs.com";
+export const SUPERADMIN_URL="https://super-admin.pickypigs.com";
 

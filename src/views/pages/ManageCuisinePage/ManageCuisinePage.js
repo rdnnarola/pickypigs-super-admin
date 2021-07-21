@@ -7,7 +7,7 @@ import CIcon from '@coreui/icons-react'
 import DeleteCuisineComponent from './DeleteCuisineComponent';
 import AddCuisineComponent from './AddCuisineComponent';
 import UpdateCuisineComponent from './UpdateCuisineComponent';
-import { getAllCuisineData } from '../../../redux/actions/manageCuisineAction';
+import { getAllCuisineData, showAddCuisineModal, showDeleteCuisineModal, showUpdateCuisineModal } from '../../../redux/actions/manageCuisineAction';
 import moment from "moment";
 
 
@@ -15,12 +15,16 @@ const ManageCuisinePage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
     const [inputValue,setInputValue]=useState("");
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    // const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
-    const [addCuisineModalShow, setAddCuisineModalShow] = useState(false);
-    const [updateCuisineModalShow, setUpdateCuisineModalShow] = useState(false);
+    // const [addCuisineModalShow, setAddCuisineModalShow] = useState(false);
+    // const [updateCuisineModalShow, setUpdateCuisineModalShow] = useState(false);
     const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
+
+    const addCuisineModalShow = useSelector(state => state.cuisine.showAddCuisineModalData)
+    const updateCuisineModalShow = useSelector(state => state.cuisine.showUpdateCuisineModalData)
+    const deleteModalShow = useSelector(state => state.cuisine.showDeleteCuisineModalData)
 
     // useEffect(()=>{
     //     dispatch(getAllCuisineData({start:0,search:inputValue}));
@@ -61,8 +65,8 @@ const ManageCuisinePage = () => {
           <CDropdown className="btn-group">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateCuisineModalShow(true);setSelectedId(row._id);}}>Update</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);}}>Delete</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showUpdateCuisineModal(true));setSelectedId(row._id);}}>Update</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showDeleteCuisineModal(true));setSelectedId(row._id);}}>Delete</CDropdownItem>
           </CDropdownMenu>
         </CDropdown>,
             allowOverflow: true,
@@ -89,7 +93,7 @@ const ManageCuisinePage = () => {
                 }
               </CCol>
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
-                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddCuisineModalShow(true);setSelectedId(null)}}>
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {dispatch(showAddCuisineModal(true));setSelectedId(null)}}>
                   <span className="add-icon">
                      Add Cuisine
                   </span>   
@@ -97,7 +101,7 @@ const ManageCuisinePage = () => {
               </CCol>
               <div>
                 <AddCuisineComponent 
-                  show={addCuisineModalShow} onClose={() => setAddCuisineModalShow(false)} 
+                  show={addCuisineModalShow} onClose={() => dispatch(showAddCuisineModal(false))} 
                   perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
@@ -148,14 +152,14 @@ const ManageCuisinePage = () => {
     </CRow>
     <React.Fragment>
         <UpdateCuisineComponent 
-          show={updateCuisineModalShow} onClose={() => setUpdateCuisineModalShow(false)} 
+          show={updateCuisineModalShow} onClose={() => dispatch(showUpdateCuisineModal(false)) } 
           selectedid={selectedId} 
           perpage={perPage} mypage={myPage} inputvalue={inputValue}
           />
     </React.Fragment>
     <React.Fragment>
       <DeleteCuisineComponent 
-        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        show={deleteModalShow} onClose={() => dispatch(showDeleteCuisineModal(false))} 
         selectedid={selectedId}
         perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />

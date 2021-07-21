@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import {CBadge,CCard,CCardBody,CCardHeader,CCol,CDataTable,CButton,CRow,CDropdownMenu,CDropdownItem,CDropdown,CDropdownToggle} from '@coreui/react'
-import { getAllRestaurantData } from '../../../redux/actions/manageRestaurantAction';
+import { getAllRestaurantData, showAddRestaurantModal, showDeleteRestaurantModal, showUpdateRestaurantModal } from '../../../redux/actions/manageRestaurantAction';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable, { defaultThemes }from 'react-data-table-component';
 import CIcon from '@coreui/icons-react'
@@ -16,12 +16,16 @@ const ManageRestaurantPage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
     const [inputValue,setInputValue]=useState("");
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    // const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
-    const [addRestaurantModalShow, setAddRestaurantModalShow] = useState(false);
-    const [updateRestaurantModalShow, setUpdateRestaurantModalShow] = useState(false);
+    // const [addRestaurantModalShow, setAddRestaurantModalShow] = useState(false);
+    // const [updateRestaurantModalShow, setUpdateRestaurantModalShow] = useState(false);
     const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
+
+    const addRestaurantModalShow = useSelector(state => state.restaurant.showAddRestaurantModalData);
+    const updateRestaurantModalShow = useSelector(state => state.restaurant.showUpdateRestaurantModalData);
+    const deleteModalShow = useSelector(state => state.restaurant.showDeleteRestaurantModalData);
 
     // useEffect(()=>{
     //     dispatch(getAllRestaurantData({start:0}));
@@ -72,8 +76,8 @@ const ManageRestaurantPage = () => {
           <CDropdown className="btn d-inline-block">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateRestaurantModalShow(true);setSelectedId(row._id)}}>Update Password</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showUpdateRestaurantModal(true));setSelectedId(row._id)}}>Update Password</CDropdownItem>
+            <CDropdownItem onClick={() => { dispatch(showDeleteRestaurantModal(true));setSelectedId(row._id)}}>Delete</CDropdownItem>
           </CDropdownMenu>
         </CDropdown>,
             allowOverflow: true,
@@ -101,7 +105,7 @@ const ManageRestaurantPage = () => {
                 }
               </CCol>
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
-                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddRestaurantModalShow(true);setSelectedId(null)}}>
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {dispatch(showAddRestaurantModal(true));setSelectedId(null)}}>
                   <span className="add-icon">
                      Add Restaurant
                   </span>
@@ -109,7 +113,7 @@ const ManageRestaurantPage = () => {
               </CCol>
               <div>
                 <AddRestaurantModalComp 
-                  show={addRestaurantModalShow} onClose={() => setAddRestaurantModalShow(false)} 
+                  show={addRestaurantModalShow} onClose={() => dispatch(showAddRestaurantModal(false))} 
                   perpage={perPage} mypage={myPage} inputvalue={inputValue}
                 />
               </div>
@@ -162,14 +166,14 @@ const ManageRestaurantPage = () => {
     </CRow>
     <React.Fragment>
         <UpdatePasswordModalComp 
-          show={updateRestaurantModalShow} onClose={() => setUpdateRestaurantModalShow(false)} 
+          show={updateRestaurantModalShow} onClose={() =>dispatch(showUpdateRestaurantModal(false))} 
           selectedid={selectedId}
           perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteRestaurantModalComp 
-        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        show={deleteModalShow} onClose={() => dispatch(showDeleteRestaurantModal(false))} 
         selectedid={selectedId}
         perpage={perPage} mypage={myPage} inputvalue={inputValue}
       />

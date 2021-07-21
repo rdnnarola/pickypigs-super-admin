@@ -6,6 +6,10 @@ const initialState = {
     dietary_Data:{},
     selectedDietary:{},
     totalrows:0,
+
+    showAddDietaryModalData:false,
+    showUpdateDietaryModalData:false,
+    showDeleteDietaryModalData:false,
     };
     
     const manageDietaryReducer = (state = initialState, { type, payload }) => {
@@ -62,6 +66,21 @@ const initialState = {
                 errorMessage:payload
             };
   
+        case 'SHOW_ADDDIETARY_MODAL':
+            return  { 
+              ...state, 
+              showAddDietaryModalData:payload
+            }; 
+        case 'SHOW_UPDATEDIETARY_MODAL':
+            return  { 
+              ...state, 
+              showUpdateDietaryModalData:payload
+            };    
+        case 'SHOW_DELETEDIETARY_MODAL':
+            return  { 
+              ...state, 
+              showDeleteDietaryModalData:payload
+            };        
     
 
         default:

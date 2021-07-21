@@ -11,7 +11,6 @@ const DeleteAllergyComponent = (props) => {
 
     const handleDelete=()=>{
         dispatch(deleteSelectedAllergyData(props.selectedid,props.imagepath,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
     }
     return (
         <>

@@ -76,7 +76,7 @@ const Login = () => {
                   
                   <Formik
                       initialValues={{ email: '', password: '' }} validationSchema={validationSchemaForLogin}
-                      onSubmit={(values) => { console.log('values => ', values);  handleLoginForm(values) }}
+                      onSubmit={(values) => {   handleLoginForm(values) }}
                     >
                     {({
                       values, errors, touched, handleChange, handleBlur, isSubmitting,
@@ -92,7 +92,7 @@ const Login = () => {
                               <CIcon name="cil-user" />
                             </CInputGroupText>
                           </CInputGroupPrepend>
-                          <Field name="email" placeholder="Email" className={`form-control ${touched.email && errors.email?"is-invalid": touched.email && !errors.email?"is-valid":null}`}/>
+                          <Field name="email" placeholder="Email" className={`form-control ${touched.email && errors.email?"is-invalid": touched.email && !errors.email?"is-valid":null}`} autoComplete="new-password"/>
                           <CInvalidFeedback className="help-block">{errors.email}</CInvalidFeedback>     
                         </CInputGroup>
 
@@ -102,7 +102,7 @@ const Login = () => {
                               <CIcon  name="cil-lock-locked" />
                             </CInputGroupText>
                           </CInputGroupPrepend>
-                          <Field type={type} name="password" placeholder="Password"  className={`form-control ${touched.password && errors.password?"is-invalid": touched.password && !errors.password?"is-valid":null}`} />
+                          <Field type={type} name="password" placeholder="Password"  className={`form-control ${touched.password && errors.password?"is-invalid": touched.password && !errors.password?"is-valid":null}`} autoComplete="new-password"/>
                             <CInputGroupAppend>
                                 <CInputGroupText type="button" color="light" onClick={() => handlePassword()}>
                                     {type=== "password"?
@@ -139,7 +139,7 @@ const Login = () => {
                   
                   <Formik
                       initialValues={{ email: '' }} validationSchema={validationSchemaForForgotPassword}
-                      onSubmit={(values) => { console.log('values => ', values);  handlelForgotPassword(values) }}
+                      onSubmit={(values) => {   handlelForgotPassword(values) }}
                     >
                     {({
                       values, errors, touched, handleChange, handleBlur, isSubmitting,

@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { CFormGroup,CLabel,CInvalidFeedback,CCardFooter} from '@coreui/react'
 import { getSelectedCookingData, updateSelectedCooking } from "../../../redux/actions/manageCookingAction";
 import { useDropzone } from "react-dropzone";
+import { SERVER_URL } from "../../../shared/constant";
 
 
 
@@ -46,7 +47,7 @@ const UpdateCookingComponent = (props) => {
             // description:input.description,
         }
         dispatch(updateSelectedCooking(props.selectedid,obj,props.imagepath,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
+        // props.onClose();
         resetForm();
 
     }
@@ -99,7 +100,7 @@ const UpdateCookingComponent = (props) => {
                                             {values.image &&
                                              <div className="d-flex justify-content-center align-items-center p-3">
                                                {typeof values.image === 'string' || values.image instanceof String ?
-                                                    <img src={`${props.imagelink}${values.image}`} width="160px" height="100px" alt={values&&values.name?values.name:"image"}/>
+                                                    <img src={`${SERVER_URL}/${values.image}`} width="160px" height="100px" alt={values&&values.name?values.name:"image"}/>
                                                     :
                                                     <img src={URL.createObjectURL(values.image)} width="160px" height="100px" className="border" alt={values&&values.name?values.name:"image"}/>
                                             }

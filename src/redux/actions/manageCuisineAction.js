@@ -1,6 +1,7 @@
 import Axios from './axios';
 import {setAlert} from './alertAction';
-
+import { logoutUser } from './generalActions';
+import history from '../../history'
 
 export const getAllCuisineData=(data)=>{
     return async(dispatch)=>{
@@ -19,6 +20,9 @@ export const getAllCuisineData=(data)=>{
           dispatch({type:"GET_CUISINE_FAILURE",payload:error});
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+            if(error.response&&error.response.status==401){
+              dispatch(logoutUser(history))
+            }
           } else {
             dispatch(setAlert('Something went wrong!', 'danger'));
           }
@@ -40,6 +44,7 @@ export const getAllCuisineData=(data)=>{
             let response = await Axios.post(dataURL,JSON.stringify(data),config );
             dispatch({type:"ADD_CUISINE_SUCCESS",payload:response.data});
             dispatch(getAllCuisineData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
+            dispatch(showAddCuisineModal(false));
             dispatch(setAlert('Cuisine Added Successfully .', 'success'));
 
         }
@@ -47,6 +52,9 @@ export const getAllCuisineData=(data)=>{
           dispatch({type:"ADD_CUISINE_FAILURE",payload:error});
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+            if(error.response&&error.response.status==401){
+              dispatch(logoutUser(history))
+            }
           } else {
             dispatch(setAlert('Something went wrong!', 'danger'));
           }
@@ -82,12 +90,16 @@ export const getAllCuisineData=(data)=>{
             let response = await Axios.put(dataURL,JSON.stringify(data),config );
             dispatch({type:"UPDATE_CUISINE_SUCCESS",payload:response.data});
             dispatch(getAllCuisineData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
+            dispatch(showUpdateCuisineModal(false));
             dispatch(setAlert('Cuisine Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_CUISINE_FAILURE",payload:error});
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+            if(error.response&&error.response.status==401){
+              dispatch(logoutUser(history))
+            }
           } else {
             dispatch(setAlert('Something went wrong!', 'danger'));
           }
@@ -103,15 +115,55 @@ export const getAllCuisineData=(data)=>{
             let response = await Axios.delete(`/super_admin/manage_cuisine_type/${selectedId}`)
             dispatch({type:"DELETE_CUISINE_SUCCESS",payload:response.data});
             dispatch(getAllCuisineData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
+            dispatch(showDeleteCuisineModal(false));
             dispatch(setAlert('Cuisine Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_CUISINE_FAILURE",payload:error});
             if (error.response) {
               dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+              if(error.response&&error.response.status==401){
+                dispatch(logoutUser(history))
+              }
             } else {
               dispatch(setAlert('Something went wrong!', 'danger'));
             }
         }
     }
   }
+
+  export const showAddCuisineModal = (value) => {
+    
+    return async(dispatch)=>{
+      try{
+          await dispatch({type :"SHOW_ADDCUISINE_MODAL" , payload :value });
+      }
+      catch(error){
+          console.error(error);
+      }
+    }
+  };
+
+  export const showUpdateCuisineModal = (value) => {
+    
+    return async(dispatch)=>{
+      try{
+          await dispatch({type :"SHOW_UPDATECUISINE_MODAL" , payload :value });
+      }
+      catch(error){
+          console.error(error);
+      }
+    }
+  };
+
+  export const showDeleteCuisineModal = (value) => {
+    
+    return async(dispatch)=>{
+      try{
+          await dispatch({type :"SHOW_DELETECUISINE_MODAL" , payload :value });
+      }
+      catch(error){
+          console.error(error);
+      }
+    }
+  };

@@ -1,6 +1,9 @@
 import Axios from './axios';
 import {setAlert} from './alertAction';
 import { deleteImage } from './generalActions';
+import { logoutUser } from './generalActions';
+import history from '../../history'
+
 
 export const getAllFeaturesData=(data)=>{
     return async(dispatch)=>{
@@ -19,6 +22,9 @@ export const getAllFeaturesData=(data)=>{
           dispatch({type:"GET_FEATURES_FAILURE",payload:error});
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+            if(error.response&&error.response.status==401){
+              dispatch(logoutUser(history))
+            }
           } else {
             dispatch(setAlert('Something went wrong!', 'danger'));
           }
@@ -46,6 +52,7 @@ export const getAllFeaturesData=(data)=>{
             let response = await Axios.post(dataURL,formData,config );
             dispatch({type:"ADD_FEATURES_SUCCESS",payload:response.data});
             dispatch(getAllFeaturesData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
+            dispatch(showAddFeaturesModal(false));
             dispatch(setAlert('Features Added Successfully .', 'success'));
 
         }
@@ -53,6 +60,9 @@ export const getAllFeaturesData=(data)=>{
           dispatch({type:"ADD_FEATURES_FAILURE",payload:error});
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+            if(error.response&&error.response.status==401){
+              dispatch(logoutUser(history))
+            }
           } else {
             dispatch(setAlert('Something went wrong!', 'danger'));
           }
@@ -97,12 +107,16 @@ export const getAllFeaturesData=(data)=>{
             if(data.image!==imagepath){
               dispatch(deleteImage({path:imagepath}));
             }
+            dispatch(showUpdateFeaturesModal(false));
             dispatch(setAlert('Features Updated Successfully .', 'success'));
         }
         catch(error){
           dispatch({type:"UPDATE_FEATURES_FAILURE",payload:error});
           if (error.response) {
             dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+            if(error.response&&error.response.status==401){
+              dispatch(logoutUser(history))
+            }
           } else {
             dispatch(setAlert('Something went wrong!', 'danger'));
           }
@@ -119,15 +133,57 @@ export const getAllFeaturesData=(data)=>{
             dispatch({type:"DELETE_FEATURES_SUCCESS",payload:response.data});
             dispatch(getAllFeaturesData({start:(myPage-1)*perPage,length:perPage,search:inputValue}));
             dispatch(deleteImage({path:imagepath}));
+            dispatch(showDeleteFeaturesModal(false));
             dispatch(setAlert('Features Deleted Successfully .', 'warning'));
         }
         catch(error){
             dispatch({type:"DELETE_FEATURES_FAILURE",payload:error});
             if (error.response) {
               dispatch(setAlert(`${error.response.data.message}`, 'danger'));
+              if(error.response&&error.response.status==401){
+                dispatch(logoutUser(history))
+              }
             } else {
               dispatch(setAlert('Something went wrong!', 'danger'));
             }
         }
     }
   }
+
+
+
+  export const showAddFeaturesModal = (value) => {
+    
+    return async(dispatch)=>{
+      try{
+          await dispatch({type :"SHOW_ADDFEATURES_MODAL" , payload :value });
+      }
+      catch(error){
+          console.error(error);
+      }
+    }
+  };
+
+  export const showUpdateFeaturesModal = (value) => {
+    
+    return async(dispatch)=>{
+      try{
+          await dispatch({type :"SHOW_UPDATEFEATURES_MODAL" , payload :value });
+      }
+      catch(error){
+          console.error(error);
+      }
+    }
+  };
+
+  export const showDeleteFeaturesModal = (value) => {
+    
+    return async(dispatch)=>{
+      try{
+          await dispatch({type :"SHOW_DELETEFEATURES_MODAL" , payload :value });
+      }
+      catch(error){
+          console.error(error);
+      }
+    }
+  };

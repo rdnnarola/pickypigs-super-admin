@@ -6,6 +6,10 @@ const initialState = {
     cuisine_Data:{},
     selectedCuisine:{},
     totalrows:0,
+
+    showAddCuisineModalData:false,
+    showUpdateCuisineModalData:false,
+    showDeleteCuisineModalData:false,
     };
     
     const manageCuisineReducer = (state = initialState, { type, payload }) => {
@@ -61,6 +65,22 @@ const initialState = {
                 isLoading:false,
                 errorMessage:payload
             };
+
+        case 'SHOW_ADDCUISINE_MODAL':
+            return  { 
+              ...state, 
+              showAddCuisineModalData:payload
+            }; 
+        case 'SHOW_UPDATECUISINE_MODAL':
+            return  { 
+              ...state, 
+              showUpdateCuisineModalData:payload
+            };    
+        case 'SHOW_DELETECUISINE_MODAL':
+            return  { 
+              ...state, 
+              showDeleteCuisineModalData:payload
+            };         
   
     
 

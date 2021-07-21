@@ -12,6 +12,7 @@ import { addRestaurantData } from "../../../redux/actions/manageRestaurantAction
 const packages = ["basic","standard","premium"];
 const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
+const numbRegs=RegExp(/^[0-9]*$/);
 
 const AddRestaurantModalComp = (props) => {
     const dispatch=useDispatch();
@@ -33,7 +34,11 @@ const AddRestaurantModalComp = (props) => {
         name:Yup.string().required('Restaurant Name is required'),
         contactName:Yup.string().required('Contact Name is required'),
         company:Yup.string().required('Company Name is required'),
-        phoneNumber:Yup.string().required('Phone Number is a required field').min(10, "Min 10 Digits").max(10, "Max 10 Digits").matches(phoneRegex, "Invalid Phone Number"),
+        phoneNumber:Yup.string()
+        .required('Phone Number is a required field')
+        // .min(10, "Min 10 Digits")
+        // .max(10, "Max 10 Digits")
+        .matches(numbRegs, "Invalid Phone Number"),
         email:Yup.string().email("Email must be a valid email").required('Email is required'),
         password: Yup
         .string()
@@ -58,7 +63,7 @@ const AddRestaurantModalComp = (props) => {
     const onSubmit=(fields, { setStatus,resetForm})=>{
         setStatus();
         dispatch(addRestaurantData(fields,props.perpage,props.mypage,props.inputvalue));
-        props.onClose();
+        // props.onClose();
         resetForm();
     }
 

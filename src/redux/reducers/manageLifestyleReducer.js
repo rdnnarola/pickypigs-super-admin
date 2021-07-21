@@ -6,6 +6,10 @@ const initialState = {
     lifestyle_Data:{},
     selectedLifestyle:{},
     totalrows:0,
+
+    showAddLifestyleModalData:false,
+    showUpdateLifestyleModalData:false,
+    showDeleteLifestyleModalData:false,
     };
     
     const manageLifestyleReducer = (state = initialState, { type, payload }) => {
@@ -62,6 +66,22 @@ const initialState = {
                 isLoading:false,
                 errorMessage:payload
             };
+
+        case 'SHOW_ADDLIFESTYLE_MODAL':
+            return  { 
+              ...state, 
+              showAddLifestyleModalData:payload
+            }; 
+        case 'SHOW_UPDATELIFESTYLE_MODAL':
+            return  { 
+              ...state, 
+              showUpdateLifestyleModalData:payload
+            };    
+        case 'SHOW_DELETELIFESTYLE_MODAL':
+            return  { 
+              ...state, 
+              showDeleteLifestyleModalData:payload
+            };    
   
     
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import {CBadge,CCard,CCardBody,CCardHeader,CCol,CDataTable,CButton,CRow,CDropdownMenu,CDropdownItem,CDropdown,CDropdownToggle} from '@coreui/react'
-import { downloadUserData, getAllUsersData } from '../../../redux/actions/manageUsersAction';
+import { downloadUserData, getAllUsersData, showUpdateUserPasswordModal } from '../../../redux/actions/manageUsersAction';
 import { useDispatch, useSelector } from 'react-redux';
 import DataTable, { defaultThemes }from 'react-data-table-component';
 import CIcon from '@coreui/icons-react'
@@ -18,14 +18,16 @@ const ManageUsersPage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
     const [inputValue,setInputValue]=useState("");
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    // const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
     const [selectedMail,setSelectedMail]=useState('')
     const [accountType,setAccountType]=useState('')
-    const [addRestaurantModalShow, setAddRestaurantModalShow] = useState(false);
-    const [updateUserPasswordModalShow, setUpdateUserPasswordModalShow] = useState(false);
+    // const [addRestaurantModalShow, setAddRestaurantModalShow] = useState(false);
+    // const [updateUserPasswordModalShow, setUpdateUserPasswordModalShow] = useState(false);
     const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
+
+    const updateUserPasswordModalShow = useSelector(state => state.users.showUpdateUserPasswordModalData);
 
     // useEffect(()=>{
     //     dispatch(getAllUsersData({start:0}));
@@ -72,7 +74,7 @@ const ManageUsersPage = () => {
           <CDropdown className="btn-group">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateUserPasswordModalShow(true);setSelectedId(row._id);setSelectedMail(row.user_preferenceDetail.name);setAccountType(row.accountType)}}>Update Password</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showUpdateUserPasswordModal(true));setSelectedId(row._id);setSelectedMail(row.user_preferenceDetail.name);setAccountType(row.accountType)}}>Update Password</CDropdownItem>
             {/* <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id)}}>Delete</CDropdownItem> */}
           </CDropdownMenu>
         </CDropdown>,
@@ -93,7 +95,7 @@ const  handleDownloadScv = () => {
   Axios
         .post(dataURL,responseType)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement('a');
           link.href = url;
@@ -189,7 +191,7 @@ const  handleDownloadScv = () => {
     </CRow>
     <React.Fragment>
         <UpdateUserPasswordModalComp 
-          show={updateUserPasswordModalShow} onClose={() => setUpdateUserPasswordModalShow(false)} 
+          show={updateUserPasswordModalShow} onClose={() => dispatch(showUpdateUserPasswordModal(false))} 
           selectedid={selectedId} selectedmail={selectedMail} accounttype={accountType}
           perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />

@@ -6,6 +6,10 @@ const initialState = {
     restaurant_Data:{},
     selectedRestaurant:{},
     totalrows:0,
+
+    showAddRestaurantModalData:false,
+    showUpdateRestaurantModalData:false,
+    showDeleteRestaurantModalData:false,
     };
     
     const manageRestaurantReducer = (state = initialState, { type, payload }) => {
@@ -62,6 +66,22 @@ const initialState = {
                 isLoading:false,
                 errorMessage:payload
             };
+
+        case 'SHOW_ADDRESTAURANT_MODAL':
+            return  { 
+              ...state, 
+              showAddRestaurantModalData:payload
+            }; 
+        case 'SHOW_UPDATERESTAURANT_MODAL':
+            return  { 
+              ...state, 
+              showUpdateRestaurantModalData:payload
+            };    
+        case 'SHOW_DELETERESTAURANT_MODAL':
+            return  { 
+              ...state, 
+              showDeleteRestaurantModalData:payload
+            };        
   
     
 

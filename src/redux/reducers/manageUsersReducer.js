@@ -6,6 +6,9 @@ const initialState = {
     users_Data:null,
     selectedUser:{},
     totalrows:0,
+
+    showUpdateUserPasswordModalData:false,
+
     };
     
     const manageUsersReducer = (state = initialState, { type, payload }) => {
@@ -47,6 +50,11 @@ const initialState = {
                 errorMessage:payload
             };
   
+        case 'SHOW_UPDATEUSERPASSWORD_MODAL':
+            return  { 
+              ...state, 
+              showUpdateUserPasswordModalData:payload
+            };    
     
 
         default:

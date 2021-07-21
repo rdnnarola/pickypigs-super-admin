@@ -8,23 +8,25 @@ import moment from "moment";
 import DeleteCookingComponent from './DeleteCookingComponent';
 import AddCookingComponent from './AddCookingComponent';
 import UpdateCookingComponent from './UpdateCookingComponent';
-import { getAllCookingData } from '../../../redux/actions/manageCookingAction';
+import { getAllCookingData, showAddCookingModal, showDeleteCookingModal, showUpdateCookingModal } from '../../../redux/actions/manageCookingAction';
+import { SERVER_URL } from '../../../shared/constant';
 
 
 const ManageAllergenPage = () => {
     const dispatch=useDispatch();  
     const history = useHistory();
     const [inputValue,setInputValue]=useState("");
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    // const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [selectedId,setSelectedId]=useState('')
-    const [addCookingModalShow, setAddCookingModalShow] = useState(false);
-    const [updateCookingModalShow, setUpdateCookingModalShow] = useState(false);
+    // const [addCookingModalShow, setAddCookingModalShow] = useState(false);
+    // const [updateCookingModalShow, setUpdateCookingModalShow] = useState(false);
     const [imagePath, seImagePath] = useState("");
     const [perPage, setPerPage] = useState(10);
     const [myPage, setMypage] = useState(1);
 
-    // const imagelink="http://192.168.100.39:8000/"
-    const imagelink="http://apps.narola.online:5003/"
+    const addCookingModalShow = useSelector(state => state.cooking.showAddCookingModalData)
+    const updateCookingModalShow = useSelector(state => state.cooking.showUpdateCookingModalData)
+    const deleteModalShow = useSelector(state => state.cooking.showDeleteCookingModalData)
 
     // useEffect(()=>{
     //     dispatch(getAllCookingData({start:0,search:inputValue}));
@@ -61,7 +63,7 @@ const ManageAllergenPage = () => {
       { selector: 'name',name: 'Name',  },
       {
         name: 'Thumbnail',
-        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${imagelink}${row.image}`} />,
+        cell: row => <img height="40px" className="border m-2" width="40px" alt={row.name} src={`${SERVER_URL}/${row.image}`} />,
       },
       // { selector: 'description',name: 'Description', sortable: true},
       // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
@@ -71,8 +73,8 @@ const ManageAllergenPage = () => {
           <CDropdown className="btn-group">
           <CDropdownToggle className="pinkbdr-btn" size="sm"> Action </CDropdownToggle>
           <CDropdownMenu placement="left">
-            <CDropdownItem onClick={() => {setUpdateCookingModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
-            <CDropdownItem onClick={() => {setDeleteModalShow(true);setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showUpdateCookingModal(true));setSelectedId(row._id);seImagePath(row.image)}}>Update</CDropdownItem>
+            <CDropdownItem onClick={() => {dispatch(showDeleteCookingModal(true));setSelectedId(row._id);seImagePath(row.image)}}>Delete</CDropdownItem>
           </CDropdownMenu>
         </CDropdown>,
             allowOverflow: true,
@@ -99,7 +101,7 @@ const ManageAllergenPage = () => {
                 }
               </CCol>
               <CCol className="mb-4 d-flex justify-content-end" sm="8">
-                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {setAddCookingModalShow(true);setSelectedId(null)}}>
+                <CButton className="btn pinkline-btn text-uppercase rounded-pill" onClick={() => {dispatch(showAddCookingModal(true));setSelectedId(null)}}>
                   <span className="add-icon">
                      Add Cooking Method
                   </span> 
@@ -107,8 +109,8 @@ const ManageAllergenPage = () => {
               </CCol>
               <div>
                 <AddCookingComponent 
-                  show={addCookingModalShow} onClose={() => setAddCookingModalShow(false)} 
-                  imagelink={imagelink} perpage={perPage} 
+                  show={addCookingModalShow} onClose={() => dispatch(showAddCookingModal(false))} 
+                   perpage={perPage} 
                   mypage={myPage} inputvalue={inputValue}
                 />
               </div>
@@ -159,14 +161,14 @@ const ManageAllergenPage = () => {
     </CRow>
     <React.Fragment>
         <UpdateCookingComponent 
-          show={updateCookingModalShow} onClose={() => setUpdateCookingModalShow(false)} 
-          selectedid={selectedId} imagelink={imagelink} imagepath={imagePath}
+          show={updateCookingModalShow} onClose={() => dispatch(showUpdateCookingModal(false))} 
+          selectedid={selectedId}  imagepath={imagePath}
           perpage={perPage} mypage={myPage} inputvalue={inputValue}
         />
     </React.Fragment>
     <React.Fragment>
       <DeleteCookingComponent 
-        show={deleteModalShow} onClose={() => setDeleteModalShow(false)} 
+        show={deleteModalShow} onClose={() => dispatch(showDeleteCookingModal(false))} 
         selectedid={selectedId} imagepath={imagePath} 
         perPage={perPage} myPage={myPage} inputValue={inputValue}
       />
