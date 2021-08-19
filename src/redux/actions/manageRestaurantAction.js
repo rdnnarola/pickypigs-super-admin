@@ -20,7 +20,7 @@ export const getAllRestaurantData = (data) => {
       dispatch({ type: "GET_ALLRESTAURANT_FAILURE", payload: error });
       if (error.response) {
         dispatch(setAlert(`${error.response.data.message}`, "danger"));
-        if (error.response && error.response.status == 401) {
+        if (error.response && error.response.status === 401) {
           dispatch(logoutUser(history));
         }
       } else {
@@ -55,7 +55,7 @@ export const addRestaurantData = (data, perPage, myPage, inputValue) => {
       dispatch({ type: "ADD_RESTAURANT_FAILURE", payload: error });
       if (error.response) {
         dispatch(setAlert(`${error.response.data.message}`, "danger"));
-        if (error.response && error.response.status == 401) {
+        if (error.response && error.response.status === 401) {
           dispatch(logoutUser(history));
         }
       } else {
@@ -110,7 +110,7 @@ export const updateSelectedRestaurantPassword = (
       dispatch({ type: "UPDATE_RESTAURANT_FAILURE", payload: error });
       if (error.response) {
         dispatch(setAlert(`${error.response.data.message}`, "danger"));
-        if (error.response && error.response.status == 401) {
+        if (error.response && error.response.status === 401) {
           dispatch(logoutUser(history));
         }
       } else {
@@ -146,7 +146,7 @@ export const deleteSelectedRestaurantData = (
       dispatch({ type: "DELETE_RESTAURANT_FAILURE", payload: error });
       if (error.response) {
         dispatch(setAlert(`${error.response.data.message}`, "danger"));
-        if (error.response && error.response.status == 401) {
+        if (error.response && error.response.status === 401) {
           dispatch(logoutUser(history));
         }
       } else {

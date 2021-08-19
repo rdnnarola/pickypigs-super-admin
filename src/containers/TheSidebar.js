@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   CCreateElement,
   CSidebar,
@@ -10,23 +10,21 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
-  CImg
-} from '@coreui/react'
-
-import CIcon from '@coreui/icons-react'
+  CImg,
+} from "@coreui/react";
 
 // sidebar nav config
-import navigation from './_nav'
-import { setSideBar } from '../redux/actions/generalActions'
+import navigation from "./_nav";
+import { setSideBar } from "../redux/actions/generalActions";
 
 const TheSidebar = () => {
-  const dispatch = useDispatch()
-  const show = useSelector(state => state.general.sidebarShow)
+  const dispatch = useDispatch();
+  const show = useSelector((state) => state.general.sidebarShow);
 
   return (
     <CSidebar
       show={show}
-      onShowChange={(val) => dispatch(setSideBar({ sidebarShow: val}))}
+      onShowChange={(val) => dispatch(setSideBar({ sidebarShow: val }))}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
         {/* <CIcon
@@ -36,23 +34,28 @@ const TheSidebar = () => {
         /> */}
 
         <section className="c-sidebar-brand-full">
-        <div className="d-flex justify-content-center align-items-center">
-          <CImg
-              src={'avatars/logo.svg'}
+          <div className="d-flex justify-content-center align-items-center">
+            <CImg
+              src={"avatars/logo.svg"}
               className="c-avatar-img"
-              style={{width:30}}
+              style={{ width: 30 }}
               alt="Picky_pigs_super_admin"
             />
-          <p style={{color:'#ffffff',fontSize:25,fontWeight:'bold'}} className="ml-3 mb-0">Picky Pigs</p>
-        </div>
+            <p
+              style={{ color: "#ffffff", fontSize: 25, fontWeight: "bold" }}
+              className="ml-3 mb-0"
+            >
+              Picky Pigs
+            </p>
+          </div>
         </section>
-        
+
         <section className="c-sidebar-brand-minimized">
           <CImg
-              src={'avatars/logo.svg'}
-              className="c-avatar-img"
-              style={{width:30}}
-              alt="Picky_pigs_super_admin"
+            src={"avatars/logo.svg"}
+            className="c-avatar-img"
+            style={{ width: 30 }}
+            alt="Picky_pigs_super_admin"
           />
         </section>
 
@@ -63,20 +66,19 @@ const TheSidebar = () => {
         /> */}
       </CSidebarBrand>
       <CSidebarNav>
-
         <CCreateElement
           items={navigation}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,
             CSidebarNavItem,
-            CSidebarNavTitle
+            CSidebarNavTitle,
           }}
         />
       </CSidebarNav>
-      <CSidebarMinimizer className="c-d-md-down-none"/>
+      <CSidebarMinimizer className="c-d-md-down-none" />
     </CSidebar>
-  )
-}
+  );
+};
 
-export default React.memo(TheSidebar)
+export default React.memo(TheSidebar);

@@ -73,9 +73,7 @@ const Login = () => {
       setType("password");
     }
   };
-  let forgotPasswordData = useSelector((state) => {
-    return state.general.forgot_Password;
-  });
+
   let loading = useSelector((state) => {
     return state.general.isLoading;
   });

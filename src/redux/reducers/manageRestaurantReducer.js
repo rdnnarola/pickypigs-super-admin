@@ -103,6 +103,10 @@ const manageRestaurantReducer = (state = initialState, { type, payload }) => {
       let index = restaurantData.findIndex((data) => data._id === payload._id);
       restaurantData[index].isActive = payload.isActive;
 
+      return {
+        ...state,
+      };
+
     // return {
     //   ...state,
     //   restaurant_Data: {
