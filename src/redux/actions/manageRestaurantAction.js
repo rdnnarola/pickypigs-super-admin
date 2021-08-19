@@ -167,7 +167,13 @@ export const enableRestaurant = (value) => {
       };
       let dataURL = `/super_admin/manage_restaurant/update_status`;
       let response = await axios.post(dataURL, value, config);
-      dispatch({ type: "ENABLE_RESTAURANT_SUCCESS", payload: response.data });
+      dispatch({
+        type: "ENABLE_RESTAURANT_SUCCESS",
+        payload: response.data.data,
+      });
+
+      dispatch({ type: "UPDATE_RESTAURANT_LIST", payload: response.data.data });
+
       dispatch(setAlert(response.data.message, "success"));
       const token = localStorage.getItem("access_token");
       if (token) axios.defaults.headers.common = { "x-access-token": token };

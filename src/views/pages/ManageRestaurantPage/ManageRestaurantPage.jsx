@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
 import {
-  CBadge,
   CCard,
   CCardBody,
   CCardHeader,
   CCol,
-  CDataTable,
   CButton,
   CRow,
   CDropdownMenu,
@@ -22,7 +19,7 @@ import {
   showUpdateRestaurantModal,
 } from "../../../redux/actions/manageRestaurantAction";
 import { useDispatch, useSelector } from "react-redux";
-import DataTable, { defaultThemes } from "react-data-table-component";
+import DataTable from "react-data-table-component";
 import CIcon from "@coreui/icons-react";
 import moment from "moment";
 import DeleteRestaurantModalComp from "./DeleteRestaurantModalComp";
@@ -32,7 +29,6 @@ import "./ManageRestaurantPage.scss";
 
 const ManageRestaurantPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [inputValue, setInputValue] = useState("");
   // const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [selectedId, setSelectedId] = useState("");
@@ -86,8 +82,6 @@ const ManageRestaurantPage = () => {
 
   let { isLoading, restaurant_Data, totalrows } = allRestaurant_data;
 
-  console.log("restaurant_Data =>", restaurant_Data);
-
   // const search=(datas)=>{
   //     return datas.filter(
   //         (data)=>data.email.toLowerCase().indexOf(inputValue)>-1
@@ -128,25 +122,21 @@ const ManageRestaurantPage = () => {
               onClick={() => {
                 const payload = {
                   id: row.restaurants._id,
-                  isActive: true,
+                  isActive: !row.isActive,
                 };
                 dispatch(enableRestaurant(payload));
-                setSelectedId(row.restaurants._id);
               }}
             >
-              <label class="c-switch c-switch-label c-switch-pill ">
+              <label class="c-switch c-switch-pill c-switch-danger">
                 <input
                   type="checkbox"
                   class="c-switch-input"
                   checked={row.isActive}
                 />
-                <span
-                  class="c-switch-slider switch-label"
-                  data-checked="&#x2713;"
-                  data-unchecked="&#x2715;"
-                ></span>
+                <span class="c-switch-slider"></span>
               </label>
             </CDropdownItem>
+
             <CDropdownItem
               onClick={() => {
                 dispatch(showUpdateRestaurantModal(true));

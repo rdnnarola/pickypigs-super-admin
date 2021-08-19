@@ -1,7 +1,7 @@
 const initialState = {
   isLoading: false,
   errorMessage: "",
-  restaurant_Data: {},
+  restaurant_Data: [],
   selectedRestaurant: {},
   totalrows: 0,
 
@@ -23,6 +23,7 @@ const manageRestaurantReducer = (state = initialState, { type, payload }) => {
         isLoading: true,
       };
     case "GET_ALLRESTAURANT_SUCCESS":
+      console.log("List =>", payload);
       return {
         ...state,
         isLoading: false,
@@ -75,6 +76,7 @@ const manageRestaurantReducer = (state = initialState, { type, payload }) => {
         activeRestaurant: payload,
       };
     case "ENABLE_RESTAURANT_SUCCESS":
+      console.log("payload =>", payload);
       return {
         ...state,
         activeRestaurant: payload,
@@ -95,6 +97,19 @@ const manageRestaurantReducer = (state = initialState, { type, payload }) => {
         ...state,
         showDeleteRestaurantModalData: payload,
       };
+
+    case "UPDATE_RESTAURANT_LIST":
+      const restaurantData = state.restaurant_Data.restaurantList;
+      let index = restaurantData.findIndex((data) => data._id === payload._id);
+      restaurantData[index].isActive = payload.isActive;
+
+    // return {
+    //   ...state,
+    //   restaurant_Data: {
+    //     ...state.restaurant_Data,
+    //     restaurantList: restaurant_Data,
+    //   },
+    // };
 
     default:
       return state;
