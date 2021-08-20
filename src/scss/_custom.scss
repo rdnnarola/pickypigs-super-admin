@@ -1,251 +1,268 @@
 // Here you can add other styles
 .pink-txt {
-    color: #cb007b !important;
+  color: #cb007b !important;
 }
 .bg-pink {
-    color: #fff;
-    background-color: #cb007b;
-    border-color: #cb007b;
+  color: #fff;
+  background-color: #cb007b;
+  border-color: #cb007b;
 }
-.bg-pickypigs  {
-    color: #fff;
-    background:linear-gradient(90deg,#cb007b,#ff75ba) !important;
-    border-color:initial !important;
+.bg-pickypigs {
+  color: #fff;
+  background: linear-gradient(90deg, #cb007b, #ff75ba) !important;
+  border-color: initial !important;
 }
 // Pink Button css start
 .pinkbg-btn {
-    border: 1px solid #cb007b !important;
-    background-color: #cb007b;
+  border: 1px solid #cb007b !important;
+  background-color: #cb007b;
+  color: #fff !important;
+  // height: 40px;
+  // min-width: 160px;
+  transition: all 0.2s;
+  font-size: 14px;
+
+  &:hover {
+    background: #cb007b;
     color: #fff !important;
-    // height: 40px;
-    // min-width: 160px;
-    transition: all 0.2s;
-    font-size: 14px;
+    border: 1px solid #fb6bb5 !important;
 
-    &:hover {
-        background: #cb007b;
-        color: #fff !important;
-        border: 1px solid #fb6bb5 !important;
+    .add-icon,
+    .edit-icon {
+      padding-left: 25px;
 
-        .add-icon,
-        .edit-icon {
-            padding-left: 25px;
+      &::after {
+        opacity: 1;
+        left: 0;
+      }
+    }
+  }
 
-            &::after {
-                opacity: 1;
-                left: 0;
-            }
-        }
-    }
-
-    &:focus {
-        box-shadow: 0 0 0 0.2rem #d00b812e !important;
-    }
-    &.min-width-120 {
-        min-width: 120px;
-    }
-    &.min-width-270 {
-        min-width: 270px;
-    }
-    &.min-height-50 {
-        height: 50px;
-    }
-    &.shadow-light {
-        box-shadow: 0px 7px 10px 0px #0000000f;
-    }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem #d00b812e !important;
+  }
+  &.min-width-120 {
+    min-width: 120px;
+  }
+  &.min-width-270 {
+    min-width: 270px;
+  }
+  &.min-height-50 {
+    height: 50px;
+  }
+  &.shadow-light {
+    box-shadow: 0px 7px 10px 0px #0000000f;
+  }
 }
 // Pink Button css end
 // Pink Button css start
 .pinkbdr-btn {
-    border: 1px solid #cb007b !important;
-    color: #cb007b !important;
-    // height: 40px;
-    // min-width: 160px;
-    transition: all 0.2s;
-    font-size: 14px;
+  border: 1px solid #cb007b !important;
+  color: #cb007b !important;
+  // height: 40px;
+  // min-width: 160px;
+  transition: all 0.2s;
+  font-size: 14px;
 
-    &:hover {
-        background: #cb007b;
-        color: #fff !important;
-        border: 1px solid #fb6bb5 !important;
+  &:hover {
+    background: #cb007b;
+    color: #fff !important;
+    border: 1px solid #fb6bb5 !important;
 
-        .add-icon,
-        .edit-icon {
-            padding-left: 25px;
+    .add-icon,
+    .edit-icon {
+      padding-left: 25px;
 
-            &::after {
-                opacity: 1;
-                left: 0;
-            }
-        }
+      &::after {
+        opacity: 1;
+        left: 0;
+      }
     }
+  }
 
-    &:focus {
-        box-shadow: 0 0 0 0.2rem #d00b812e !important;
-    }
-    &.min-width-120 {
-        min-width: 120px;
-    }
-    &.min-width-270 {
-        min-width: 270px;
-    }
-    &.min-height-50 {
-        height: 50px;
-    }
-    &.shadow-light {
-        box-shadow: 0px 7px 10px 0px #0000000f;
-    }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem #d00b812e !important;
+  }
+  &.min-width-120 {
+    min-width: 120px;
+  }
+  &.min-width-270 {
+    min-width: 270px;
+  }
+  &.min-height-50 {
+    height: 50px;
+  }
+  &.shadow-light {
+    box-shadow: 0px 7px 10px 0px #0000000f;
+  }
 }
 // Pink Button css end
 
 // Pink Button css start
 .pinkline-btn {
-    border: 1px solid #cb007b !important;
-    color: #cb007b !important;
-    height: 40px;
-    min-width: 160px;
+  border: 1px solid #cb007b !important;
+  color: #cb007b !important;
+  height: 40px;
+  min-width: 160px;
+  transition: all 0.2s;
+  font-size: 15px;
+
+  .add-icon {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
     transition: all 0.2s;
-    font-size: 15px;
-
-    .add-icon {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: all 0.2s;
-        &::after {
-            content: url("../assets/images/addicon-white.svg");
-            font-size: 20px;
-            position: absolute;
-            opacity: 0;
-            top: -6px;
-            left: -15px;
-            transition: all 0.2s;
-            width: 14px;
-        }
+    &::after {
+      content: url("../assets/images/addicon-white.svg");
+      font-size: 20px;
+      position: absolute;
+      opacity: 0;
+      top: -6px;
+      left: -15px;
+      transition: all 0.2s;
+      width: 14px;
     }
+  }
 
+  .edit-icon {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s;
+    &::after {
+      content: url("../assets/images/editicon-white.svg");
+      font-size: 20px;
+      position: absolute;
+      opacity: 0;
+      top: -6px;
+      left: -15px;
+      transition: all 0.2s;
+      width: 14px;
+      background-size: 14px;
+    }
+  }
+
+  &:hover {
+    background: #cb007b;
+    color: #fff !important;
+    border: 1px solid #fb6bb5 !important;
+
+    .add-icon,
     .edit-icon {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: all 0.2s;
-        &::after {
-            content: url("../assets/images/editicon-white.svg");
-            font-size: 20px;
-            position: absolute;
-            opacity: 0;
-            top: -6px;
-            left: -15px;
-            transition: all 0.2s;
-            width: 14px;
-            background-size: 14px;
-        }
-    }
+      padding-left: 25px;
 
+      &::after {
+        opacity: 1;
+        left: 0;
+      }
+    }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem #d00b812e !important;
+  }
+  &.min-width-120 {
+    min-width: 120px;
+  }
+  &.min-height-50 {
+    height: 50px;
+  }
+  &.min-width-170 {
+    width: 170px;
+  }
+}
+
+.c-sidebar {
+  .c-sidebar-nav-link,
+  .c-sidebar-nav-dropdown-toggle {
     &:hover {
-        background: #cb007b;
-        color: #fff !important;
-        border: 1px solid #fb6bb5 !important;
+      color: #fff;
+      background: #cb007b;
+    }
+  }
+}
 
-        .add-icon,
-        .edit-icon {
-            padding-left: 25px;
-
-            &::after {
-                opacity: 1;
-                left: 0;
-            }
-        }
-    }
-
-    &:focus {
-        box-shadow: 0 0 0 0.2rem #d00b812e !important;
-    }
-    &.min-width-120 {
-        min-width: 120px;
-    }
-    &.min-height-50 {
-        height: 50px;
-    }
-    &.min-width-170 {
-        width: 170px;
-    }
+.dropdown-item {
+  &.active,
+  &:active {
+    background-color: #cb007b;
+  }
 }
 
 .rdt_Table .rdt_TableHeadRow {
-    background: #cb007b;
-    min-height: 45px;
-    border-bottom-color: #cb007b;
+  background: #cb007b;
+  min-height: 45px;
+  border-bottom-color: #cb007b;
 }
 
 .rdt_Table .rdt_TableHeadRow .rdt_TableCol {
-    color: #fff;
-    font-weight: bold;
-    font-size: 14px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
 }
 .rdt_TableBody .rdt_TableRow {
-    min-height: auto;
+  min-height: auto;
 }
 
 .rdt_TableBody .rdt_TableRow .rdt_TableCell {
-    min-height: 40px;
+  min-height: 40px;
 }
 
 .rdt_Pagination {
-    font-weight: 500 !important;
-    font-size: 14px !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
 }
 .rdt_Pagination > div {
-    display: flex;
-    // margin-right: auto;
+  display: flex;
+  // margin-right: auto;
 }
 
 .rdt_Pagination > div > select {
-    min-width: auto;
-    padding-right: 34px;
-    padding-left: 10px;
-    border: 1px solid #cb007b;
-    outline: none;
-    color: #cb007b;
-    font-weight: 600;
+  min-width: auto;
+  padding-right: 34px;
+  padding-left: 10px;
+  border: 1px solid #cb007b;
+  outline: none;
+  color: #cb007b;
+  font-weight: 600;
 }
 
 .rdt_Pagination > div > select + svg {
-    top: 1px;
-    fill: #fff;
-    background-color: #cb007b;
+  top: 1px;
+  fill: #fff;
+  background-color: #cb007b;
 }
-.rdt_Pagination >    div + span {
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
+.rdt_Pagination > div + span {
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #pagination-first-page:not(:disabled),
 #pagination-last-page:not(:disabled),
 #pagination-previous-page:not(:disabled),
 #pagination-next-page:not(:disabled) {
-    color: rgb(203, 0, 123);
-    fill: rgb(203, 0, 123);
+  color: rgb(203, 0, 123);
+  fill: rgb(203, 0, 123);
 }
 
 #pagination-first-page:hover:not(:disabled),
 #pagination-last-page:hover:not(:disabled),
 #pagination-previous-page:hover:not(:disabled),
 #pagination-next-page:hover:not(:disabled) {
-    background-color: #cb007b;
-    color: #fff;
-    fill:#fff;
+  background-color: #cb007b;
+  color: #fff;
+  fill: #fff;
 }
 
-.trans_button{
-    background-color: transparent;
-    border: none;
-    padding:0px
+.trans_button {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
 }
-.trans_button:focus{
-    outline: none;
+.trans_button:focus {
+  outline: none;
 }
-.trans_button:hover{
-    text-decoration: underline;
+.trans_button:hover {
+  text-decoration: underline;
 }

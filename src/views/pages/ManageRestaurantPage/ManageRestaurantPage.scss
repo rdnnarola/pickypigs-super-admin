@@ -9,3 +9,14 @@
 .switch-off {
   background-color: white;
 }
+
+.c-switch-danger {
+  .c-switch-input {
+    &:checked {
+      & + .c-switch-slider {
+        background-color: #cb007b;
+        border-color: #cb007b;
+      }
+    }
+  }
+}
