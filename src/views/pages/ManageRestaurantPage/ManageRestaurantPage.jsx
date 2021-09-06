@@ -90,7 +90,11 @@ const ManageRestaurantPage = () => {
   // }
 
   const columns = [
-    { selector: "restaurants.name", name: "Name", sortable: true },
+    {
+      selector: "restaurants.name",
+      name: "Name",
+      sortable: true,
+    },
     { selector: "email", name: "Email", sortable: true },
     { selector: "restaurants.company", name: "Company", sortable: true },
     { selector: "restaurants.package", name: "Package", sortable: true },
@@ -222,6 +226,7 @@ const ManageRestaurantPage = () => {
                   restaurant_Data.restaurantList.length > 0 ? (
                     <CCard>
                       <DataTable
+                        className="table"
                         columns={columns}
                         data={restaurant_Data.restaurantList}
                         highlightOnHover

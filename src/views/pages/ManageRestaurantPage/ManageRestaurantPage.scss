@@ -20,3 +20,8 @@
     }
   }
 }
+
+.table .rdt_TableHeadRow .rdt_TableCol:nth-child(2),
+.table .rdt_TableBody .rdt_TableRow .rdt_TableCell:nth-child(2) {
+  min-width: 250px;
+}
