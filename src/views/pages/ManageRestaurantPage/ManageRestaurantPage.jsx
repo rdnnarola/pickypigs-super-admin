@@ -21,7 +21,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import CIcon from "@coreui/icons-react";
-import moment from "moment";
 import DeleteRestaurantModalComp from "./DeleteRestaurantModalComp";
 import AddRestaurantModalComp from "./AddRestaurantModalComp";
 import UpdatePasswordModalComp from "./UpdatePasswordModalComp";
@@ -101,14 +100,14 @@ const ManageRestaurantPage = () => {
       sortable: true,
       cell: (row) => <span>{row.restaurants.phoneNumber}</span>,
     },
-    {
-      selector: "updatedAt",
-      name: "Updated At",
-      sortable: true,
-      cell: (row) => (
-        <span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>
-      ),
-    },
+    // {
+    //   selector: "updatedAt",
+    //   name: "Updated At",
+    //   sortable: true,
+    //   cell: (row) => (
+    //     <span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>
+    //   ),
+    // },
     {
       name: "Action",
       button: true,

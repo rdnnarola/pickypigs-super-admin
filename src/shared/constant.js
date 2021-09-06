@@ -10,7 +10,8 @@ export const GOOGLE_MAP_API_URL = "https://maps.googleapis.com/maps/api/geocode/
 
 export const GOOGLE_PLACE_API_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json";
 
-export const GOOGLE_CLIENT_ID = "521543791680-26jrl70j0duivecoh80f4jpun63cjbpn.apps.googleusercontent.com";
+export const GOOGLE_CLIENT_ID = "1008544511557-9jlk8iviuhnvpatq9bj5d5geeg9e0jr5.apps.googleusercontent.com";
+// export const GOOGLE_CLIENT_ID = "521543791680-26jrl70j0duivecoh80f4jpun63cjbpn.apps.googleusercontent.com";
 
 export const FACEBOOK_APP_ID = "2809614726027672";
 
