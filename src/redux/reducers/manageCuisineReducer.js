@@ -25,6 +25,7 @@ const initialState = {
                 isLoading :true,
             };
         case "GET_CUISINE_SUCCESS":
+            console.log('payload_cusine =>',payload);
             return {
                 ...state,
                 isLoading:false,

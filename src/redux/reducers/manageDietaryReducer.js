@@ -25,6 +25,8 @@ const initialState = {
                 isLoading :true,
             };
         case "GET_DIETARY_SUCCESS":
+            console.log('payload_dietary =>',payload);
+
             return {
                 ...state,
                 isLoading:false,

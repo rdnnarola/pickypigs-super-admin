@@ -35,11 +35,16 @@ export const addCuisineData = (data, perPage, myPage, inputValue) => {
       dispatch({ type: "ADD_CUISINE_REQUEST" });
       let config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       };
+      const formData = new FormData();
+      const file = data.image;
+      formData.append("image", file);
+      formData.append("name", data.name);
+      formData.append("description", data.description);
       let dataURL = `super_admin/manage_cuisine_type`;
-      let response = await Axios.post(dataURL, JSON.stringify(data), config);
+      let response = await Axios.post(dataURL, formData, config);
       dispatch({ type: "ADD_CUISINE_SUCCESS", payload: response.data });
       dispatch(
         getAllCuisineData({
@@ -80,6 +85,7 @@ export const getSelectedCuisineData = (selectedId) => {
 export const updateSelectedCuisine = (
   selectedId,
   data,
+  imagepath,
   perPage,
   myPage,
   inputValue
@@ -89,11 +95,17 @@ export const updateSelectedCuisine = (
       dispatch({ type: "UPDATE_CUISINE_REQUEST" });
       let config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       };
+      const formData = new FormData();
+      const file = data.image;
+      formData.append("image", file);
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+
       let dataURL = `/super_admin/manage_cuisine_type/${selectedId}`;
-      let response = await Axios.put(dataURL, JSON.stringify(data), config);
+      let response = await Axios.put(dataURL, formData, config);
       dispatch({ type: "UPDATE_CUISINE_SUCCESS", payload: response.data });
       dispatch(
         getAllCuisineData({

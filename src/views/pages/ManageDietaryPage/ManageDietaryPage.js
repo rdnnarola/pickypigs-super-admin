@@ -24,6 +24,7 @@ import {
   showUpdateDietaryModal,
 } from "../../../redux/actions/manageDietaryAction";
 import { SERVER_URL } from "../../../shared/constant";
+import CustomDescription from "../../../reusable/CustomDescription"
 
 const ManageDietaryPage = () => {
   const dispatch = useDispatch();
@@ -79,6 +80,7 @@ const ManageDietaryPage = () => {
     return state.dietary;
   });
 
+
   let { isLoading, dietary_Data, totalrows } = allDietary_data;
 
   const columns = [
@@ -94,6 +96,12 @@ const ManageDietaryPage = () => {
           src={`${SERVER_URL}/${row.image}`}
         />
       ),
+    },
+    {
+      selector: "description",
+      name: "Description",
+      allowOverflow: false,
+      cell: (row) => (<CustomDescription row={row}/>),
     },
     // { selector: 'description',name: 'Description', sortable: true},
     {

@@ -36,14 +36,14 @@ export const addLifestyleData = (data, perPage, myPage, inputValue) => {
       dispatch({ type: "ADD_LIFESTYLE_REQUEST" });
       let config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       };
       const formData = new FormData();
       const file = data.image;
       formData.append("image", file);
       formData.append("name", data.name);
-      //  formData.append("description", data.description);
+      formData.append("description", data.description);
 
       let dataURL = `super_admin/manage_lifestyle`;
       let response = await Axios.post(dataURL, formData, config);
@@ -100,14 +100,14 @@ export const updateSelectedLifestyle = (
       dispatch({ type: "UPDATE_LIFESTYLE_REQUEST" });
       let config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       };
       const formData = new FormData();
       const file = data.image;
       formData.append("image", file);
       formData.append("name", data.name);
-      // formData.append("description", data.description);
+      formData.append("description", data.description);
 
       let dataURL = `/super_admin/manage_lifestyle/${selectedId}`;
       let response = await Axios.put(dataURL, formData, config);

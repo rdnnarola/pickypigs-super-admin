@@ -19,8 +19,8 @@ import {
   getSelectedAllergyData,
   updateSelectedAllergy,
 } from "../../../redux/actions/manageAllergyAction";
-import { useDropzone } from "react-dropzone";
 import { SERVER_URL } from "../../../shared/constant";
+import UploadImageComponent from "../../../reusable/UploadImageComponent";
 
 // const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
 
@@ -156,7 +156,7 @@ const UpdateAllergyComponent = (props) => {
                                         </CFormGroup> */}
                     <CFormGroup>
                       <CLabel>Allergy Image</CLabel>
-                      <UploadComponent
+                      <UploadImageComponent
                         setFieldValue={setFieldValue}
                         setSubmitting={setSubmitting}
                         className={`form-control ${
@@ -237,36 +237,3 @@ const UpdateAllergyComponent = (props) => {
 };
 
 export default UpdateAllergyComponent;
-
-const UploadComponent = (props) => {
-  const { setFieldValue } = props;
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFieldValue("image", acceptedFiles[0]);
-    },
-  });
-
-  return (
-    <div className="border bg-primary" type="button">
-      {}
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <div className="d-flex justify-content-center align-items-center p-2">
-            <img
-              src={"images/upload.svg"}
-              width="30px"
-              className="img-fluid mr-4"
-              alt="showpassword"
-            />
-            <p className="text-white m-0">Click to Upload Image</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};

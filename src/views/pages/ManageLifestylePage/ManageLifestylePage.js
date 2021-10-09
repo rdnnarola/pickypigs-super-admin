@@ -24,6 +24,7 @@ import {
   showUpdateLifestyleModal,
 } from "../../../redux/actions/manageLifestyleAction";
 import { SERVER_URL } from "../../../shared/constant";
+import CustomDescription from "../../../reusable/CustomDescription";
 
 const ManageLifestylePage = () => {
   const dispatch = useDispatch();
@@ -94,6 +95,12 @@ const ManageLifestylePage = () => {
           src={`${SERVER_URL}/${row.image}`}
         />
       ),
+    },
+    {
+      selector: "description",
+      name: "Description",
+      allowOverflow: false,
+      cell: (row) => <CustomDescription row={row} />,
     },
     // { selector: 'description',name: 'Description', sortable: true},
     // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },

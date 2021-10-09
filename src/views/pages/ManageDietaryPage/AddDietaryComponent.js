@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addDietaryData } from "../../../redux/actions/manageDietaryAction";
-import { useDropzone } from "react-dropzone";
+import UploadImageComponent from "../../../reusable/UploadImageComponent";
 
 // const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 // const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
@@ -25,13 +25,13 @@ const AddDietaryComponent = (props) => {
   const initialValues = {
     name: "",
     image: null,
-    // description:'',
+    description:'',
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required(" Name is required"),
     image: Yup.mixed().required("Please Upload Image"),
-    // description:Yup.string().required('Description is required'),
+    description:Yup.string().required('Description is required'),
   });
 
   const onSubmit = (fields, { setStatus, resetForm }) => {
@@ -95,6 +95,25 @@ const AddDietaryComponent = (props) => {
                         {errors.name}
                       </CInvalidFeedback>
                     </CFormGroup>
+                    <CFormGroup>
+                      <CLabel>Dietary Description</CLabel>
+                      <Field
+                        component="textarea"
+                        style={{ height: 100 }}
+                        name="description"
+                        placeholder="Enter here"
+                        className={`form-control ${
+                          touched.description && errors.description
+                            ? "is-invalid"
+                            : touched.description && !errors.description
+                            ? "is-valid"
+                            : null
+                        }`}
+                      />
+                      <CInvalidFeedback className="help-block">
+                        {errors.description}
+                      </CInvalidFeedback>
+                    </CFormGroup>
                     {/* <CFormGroup >
                                             <CLabel >Dietary Description</CLabel>
                                             <Field component="textarea" style={{height:100}} name="description" placeholder="Enter here" className={`form-control ${touched.description && errors.description?"is-invalid": touched.description && !errors.description?"is-valid":null}`} />
@@ -102,7 +121,7 @@ const AddDietaryComponent = (props) => {
                                         </CFormGroup>  */}
                     <CFormGroup>
                       <CLabel>Dietary Image</CLabel>
-                      <UploadComponent
+                      <UploadImageComponent
                         setFieldValue={setFieldValue}
                         setSubmitting={setSubmitting}
                         className={`form-control ${
@@ -157,34 +176,3 @@ const AddDietaryComponent = (props) => {
 
 export default AddDietaryComponent;
 
-const UploadComponent = (props) => {
-  const { setFieldValue } = props;
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFieldValue("image", acceptedFiles[0]);
-    },
-  });
-
-  return (
-    <div className="border bg-primary" type="button">
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <div className="d-flex justify-content-center align-items-center p-2">
-            <img
-              src={"images/upload.svg"}
-              width="30px"
-              className="img-fluid mr-4"
-              alt="showpassword"
-            />
-            <p className="text-white m-0">Click to Upload Image</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};

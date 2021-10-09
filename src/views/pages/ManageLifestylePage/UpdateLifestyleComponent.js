@@ -19,8 +19,8 @@ import {
   getSelectedLifestyleData,
   updateSelectedLifestyle,
 } from "../../../redux/actions/manageLifestyleAction";
-import { useDropzone } from "react-dropzone";
 import { SERVER_URL } from "../../../shared/constant";
+import UploadImageComponent from "../../../reusable/UploadImageComponent";
 
 // const packages = ["basic","standard","premium"];
 // const roles=["restaurant_admin"]
@@ -42,12 +42,12 @@ const UpdateLifestyleComponent = (props) => {
   const initialValues = {
     name: selectedLifestyleData && selectedLifestyleData.name,
     image: selectedLifestyleData && selectedLifestyleData.image,
-    // description:selectedLifestyleData&&selectedLifestyleData.description,
+    description:selectedLifestyleData&&selectedLifestyleData.description,
   };
   const validationSchemaForm = Yup.object().shape({
     name: Yup.string().required("Lifestyle Name is required"),
     image: Yup.string().required("Lifestyle Image is required"),
-    // description:Yup.string().required('Lifestyle Description is required'),
+    description:Yup.string().required('Lifestyle Description is required'),
   });
 
   const onSubmit = (input, { setStatus, resetForm }) => {
@@ -55,7 +55,7 @@ const UpdateLifestyleComponent = (props) => {
     let obj = {
       name: input.name,
       image: input.image,
-      // description:input.description,
+      description:input.description,
     };
     dispatch(
       updateSelectedLifestyle(
@@ -129,9 +129,29 @@ const UpdateLifestyleComponent = (props) => {
                                             <Field component="textarea" style={{height:100}} name="description" placeholder="Enter here" className={`form-control ${touched.description && errors.description?"is-invalid": touched.description && !errors.description?"is-valid":null}`} />
                                             <CInvalidFeedback className="help-block">{errors.description}</CInvalidFeedback>
                                         </CFormGroup>  */}
+                     <CFormGroup>
+                      <CLabel>Cuisine Description</CLabel>
+                      <Field
+                        component="textarea"
+                        style={{ height: 100 }}
+                        name="description"
+                        placeholder="Enter here"
+                        className={`form-control ${
+                          touched.description && errors.description
+                            ? "is-invalid"
+                            : touched.description && !errors.description
+                            ? "is-valid"
+                            : null
+                        }`}
+                      />
+                      <CInvalidFeedback className="help-block">
+                        {errors.description}
+                      </CInvalidFeedback>
+                    </CFormGroup>
+                    
                     <CFormGroup>
                       <CLabel>Allergy Image</CLabel>
-                      <UploadComponent
+                      <UploadImageComponent
                         setFieldValue={setFieldValue}
                         setSubmitting={setSubmitting}
                         className={`form-control ${
@@ -200,35 +220,3 @@ const UpdateLifestyleComponent = (props) => {
 
 export default UpdateLifestyleComponent;
 
-const UploadComponent = (props) => {
-  const { setFieldValue } = props;
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFieldValue("image", acceptedFiles[0]);
-    },
-  });
-
-  return (
-    <div className="border bg-primary" type="button">
-      {}
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <div className="d-flex justify-content-center align-items-center p-2">
-            <img
-              src={"images/upload.svg"}
-              width="30px"
-              className="img-fluid mr-4"
-              alt="showpassword"
-            />
-            <p className="text-white m-0">Click to Upload Image</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};

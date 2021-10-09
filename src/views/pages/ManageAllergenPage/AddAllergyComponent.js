@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addAllergyData } from "../../../redux/actions/manageAllergyAction";
-import { useDropzone } from "react-dropzone";
+import UploadImageComponent from "../../../reusable/UploadImageComponent";
 
 // const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 // const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
@@ -127,7 +127,7 @@ const AddAllergyComponent = (props) => {
                     </CFormGroup>
                     <CFormGroup>
                       <CLabel>Allergy Image</CLabel>
-                      <UploadComponent
+                      <UploadImageComponent
                         setFieldValue={setFieldValue}
                         setSubmitting={setSubmitting}
                         className={`form-control ${
@@ -181,46 +181,4 @@ const AddAllergyComponent = (props) => {
 
 export default AddAllergyComponent;
 
-const UploadComponent = (props) => {
-  const { setFieldValue } = props;
 
-  const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
-    accept: ".svg",
-    onDrop: (acceptedFiles) => {
-      setFieldValue("image", acceptedFiles[0]);
-    },
-  });
-
-  const fileRejectionItems = fileRejections.map(({ file, errors }) => (
-      <ul style={{color:"red",listStyle:"none",position:"relative",top:"7px"}}>
-        {errors.map(e => (
-          <li key={e.code}>{e.message}</li>
-        ))}
-      </ul>
-  ));
-
-  return (
-    <div className="border bg-primary" type="button">
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <>
-          <p>Drop the files here ...</p>
-          <em>(Only files with name less than 20 characters will be accepted)</em>
-          </>
-        ) : (
-          <div className="d-flex justify-content-center align-items-center p-2">
-            <img
-              src={"images/upload.svg"}
-              width="30px"
-              className="img-fluid mr-4"
-              alt="showpassword"
-            />
-            <p className="text-white m-0">Click to Upload Image</p>
-            <ul >{fileRejectionItems}</ul>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};

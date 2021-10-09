@@ -15,14 +15,17 @@ import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import CIcon from "@coreui/icons-react";
 import DeleteCuisineComponent from "./DeleteCuisineComponent";
-import AddCuisineComponent from "./AddCuisineComponent";
 import UpdateCuisineComponent from "./UpdateCuisineComponent";
+import AddCuisineComponent  from "./AddCuisineComponent"
 import {
   getAllCuisineData,
   showAddCuisineModal,
   showDeleteCuisineModal,
   showUpdateCuisineModal,
 } from "../../../redux/actions/manageCuisineAction";
+import { SERVER_URL } from "../../../shared/constant";
+import CustomDescription from "../../../reusable/CustomDescription";
+
 
 const ManageCuisinePage = () => {
   const dispatch = useDispatch();
@@ -80,6 +83,24 @@ const ManageCuisinePage = () => {
 
   const columns = [
     { selector: "name", name: "Name" },
+    {
+      name: "Thumbnail",
+      cell: (row) => (
+        <img
+          height="40px"
+          className="border m-2"
+          width="40px"
+          alt={row.name}
+          src={`${SERVER_URL}/${row.image}`}
+        />
+      ),
+    },
+    {
+      selector: "description",
+      name: "Description",
+      allowOverflow: false,
+      cell: (row) => <CustomDescription row={row} />,
+    },
     // { selector: 'description',name: 'Description', sortable: true},
     // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
 
@@ -157,7 +178,7 @@ const ManageCuisinePage = () => {
                     <span className="add-icon">Add Cuisine</span>
                   </CButton>
                 </CCol>
-                <div>
+              <React.Fragment>
                   <AddCuisineComponent
                     show={addCuisineModalShow}
                     onClose={() => dispatch(showAddCuisineModal(false))}
@@ -165,7 +186,7 @@ const ManageCuisinePage = () => {
                     mypage={myPage}
                     inputvalue={inputValue}
                   />
-                </div>
+                </React.Fragment>
               </CRow>
               {isLoading ? (
                 <div className="text-center">

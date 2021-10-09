@@ -31,6 +31,7 @@ export const getAllDietaryData = (data) => {
 };
 
 export const addDietaryData = (data, perPage, myPage, inputValue) => {
+  console.log('data =>',data);
   return async (dispatch) => {
     try {
       dispatch({ type: "ADD_DIETARY_REQUEST" });
@@ -43,7 +44,7 @@ export const addDietaryData = (data, perPage, myPage, inputValue) => {
       const file = data.image;
       formData.append("image", file);
       formData.append("name", data.name);
-      //  formData.append("description", data.description);
+      formData.append("description", data.description);
 
       let dataURL = `super_admin/manage_dietary`;
       let response = await Axios.post(dataURL, formData, config);
@@ -104,7 +105,7 @@ export const updateSelectedDietary = (
       const file = data.image;
       formData.append("image", file);
       formData.append("name", data.name);
-      // formData.append("description", data.description);
+      formData.append("description", data.description);
 
       let dataURL = `/super_admin/manage_dietary/${selectedId}`;
       let response = await Axios.put(dataURL, formData, config);
