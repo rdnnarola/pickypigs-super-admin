@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   CCard,
   CCardBody,
@@ -10,31 +10,31 @@ import {
   CDropdownItem,
   CDropdown,
   CDropdownToggle,
-} from "@coreui/react";
-import { useDispatch, useSelector } from "react-redux";
-import DataTable from "react-data-table-component";
-import CIcon from "@coreui/icons-react";
-import DeleteFeaturesComponent from "./DeleteFeaturesComponent";
-import AddFeaturesComponent from "./AddFeaturesComponent";
-import UpdateFeaturesComponent from "./UpdateFeaturesComponent";
+} from '@coreui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import DataTable from 'react-data-table-component';
+import CIcon from '@coreui/icons-react';
+import DeleteFeaturesComponent from './DeleteFeaturesComponent';
+import AddFeaturesComponent from './AddFeaturesComponent';
+import UpdateFeaturesComponent from './UpdateFeaturesComponent';
 import {
   getAllFeaturesData,
   showAddFeaturesModal,
   showDeleteFeaturesModal,
   showUpdateFeaturesModal,
-} from "../../../redux/actions/manageFeaturesAction";
-import { SERVER_URL } from "../../../shared/constant";
+} from '../../../redux/actions/manageFeaturesAction';
+import { SERVER_URL } from '../../../shared/constant';
 
 const CustomDesc = ({ row }) => (
   <div>
     {}
     <div>
       <div
-        data-tag="allowRowEvents"
+        data-tag='allowRowEvents'
         style={{
-          overflow: "hidden",
-          whiteSpace: "wrap",
-          textOverflow: "ellipses",
+          overflow: 'hidden',
+          whiteSpace: 'wrap',
+          textOverflow: 'ellipses',
         }}
       >
         {}
@@ -46,12 +46,12 @@ const CustomDesc = ({ row }) => (
 
 const ManageAllergenPage = () => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   // const [deleteModalShow, setDeleteModalShow] = useState(false);
-  const [selectedId, setSelectedId] = useState("");
+  const [selectedId, setSelectedId] = useState('');
   // const [addFeaturesModalShow, setAddFeaturesModalShow] = useState(false);
   // const [updateFeaturesModalShow, setUpdateFeaturesModalShow] = useState(false);
-  const [imagePath, seImagePath] = useState("");
+  const [imagePath, seImagePath] = useState('');
   const [perPage, setPerPage] = useState(10);
   const [myPage, setMypage] = useState(1);
 
@@ -101,35 +101,35 @@ const ManageAllergenPage = () => {
   let { isLoading, features_Data, totalrows } = allFeatures_data;
 
   const columns = [
-    { selector: "name", name: "Name" },
+    { selector: 'name', name: 'Name' },
     {
-      name: "Thumbnail",
+      name: 'Thumbnail',
       cell: (row) => (
         <img
-          height="40px"
-          className="border m-2"
-          width="40px"
+          height='40px'
+          className='border m-2'
+          width='40px'
           alt={row.name}
           src={`${SERVER_URL}/${row.image}`}
         />
       ),
     },
     {
-      selector: "description",
-      name: "Description",
+      selector: 'description',
+      name: 'Description',
       allowOverflow: false,
       cell: (row) => <CustomDesc row={row} />,
     },
     {
-      name: "Action",
+      name: 'Action',
       button: true,
       cell: (row) => (
-        <CDropdown className="btn-group">
-          <CDropdownToggle className="pinkbdr-btn" size="sm">
-            {" "}
-            Action{" "}
+        <CDropdown className='btn-group'>
+          <CDropdownToggle className='pinkbdr-btn' size='sm'>
+            {' '}
+            Action{' '}
           </CDropdownToggle>
-          <CDropdownMenu placement="left">
+          <CDropdownMenu placement='left'>
             <CDropdownItem
               onClick={() => {
                 dispatch(showUpdateFeaturesModal(true));
@@ -162,38 +162,38 @@ const ManageAllergenPage = () => {
           <CCard>
             <CCardHeader>Manage Restaurant Features</CCardHeader>
             <CCardBody>
-              <CRow className="justify-content-between align-items-center ">
-                <CCol sm="4" className="mb-4">
+              <CRow className='justify-content-between align-items-center '>
+                <CCol sm='4' className='mb-4'>
                   <input
-                    className="form-control position-relative"
-                    type="text"
+                    className='form-control position-relative'
+                    type='text'
                     value={inputValue}
                     onChange={(e) => {
                       setInputValue(e.target.value);
                     }}
-                    placeholder="Search By Name"
+                    placeholder='Search By Name'
                   />
                   {inputValue && (
                     <CButton
                       onClick={(e) => {
-                        setInputValue("");
+                        setInputValue('');
                       }}
-                      className="position-absolute"
+                      className='position-absolute'
                       style={{ top: 0, right: 7 }}
                     >
-                      <CIcon name="cil-x" alt="Settings" className="mr-1" />
+                      <CIcon name='cil-x' alt='Settings' className='mr-1' />
                     </CButton>
                   )}
                 </CCol>
-                <CCol className="mb-4 d-flex justify-content-end" sm="8">
+                <CCol className='mb-4 d-flex justify-content-end' sm='8'>
                   <CButton
-                    className="btn pinkline-btn text-uppercase rounded-pill"
+                    className='btn pinkline-btn text-uppercase rounded-pill'
                     onClick={() => {
                       dispatch(showAddFeaturesModal(true));
                       setSelectedId(null);
                     }}
                   >
-                    <span className="add-icon">Add Restaurant Features</span>
+                    <span className='add-icon'>Add Restaurant Features</span>
                   </CButton>
                 </CCol>
                 <div>
@@ -203,13 +203,14 @@ const ManageAllergenPage = () => {
                     perpage={perPage}
                     mypage={myPage}
                     inputvalue={inputValue}
+                    loading={isLoading}
                   />
                 </div>
               </CRow>
               {isLoading ? (
-                <div className="text-center">
-                  <div className="spinner-border m-3" role="status"></div>
-                  <div className="visually-hidden">Please Wait Loading...</div>
+                <div className='text-center'>
+                  <div className='spinner-border m-3' role='status'></div>
+                  <div className='visually-hidden'>Please Wait Loading...</div>
                 </div>
               ) : (
                 <React.Fragment>
@@ -223,7 +224,7 @@ const ManageAllergenPage = () => {
                         noHeader
                         overflowY
                         striped
-                        sortIcon={<CIcon name={"cil-arrow-top"} />}
+                        sortIcon={<CIcon name={'cil-arrow-top'} />}
                         pagination={true}
                         paginationRowsPerPageOptions={[10, 15, 20, 25, 30]}
                         paginationPerPage={perPage}
@@ -235,7 +236,7 @@ const ManageAllergenPage = () => {
                       />
                     </CCard>
                   ) : (
-                    <div className="visually-hidden text-center m-4">
+                    <div className='visually-hidden text-center m-4'>
                       No Data Available
                     </div>
                   )}
@@ -255,6 +256,7 @@ const ManageAllergenPage = () => {
           perpage={perPage}
           mypage={myPage}
           inputvalue={inputValue}
+          loading={isLoading}
         />
       </React.Fragment>
       <React.Fragment>
@@ -266,6 +268,7 @@ const ManageAllergenPage = () => {
           perpage={perPage}
           mypage={myPage}
           inputvalue={inputValue}
+          loading={isLoading}
         />
       </React.Fragment>
     </>

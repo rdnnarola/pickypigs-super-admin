@@ -2,6 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {CButton,CModal,CModalFooter,CModalHeader,CModalTitle, } from '@coreui/react';
 import { deleteSelectedDietaryData } from "../../../redux/actions/manageDietaryAction";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 
 
@@ -27,6 +28,9 @@ const DeleteDietaryComponent = (props) => {
               <CModalFooter className="d-flex justify-content-center">
                 <CButton className="pl-4 pr-4 mr-4" color="secondary" onClick={props.onClose}>  No  </CButton>{' '}
                 <CButton className="pl-4 pr-4" color="danger" onClick={handleDelete}>  Yes  </CButton>
+                <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
               </CModalFooter>
             </CModal>
 

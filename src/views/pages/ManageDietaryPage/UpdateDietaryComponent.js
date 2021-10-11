@@ -21,6 +21,7 @@ import {
 } from "../../../redux/actions/manageDietaryAction";
 import { SERVER_URL } from "../../../shared/constant";
 import UploadImageComponent from "../../../reusable/UploadImageComponent";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 // const packages = ["basic","standard","premium"];
 // const roles=["restaurant_admin"]
@@ -206,6 +207,9 @@ const UpdateDietaryComponent = (props) => {
                     <CButton color="success" type="submit">
                       Update
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

@@ -21,6 +21,7 @@ import {
 } from "../../../redux/actions/manageFeaturesAction";
 import { useDropzone } from "react-dropzone";
 import { SERVER_URL } from "../../../shared/constant";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 const UpdateFeaturesComponent = (props) => {
   const dispatch = useDispatch();
@@ -205,6 +206,9 @@ const UpdateFeaturesComponent = (props) => {
                     >
                       Update
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

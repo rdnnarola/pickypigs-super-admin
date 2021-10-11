@@ -15,6 +15,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addDietaryData } from "../../../redux/actions/manageDietaryAction";
 import UploadImageComponent from "../../../reusable/UploadImageComponent";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 // const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 // const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
@@ -163,6 +164,9 @@ const AddDietaryComponent = (props) => {
                     <CButton color="success" type="submit">
                       ADD
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

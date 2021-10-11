@@ -185,6 +185,7 @@ const ManageCuisinePage = () => {
                     perpage={perPage}
                     mypage={myPage}
                     inputvalue={inputValue}
+                    loading={isLoading}
                   />
                 </React.Fragment>
               </CRow>
@@ -236,6 +237,7 @@ const ManageCuisinePage = () => {
           perpage={perPage}
           mypage={myPage}
           inputvalue={inputValue}
+          loading={isLoading}
         />
       </React.Fragment>
       <React.Fragment>
@@ -246,6 +248,7 @@ const ManageCuisinePage = () => {
           perpage={perPage}
           mypage={myPage}
           inputvalue={inputValue}
+          loading={isLoading}
         />
       </React.Fragment>
     </>

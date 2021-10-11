@@ -24,6 +24,7 @@ import {
   showUpdateCookingModal,
 } from "../../../redux/actions/manageCookingAction";
 import { SERVER_URL } from "../../../shared/constant";
+import CustomDescription from "../../../reusable/CustomDescription";
 
 const ManageAllergenPage = () => {
   const dispatch = useDispatch();
@@ -94,6 +95,12 @@ const ManageAllergenPage = () => {
           src={`${SERVER_URL}/${row.image}`}
         />
       ),
+    },
+    {
+      selector: "description",
+      name: "Description",
+      allowOverflow: false,
+      cell: (row) => (<CustomDescription row={row}/>),
     },
     // { selector: 'description',name: 'Description', sortable: true},
     // { selector: 'updatedAt', name: 'Updated At', cell:(row)=><span>{moment(row.updatedAt).format(" Do MMMM, YYYY")}</span>  },
@@ -181,6 +188,7 @@ const ManageAllergenPage = () => {
                     perpage={perPage}
                     mypage={myPage}
                     inputvalue={inputValue}
+                    loading={isLoading}
                   />
                 </div>
               </CRow>
@@ -233,6 +241,7 @@ const ManageAllergenPage = () => {
           perpage={perPage}
           mypage={myPage}
           inputvalue={inputValue}
+          loading={isLoading}
         />
       </React.Fragment>
       <React.Fragment>
@@ -244,6 +253,7 @@ const ManageAllergenPage = () => {
           perPage={perPage}
           myPage={myPage}
           inputValue={inputValue}
+          loading={isLoading}
         />
       </React.Fragment>
     </>

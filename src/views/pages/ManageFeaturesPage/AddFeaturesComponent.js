@@ -15,7 +15,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addFeaturesData } from "../../../redux/actions/manageFeaturesAction";
 import { useDropzone } from "react-dropzone";
-
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 const AddFeaturesComponent = (props) => {
   const dispatch = useDispatch();
 
@@ -159,6 +159,9 @@ const AddFeaturesComponent = (props) => {
                     >
                       ADD
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

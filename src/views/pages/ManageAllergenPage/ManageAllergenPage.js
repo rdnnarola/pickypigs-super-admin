@@ -95,7 +95,7 @@ const ManageAllergenPage = () => {
     return state.allergy;
   });
 
-  let { getLoading, allergy_Data, totalrows } = allAllergy_data;
+  let { getLoading,addLoading,updateLoading,deleteLoading, allergy_Data, totalrows } = allAllergy_data;
 
   const columns = [
     { selector: "name", name: "Name" },
@@ -201,6 +201,7 @@ const ManageAllergenPage = () => {
                     perpage={perPage}
                     mypage={myPage}
                     inputvalue={inputValue}
+                    loading={addLoading}
                   />
                 </div>
               </CRow>
@@ -253,6 +254,7 @@ const ManageAllergenPage = () => {
           perpage={perPage}
           mypage={myPage}
           inputvalue={inputValue}
+          loading={updateLoading}
         />
       </React.Fragment>
       <React.Fragment>
@@ -264,6 +266,7 @@ const ManageAllergenPage = () => {
           perpage={perPage}
           mypage={myPage}
           inputvalue={inputValue}
+          loading={deleteLoading}
         />
       </React.Fragment>
     </>

@@ -21,6 +21,7 @@ import {
 } from "../../../redux/actions/manageAllergyAction";
 import { SERVER_URL } from "../../../shared/constant";
 import UploadImageComponent from "../../../reusable/UploadImageComponent";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 // const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
 
@@ -225,6 +226,9 @@ const UpdateAllergyComponent = (props) => {
                     >
                       Update
                     </CButton>
+                    <React.Fragment>
+                            {props.loading ? <CustomLoadingComp /> : null}
+                          </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

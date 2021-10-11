@@ -21,6 +21,7 @@ import {
 } from "../../../redux/actions/manageCookingAction";
 import { useDropzone } from "react-dropzone";
 import { SERVER_URL } from "../../../shared/constant";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 // const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
 
@@ -40,12 +41,12 @@ const UpdateCookingComponent = (props) => {
   const initialValues = {
     name: selectedCookingData && selectedCookingData.name,
     image: selectedCookingData && selectedCookingData.image,
-    // description:selectedCookingData&&selectedCookingData.description,
+    description:selectedCookingData&&selectedCookingData.description,
   };
   const validationSchemaForm = Yup.object().shape({
     name: Yup.string().required("Cooking Name is required"),
     image: Yup.string().required("Cooking Image is required"),
-    // description:Yup.string().required('Cooking Description is required'),
+    description:Yup.string().required('Cooking Description is required'),
   });
 
   const onSubmit = (input, { setStatus, resetForm }) => {
@@ -53,7 +54,7 @@ const UpdateCookingComponent = (props) => {
     let obj = {
       name: input.name,
       image: input.image,
-      // description:input.description,
+      description:input.description,
     };
     dispatch(
       updateSelectedCooking(
@@ -122,6 +123,25 @@ const UpdateCookingComponent = (props) => {
                         {errors.name}
                       </CInvalidFeedback>
                     </CFormGroup>
+                    <CFormGroup>
+                      <CLabel>Cooking Description</CLabel>
+                      <Field
+                        component="textarea"
+                        style={{ height: 100 }}
+                        name="description"
+                        placeholder="Enter here"
+                        className={`form-control ${
+                          touched.description && errors.description
+                            ? "is-invalid"
+                            : touched.description && !errors.description
+                            ? "is-valid"
+                            : null
+                        }`}
+                      />
+                      <CInvalidFeedback className="help-block">
+                        {errors.description}
+                      </CInvalidFeedback>
+                    </CFormGroup>
                     {/* <CFormGroup >
                                             <CLabel >Cooking Description</CLabel>
                                             <Field component="textarea" style={{height:100}} name="description" placeholder="Enter here" className={`form-control ${touched.description && errors.description?"is-invalid": touched.description && !errors.description?"is-valid":null}`} />
@@ -188,6 +208,9 @@ const UpdateCookingComponent = (props) => {
                     <CButton color="success" type="submit">
                       Update
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

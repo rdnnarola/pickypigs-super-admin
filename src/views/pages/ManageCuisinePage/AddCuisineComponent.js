@@ -15,6 +15,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addCuisineData } from "../../../redux/actions/manageCuisineAction";
 import UploadImageComponent from "../../../reusable/UploadImageComponent";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp" 
 
 const AddCuisineComponent = (props) => {
   const dispatch = useDispatch();
@@ -155,6 +156,9 @@ const AddCuisineComponent = (props) => {
                     <CButton color="success" type="submit">
                       ADD
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

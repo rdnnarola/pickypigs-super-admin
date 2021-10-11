@@ -15,6 +15,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { addLifestyleData } from "../../../redux/actions/manageLifestyleAction";
 import UploadImageComponent from "../../../reusable/UploadImageComponent";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 // const phoneRegex = RegExp( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 // const passwordRegExp = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,24})/);
@@ -164,6 +165,9 @@ const AddLifestyleComponent = (props) => {
                     <CButton color="success" type="submit">
                       ADD
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );

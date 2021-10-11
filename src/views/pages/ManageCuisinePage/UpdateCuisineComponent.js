@@ -21,6 +21,7 @@ import {
 } from "../../../redux/actions/manageCuisineAction";
 import UploadImageComponent from "../../../reusable/UploadImageComponent";
 import { SERVER_URL } from "../../../shared/constant";
+import CustomLoadingComp from "../CustomLoadingComp/CustomLoadingComp";
 
 
 const UpdateCuisineComponent = (props) => {
@@ -198,6 +199,9 @@ const UpdateCuisineComponent = (props) => {
                     <CButton color="success" type="submit">
                       Update
                     </CButton>
+                    <React.Fragment>
+                      {props.loading ? <CustomLoadingComp /> : null}
+                    </React.Fragment>
                   </CCardFooter>
                 </Form>
               );
